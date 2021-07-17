@@ -1,0 +1,15 @@
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  @font-face {
+    font-family: "Dharma-Regular";
+    src: local("Dharma-Regular"),
+     url("../fonts/Dharma-Regular.ttf") format("truetype");
+    }
+
+#__next {
+  width: 100%;
+}
