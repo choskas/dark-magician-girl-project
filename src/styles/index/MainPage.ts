@@ -50,7 +50,7 @@ export const StartButton = styled.button`
 
 export const DarkMagicianGirl = styled.img`
     position: absolute;
-    margin: 300px 0 0 85px;
+    margin: 300px 0 0 70px;
 `;
 
 export const SectionTwoImage = styled.div`
