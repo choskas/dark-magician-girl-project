@@ -51,14 +51,9 @@ export const StartButton = styled.button`
 export const DarkMagicianGirl = styled.img`
     position: absolute;
     margin: 300px 0 0 70px;
-    // small smartphones
-    @media screen and (max-width: 410px) {
-        margin: 244px 0 0 88px;
-        width: 175px;
-    }
-    // smallest smartphones
-    @media screen and (max-width: 375px) {
-        margin: 295px 0 0 88px;
+    // large smartphones
+    @media screen and (max-height: 730px) {
+        margin: 320px 0 0 88px;
         width: 175px;
     }
 `;
