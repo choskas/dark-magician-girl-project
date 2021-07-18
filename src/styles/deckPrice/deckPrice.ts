@@ -19,6 +19,7 @@ export const AllCardsWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     width: 65vw;
+    height: 400px;
     overflow-y: auto;
 `;
 
