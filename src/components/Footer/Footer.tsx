@@ -1,9 +1,13 @@
-import { FooterStyle, FooterSubtitle, FooterTextWrapper, FooterTitle, WitchcraftImage, WitchcraftTextWrapper } from '../../styles/footer/Footer';
+import { FooterIcon, FooterIconWrapper, FooterStyle, FooterSubtitle, FooterTextWrapper, FooterTitle, WitchcraftImage, WitchcraftImageDesk, WitchcraftTextWrapper } from '../../styles/footer/Footer';
 
 const Footer = () => (
     <FooterStyle background="/assets/WitchcrafterCreationPink.png" >
         <WitchcraftTextWrapper>
             <FooterTextWrapper>
+            <FooterIconWrapper>
+                <FooterIcon src="/assets/facebook.png" />
+                <FooterIcon src="/assets/instagram.png" />
+            </FooterIconWrapper>
                 <FooterTitle>
                     YugiCards!
                 </FooterTitle>
@@ -12,6 +16,7 @@ const Footer = () => (
                 </FooterSubtitle>
             </FooterTextWrapper>
             <WitchcraftImage src="/assets/witchcraft.png"/>
+            <WitchcraftImageDesk src="/assets/witchcraftDesk.png" />
         </WitchcraftTextWrapper>
     </FooterStyle>
 );
