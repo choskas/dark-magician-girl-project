@@ -51,13 +51,18 @@ export const StartButton = styled.button`
 export const DarkMagicianGirl = styled.img`
     position: absolute;
     margin: 300px 0 0 70px;
+    // small smartphones
+    @media screen and (max-width: 410px) {
+        margin: 244px 0 0 88px;
+        width: 175px;
+    }
 `;
 
 export const SectionTwoImage = styled.div`
-    padding: 30px 30px 30px 30px;
+    padding: 0px 0px 0px 20px;
     background: ${({background}: MainImageProps) => `url(${background}) no-repeat;`};
-    background-size: contain;
-    height: 304px;
+    background-size: cover;
+    height: 350px;
     display: flex;
     flex-direction: column;
     color: #fff;
@@ -129,6 +134,10 @@ export const DonationTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: -10px;
+    // small smartphones
+    @media screen and (max-width: 410px) {
+        margin-left: -50px;
+    }
 `;
 
 export const DonationTitle = styled.p`

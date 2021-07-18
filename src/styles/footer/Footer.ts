@@ -20,7 +20,10 @@ export const WitchcraftTextWrapper = styled.div`
 `;
 
 export const WitchcraftImage = styled.img`
-
+    // small smartphones
+    @media screen and (max-width: 410px) {
+        margin-left: -50px;
+    }
 `;
 
 export const FooterTextWrapper = styled.div`
