@@ -56,6 +56,11 @@ export const DarkMagicianGirl = styled.img`
         margin: 244px 0 0 88px;
         width: 175px;
     }
+    // smallest smartphones
+    @media screen and (max-width: 375px) {
+        margin: 295px 0 0 88px;
+        width: 175px;
+    }
 `;
 
 export const SectionTwoImage = styled.div`
