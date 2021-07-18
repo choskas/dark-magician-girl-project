@@ -52,9 +52,9 @@ export const DarkMagicianGirl = styled.img`
     position: absolute;
     margin: 300px 0 0 70px;
     // large smartphones
-    @media screen and (max-height: 730px) {
-        margin: 340px 0 0 88px;
-        width: 150px;
+    @media screen and (min-height: 730px) {
+        margin: 335px 0 0 82px;
+        width: 200px;
     }
 `;
 
