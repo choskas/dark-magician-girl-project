@@ -1,9 +1,10 @@
-import { AnotherDarkMagician, DonateButton, DonateImageText, DonateSectionImage, DonationDescription, DonationTextWrapper, DonationTitle } from "../../styles/index/MainPage";
+import { AnotherDarkMagician, AnotherDarkMagicianDesk, DonateButton, DonateImageText, DonateSectionImage, DonationDescription, DonationTextWrapper, DonationTitle } from "../../styles/index/MainPage";
 
 const DonateSection = () => (
     <DonateSectionImage background="/assets/GirlMagicianChocoBlue.png">
         <DonateImageText>
             <AnotherDarkMagician src="/assets/AnotherDarkMagician.png" />
+            <AnotherDarkMagicianDesk src="/assets/AnotherDarkMagicianDesk.png" />
             <DonationTextWrapper>
                 <DonationTitle>¡Apoyanos para seguir desarrollando!</DonationTitle>
                 <DonationDescription>

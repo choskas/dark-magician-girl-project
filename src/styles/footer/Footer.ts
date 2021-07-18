@@ -11,6 +11,10 @@ export const FooterStyle = styled.div`
     display: flex;
     flex-direction: column;
     color: #fff;
+    // Desktop
+        @media screen and (min-width: 1000px) {
+        background: rgba(195,112,162,0.9);
+    }
 `;
 
 export const WitchcraftTextWrapper = styled.div`
@@ -24,12 +28,46 @@ export const WitchcraftImage = styled.img`
     @media screen and (max-width: 410px) {
         margin-left: -50px;
     }
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        display: none;
+    }
+`;
+
+export const WitchcraftImageDesk = styled.img`
+    display: none;
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        display: block;
+        margin: auto 0 0 auto;
+        width: 430px;
+    }
 `;
 
 export const FooterTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: auto 0 5px 18%;
+`;
+
+export const FooterIconWrapper = styled.div`
+    display: none;
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        display: flex;
+        width: 200px;
+        justify-content: space-between;
+    }
+`;
+
+export const FooterIcon = styled.img`
+    display: none;
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        display: block;
+        width: 56px;
+        height: 56px;
+    }
 `;
 
 export const FooterTitle = styled.p`
