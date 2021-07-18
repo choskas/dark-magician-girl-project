@@ -1,3 +1,4 @@
+import Footer from "../components/Footer/Footer";
 import DonateSection from "../components/index/DonateSection";
 import MainPageFirstSection from "../components/index/MainPageFirstSection"
 import NavBar from "../components/index/NavBar"
@@ -15,6 +16,7 @@ const HomePage = () => {
       <CardFrame />
       <DonateSection />
       <CardFrame />
+      <Footer />
       </>
     ); 
   }
