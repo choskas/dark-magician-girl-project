@@ -43,6 +43,9 @@ export const StartButton = styled.button`
     border: none;
     width: 341px;
     height: 48px;
+    &:focus{
+        background: radial-gradient(50% 50% at 50% 50%, #2295D0 0%, #154387 100%);
+    }
 `;
 
 export const DarkMagicianGirl = styled.img`
@@ -101,10 +104,58 @@ export const MarkWord = styled.span`
 `;
 
 export const DonateSectionImage = styled.div`
-    padding: 30px 30px 30px 30px;
+    padding: 30px 10px 30px 0;
     background: ${({background}: MainImageProps) => `url(${background}) no-repeat;`};
     height: 365px;
     display: flex;
     flex-direction: column;
     color: #fff;
+`;
+
+export const DonateImageText = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+`;
+
+export const AnotherDarkMagician = styled.img`
+    height: auto;
+    width: auto;
+`;
+
+export const DonationTextWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: -10px;
+`;
+
+export const DonationTitle = styled.p`
+    font-family: "Dharma-Regular";
+    font-size: 64px;
+    text-align: right;
+    margin: 0 0 0 0;
+`;
+
+export const DonationDescription = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    margin: 10px 0 10px 0;
+    text-align: right;
+`;
+
+export const DonateButton = styled.button`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+    background: radial-gradient(50% 50% at 50% 50%, #8C2163 0%, #C370A2 100%);
+    color: #fff;
+    border: none;
+    width: 220px;
+    height: 48px;
+    &:focus{
+        background: radial-gradient(50% 50% at 50% 50%, #2295D0 0%, #154387 100%);
+    }
 `;
