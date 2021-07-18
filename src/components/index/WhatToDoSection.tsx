@@ -1,7 +1,7 @@
 import { Dot, DotSubtitle, DotTitle, MarkWord, SectionTwoImage, TitleDotContainer } from "../../styles/index/MainPage";
 
 const WhatToDoSection = () => (
-    <SectionTwoImage background="/assets/darkMagicalCirclePink.png">
+    <SectionTwoImage background="/assets/DarkMagicalCirclePink.png">
         <TitleDotContainer>
             <Dot />
             <DotTitle>Busca!</DotTitle>
