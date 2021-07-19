@@ -78,6 +78,7 @@ export const MyDeckWrapper = styled.div`
         height: 400px;
         overflow-y: auto;
         margin: 0;
+        margin-top: -100px;
     }
     font-family: 'Montserrat', sans-serif;
     height: 400px;
