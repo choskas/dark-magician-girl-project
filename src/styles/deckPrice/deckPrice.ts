@@ -6,7 +6,7 @@ export const SearchDeckWrapper = styled.div`
         padding: 50px 30px 50px 30px;
         height: 60vh;
     }
-
+    padding: 20px;
 `;
 
 export const SearchBothInputWrapper = styled.div`

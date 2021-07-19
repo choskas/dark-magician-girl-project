@@ -14,16 +14,27 @@ import { CardFrameVertical } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
+import Switch from "../../components/common/Switch";
+import { useRouter } from "next/router";
 
 const ItemTypes = {
   CARD: "card",
 };
+
+interface SearchDeskProps {
+  history: any;
+}
 
 const SearchDeck = () => {
   const [allCards, setAllCards] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [myDeck, setMyDeck] = useState([]);
   const [isClickedDelete, setIsClickedDelete] = useState(false);
+  const [searchByCode, setSearchByCode] = useState(false);
+  const [totalDeckPrice, setTotalDeckPrice] = useState([]);
+
+  const router = useRouter();
+
   const getAllCards = async () => {
     try {
       const response = await axios.get(
@@ -32,6 +43,7 @@ const SearchDeck = () => {
       setAllCards(response.data.data);
     } catch (error) {
       console.log(error);
+      router.push("/");
     }
   };
 
@@ -98,6 +110,22 @@ const SearchDeck = () => {
     }),
   }));
 
+  const myDeckPrice = () => {
+    const priceArray = [];
+    myDeck.map((item: any) => {
+      if (item.set_price) {
+        priceArray.push(parseFloat(item.set_price));
+      } else {
+        priceArray.push(parseFloat(item.card_prices[0].tcgplayer_price));
+      }
+    });
+    setTotalDeckPrice(priceArray);
+  };
+
+  useEffect(() => {
+    myDeckPrice();
+  }, [myDeck]);
+
   useEffect(() => {
     getAllCards();
   }, []);
@@ -107,29 +135,39 @@ const SearchDeck = () => {
         <FullScreenLoader />
       ) : (
         <>
+          <Switch
+            isActive={searchByCode}
+            onClick={() => setSearchByCode(!searchByCode)}
+            text={`Busquéda por código ${
+              searchByCode ? "activada" : "desactivada"
+            }`}
+          />
           <SearchBothInputWrapper>
-            <SearchInputWrapper>
-              <InputText
-                placeholder="Búsqueda"
-                onChange={(
-                  _e: ChangeEvent<HTMLInputElement>,
-                  value: string
-                ) => {
-                  searchCard(value);
-                }}
-              />
-            </SearchInputWrapper>
-            <SearchInputWrapper>
-              <InputText
-                placeholder="Búsqueda por código"
-                onChange={(
-                  _e: ChangeEvent<HTMLInputElement>,
-                  value: string
-                ) => {
-                  searchCardByCode(value);
-                }}
-              />
-            </SearchInputWrapper>
+            {!searchByCode ? (
+              <SearchInputWrapper>
+                <InputText
+                  placeholder="Búsqueda"
+                  onChange={(
+                    _e: ChangeEvent<HTMLInputElement>,
+                    value: string
+                  ) => {
+                    searchCard(value);
+                  }}
+                />
+              </SearchInputWrapper>
+            ) : (
+              <SearchInputWrapper>
+                <InputText
+                  placeholder="Búsqueda por código"
+                  onChange={(
+                    _e: ChangeEvent<HTMLInputElement>,
+                    value: string
+                  ) => {
+                    searchCardByCode(value);
+                  }}
+                />
+              </SearchInputWrapper>
+            )}
           </SearchBothInputWrapper>
           <SearchAndMyDeckWrapper>
             <AllCardsWrapper>
@@ -138,7 +176,7 @@ const SearchDeck = () => {
                   <Card
                     item={item}
                     onTouchCard={() => {
-                        setMyDeck((myDeck) => [...myDeck, item])
+                      setMyDeck((myDeck) => [...myDeck, item]);
                     }}
                     isEditable={false}
                     foundCards={foundCards}
@@ -149,7 +187,7 @@ const SearchDeck = () => {
             </AllCardsWrapper>
             <CardFrameVertical />
             <MyDeckWrapper ref={drop}>
-              My Deck
+              My Deck ${totalDeckPrice.reduce((a, b) => a + b, 0)} dls
               <DeckWrapper>
                 {myDeck &&
                   myDeck.map((item: any, index) => (
@@ -167,6 +205,9 @@ const SearchDeck = () => {
                         const array = myDeck;
                         array.splice(index, 1);
                         setMyDeck(array);
+                        const arrayPrice = totalDeckPrice;
+                        arrayPrice.splice(index, 1);
+                        setTotalDeckPrice(arrayPrice);
                       }}
                     />
                   ))}
