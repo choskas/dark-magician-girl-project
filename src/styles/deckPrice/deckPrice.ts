@@ -4,7 +4,7 @@ export const SearchDeckWrapper = styled.div`
     // Desktop
     @media screen and (min-width: 1000px) {
         padding: 50px 30px 50px 30px;
-        height: 50vh;
+        height: 60vh;
     }
 
 `;
