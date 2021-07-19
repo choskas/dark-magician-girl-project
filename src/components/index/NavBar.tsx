@@ -14,13 +14,11 @@ const NavBar = () => (
     </Link>
     <HaamburgerImage src="/assets/hamburger.png" />
     <TextWrapper>
-      {window.location.pathname !== "/deckPrice" && (
         <Link href="/deckPrice">
           <LinkTo>
             <NavBarText>Cotiza tu Deck</NavBarText>
           </LinkTo>
         </Link>
-      )}
       <NavBarText>Donativos</NavBarText>
     </TextWrapper>
   </Wrapper>
