@@ -4,7 +4,7 @@ export const CardWrapper = styled.div`
     width: 100px;
     height: 180px;
     border: 1px solid black;
-    margin: 0 5px 5px 5px;
+    margin: 15px 5px 15px 5px;
     font-family: 'Montserrat', sans-serif;
     cursor: grab;
     &:focus{
