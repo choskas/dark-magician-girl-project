@@ -41,7 +41,7 @@ const Card = ({image, name, foundCards, isEditable, onClickDelete, index, isClic
     <CardWrapper 
         ref={drag} 
         style={{ opacity: isDragging ? 0.5 : 1}} 
-        onTouchStart={async (e) => {
+        onClick={async (e) => {
             e.preventDefault();
             await onTouchCard();
             toast("!Carta agregada!");

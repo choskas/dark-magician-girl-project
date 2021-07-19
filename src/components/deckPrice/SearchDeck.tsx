@@ -162,7 +162,7 @@ const SearchDeck = () => {
                       isEditable={true}
                       foundCards={foundCards}
                       name={item.name}
-                      image={item.card_images[0].image_url_small}
+                      image={item.image || item.card_images[0].image_url_small}
                       onClickDelete={(index) => {
                         const array = myDeck;
                         array.splice(index, 1);
