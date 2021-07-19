@@ -6,6 +6,16 @@ export const CardWrapper = styled.div`
     border: 1px solid black;
     margin: 0 5px 5px 5px;
     font-family: 'Montserrat', sans-serif;
+    cursor: grab;
+    &:focus{
+        cursor: grabbing;
+    }
+    &:target{
+        cursor: grabbing;
+    }
+    &:active{
+        cursor: grabbing;
+    }
 `;
 
 export const CardImage = styled.img`

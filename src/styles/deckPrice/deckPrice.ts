@@ -5,8 +5,14 @@ export const SearchDeckWrapper = styled.div`
   height: 50vh;
 `;
 
-export const SearchInputWrapper = styled.div`
+export const SearchBothInputWrapper = styled.div`
     width: 65vw;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const SearchInputWrapper = styled.div`
+    width: 500px;
 `;
 
 export const SearchAndMyDeckWrapper = styled.div`
@@ -23,7 +29,25 @@ export const AllCardsWrapper = styled.div`
     overflow-y: auto;
 `;
 
+export const MyDeck = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 65vw;
+    height: 400px;
+    overflow-y: auto;
+`;
+
 export const MyDeckWrapper = styled.div`
     font-family: 'Montserrat', sans-serif;
-    width: 20vw;
+    width: 30vw;
+    height: 400px;
+    overflow-y: auto;
+`;
+
+export const DeckWrapper = styled.div`
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
 `;
