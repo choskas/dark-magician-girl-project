@@ -69,9 +69,11 @@ const Card = ({
       <CardImage
         src={image}
         onClick={async (e) => {
-          e.preventDefault();
-          await onTouchCard();
-          toast("!Carta agregada!");
+          if (!isEditable) {
+            e.preventDefault();
+            await onTouchCard();
+            toast("!Carta agregada!");
+          }
         }}
       />
       {isEditable && (
