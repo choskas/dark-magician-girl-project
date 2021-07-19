@@ -1,6 +1,7 @@
 import { CardImage, CardName, CardWrapper } from "../../styles/deckPrice/Card";
 import { useDrag } from 'react-dnd';
 import { FaTimesCircle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 interface CardProps {
     image: string;
@@ -11,13 +12,15 @@ interface CardProps {
     index?: Number;
     isClickedDelete?: boolean;
     setIsClickedDelete?: Function;
+    onTouchCard?: Function;
+    item?: any;
 }
 
 const ItemTypes = {
     CARD: 'card',
 };
 
-const Card = ({image, name, foundCards, isEditable, onClickDelete, index, isClickedDelete, setIsClickedDelete}: CardProps) => {
+const Card = ({image, name, foundCards, isEditable, onClickDelete, index, isClickedDelete, setIsClickedDelete, onTouchCard, item}: CardProps) => {
     const [{ isDragging }, drag, preview] = useDrag(
         () => ({
           type: ItemTypes.CARD,
@@ -35,7 +38,15 @@ const Card = ({image, name, foundCards, isEditable, onClickDelete, index, isClic
         }), [foundCards]
       )
     return (
-    <CardWrapper ref={drag} style={{ opacity: isDragging ? 0.5 : 1}}>
+    <CardWrapper 
+        ref={drag} 
+        style={{ opacity: isDragging ? 0.5 : 1}} 
+        onTouchStart={async (e) => {
+            e.preventDefault();
+            await onTouchCard();
+            toast("!Carta agregada!");
+        }}
+    >
         <CardImage src={image} />
         {isEditable && 
         <FaTimesCircle 

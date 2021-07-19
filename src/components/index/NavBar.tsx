@@ -1,22 +1,29 @@
-import { HaamburgerImage, NavBarText, TextWrapper, Wrapper } from "../../styles/navbar/NavBar";
-import Link from 'next/link';
+import {
+  HaamburgerImage,
+  NavBarText,
+  TextWrapper,
+  Wrapper,
+} from "../../styles/navbar/NavBar";
+import Link from "next/link";
 import { LinkTo } from "../../styles/common/Link";
 
 const NavBar = () => (
-<Wrapper>
+  <Wrapper>
     <Link href="/">
-    <LinkTo>YugiCards!</LinkTo>
+      <LinkTo>YugiCards!</LinkTo>
     </Link>
-    <HaamburgerImage src="/assets/hamburger.png"/>
+    <HaamburgerImage src="/assets/hamburger.png" />
     <TextWrapper>
+      {window.location.pathname !== "/deckPrice" && (
         <Link href="/deckPrice">
-        <LinkTo>
+          <LinkTo>
             <NavBarText>Cotiza tu Deck</NavBarText>
-        </LinkTo>
+          </LinkTo>
         </Link>
-        <NavBarText>Donativos</NavBarText>
+      )}
+      <NavBarText>Donativos</NavBarText>
     </TextWrapper>
-</Wrapper>
-)
+  </Wrapper>
+);
 
 export default NavBar;
