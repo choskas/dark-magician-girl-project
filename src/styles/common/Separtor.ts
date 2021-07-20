@@ -34,3 +34,10 @@ export const DesktopVerticalSeparator = styled.div`
     background: #F178B6;
     margin: 40px 20px;
 `;
+
+export const VerticalSeparatorMini = styled.div`
+    border-left: 3px solid #F178B6;
+    background: #F178B6;
+    margin: 0;
+    height: 30px;
+`;
