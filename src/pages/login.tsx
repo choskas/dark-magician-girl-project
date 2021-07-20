@@ -9,8 +9,11 @@ import { Separator, VerticalSeparatorMini } from "../styles/common/Separtor";
 import {
   InputsWrapper,
   LoginButtonsWrapper,
+  LoginFormContainer,
   LoginImage,
+  LoginImageContainer,
   LoginRegisterWrapper,
+  LoginWrapper,
   SubtitleLogin,
   TextLogin,
   TitleContainer,
@@ -39,8 +42,11 @@ const Login = () => {
     <>
       <NavBar />
       {!isLoggedIn && (
-        <>
-          <LoginImage src="/assets/MagicianGirlLogin.png" />
+        <LoginWrapper>
+        <LoginImageContainer>
+          <LoginImage />
+          </LoginImageContainer>
+          <LoginFormContainer>
           <TitleContainer>
             <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
             <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
@@ -91,7 +97,8 @@ const Login = () => {
               fields="name,email,picture"
             />
           </LoginButtonsWrapper>
-        </>
+          </LoginFormContainer>
+        </LoginWrapper>
       )}
 
       <Footer />

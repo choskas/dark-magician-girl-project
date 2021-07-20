@@ -12,6 +12,7 @@ export const LoginButtonContainer = styled.button`
     color: #fff;
     border: none;
     box-shadow: 3px 3px 3px #8C2163;
+    cursor: pointer;
     &:hover{
 		opacity: 0.5;
 	}
@@ -21,8 +22,19 @@ export const LoginButtonContainer = styled.button`
 `;
 
 export const LoginButtonImage = styled.img`
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        top: 50px;
+    }
+    cursor: pointer;
     top: 33px;
     position: relative;
     left: -150px;
     width: 30px;
+    &:hover{
+		opacity: 0.5;
+	}
+	&:active{
+		box-shadow: none;
+	}
 `;

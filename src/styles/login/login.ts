@@ -1,8 +1,39 @@
 import styled from 'styled-components';
 
-export const LoginImage = styled.img`
+export const LoginImage = styled.div`
     width: 100%;
-    height: 30%;
+    height: 29vh;
+    background-repeat: no-repeat;
+    background-image: url(/assets/MagicianGirlLogin.png);
+    // Desktop
+        @media screen and (min-width: 1000px) {
+        height: 500px;
+        width: 50%;
+        background-image: url(/assets/darkMagicianGirlLoader2.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 10vw 0;
+    }
+`;
+
+export const LoginImageContainer = styled.div`
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        display: flex;
+        justify-content: center;
+        height: 80%;
+        width: 50%;
+    }
+`;
+
+export const LoginFormContainer = styled.div``;
+
+export const LoginWrapper = styled.div`
+      // Desktop
+      @media screen and (min-width: 1000px) {
+        display: flex;
+    }  
 `;
 
 export const TitleContainer = styled.div`
