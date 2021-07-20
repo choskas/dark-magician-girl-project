@@ -71,7 +71,7 @@ const Login = () => {
             <LoginButton
               onClick={() => {
                 const facebookButton =
-                  document.getElementsByClassName("facebook-button")[0];
+                  document.getElementsByClassName("facebook-button")[0] as HTMLElement;
                 facebookButton.click();
               }}
               icon="/assets/facebook.png"
