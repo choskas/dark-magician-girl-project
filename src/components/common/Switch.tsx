@@ -1,16 +1,50 @@
-import { SwitchContent, SwitchText } from "../../styles/common/Switch";
+import {
+  CheckBox,
+  Image,
+  ImageWrapper,
+  SliderRound,
+  SwitchContent,
+  SwitchText,
+  SwitchWrapper,
+  Text,
+} from "../../styles/common/Switch";
 
-interface SwitchProps {
-    isActive: boolean;
-    onClick: Function;
-    text: string;
+interface SwitchProps {
+  isActive: boolean;
+  onClick: Function;
+  text?: string;
+  onImage: string;
+  offImage: string;
+  onText: string;
+  offText: string;
 }
 
-const Switch = ({isActive, onClick, text}: SwitchProps) => (
-    <>
-    <SwitchText>{text}</SwitchText> 
-        <SwitchContent onClick={() => onClick()} isActive={isActive}></SwitchContent>
-        </>
-)
+const Switch = ({
+  isActive,
+  onClick,
+  text,
+  onImage,
+  offImage,
+  onText,
+  offText,
+}: SwitchProps) => (
+  <>
+    <SwitchText>{text}</SwitchText>
+    <SwitchWrapper>
+      <ImageWrapper>
+        <Image src={onImage} />
+        <Text>{onText}</Text>
+      </ImageWrapper>
+      <SwitchContent>
+        <CheckBox onClick={() => onClick()} isActive={isActive} />
+        <SliderRound isActive={isActive}></SliderRound>
+      </SwitchContent>
+      <ImageWrapper>
+        <Image src={offImage} />
+        <Text>{offText}</Text>
+      </ImageWrapper>
+    </SwitchWrapper>
+  </>
+);
 
 export default Switch;

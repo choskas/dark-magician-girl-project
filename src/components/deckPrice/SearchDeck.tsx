@@ -4,11 +4,16 @@ import { useEffect, useState, ChangeEvent } from "react";
 import {
   AllCardsWrapper,
   DeckWrapper,
+  MyDeckPriceWrapper,
   MyDeckWrapper,
+  Price,
   SearchAndMyDeckWrapper,
   SearchBothInputWrapper,
   SearchDeckWrapper,
   SearchInputWrapper,
+  Subtitle,
+  SwitchDiv,
+  Title,
 } from "../../styles/deckPrice/deckPrice";
 import { CardFrameVertical } from "../../styles/index/MainPage";
 import Card from "./Card";
@@ -16,6 +21,7 @@ import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
+import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
 
 const ItemTypes = {
   CARD: "card",
@@ -135,18 +141,27 @@ const SearchDeck = () => {
         <FullScreenLoader />
       ) : (
         <>
+          <Title>Busqueda de cartas</Title>
+          <Subtitle>
+            Busca tus cartas por nombre o por código, si búscas tus cartas por
+            código el precio que se mostrará será el más aproximado a esa carta.
+          </Subtitle>
+          <SwitchDiv>
           <Switch
+            onText="Name"
+            offText="Code"
+            onImage="/assets/Card.png"
+            offImage="/assets/Code.png"
             isActive={searchByCode}
             onClick={() => setSearchByCode(!searchByCode)}
-            text={`Busquéda por código ${
-              searchByCode ? "activada" : "desactivada"
-            }`}
           />
+          </SwitchDiv>
           <SearchBothInputWrapper>
             {!searchByCode ? (
               <SearchInputWrapper>
                 <InputText
-                  placeholder="Búsqueda"
+                  placeholder="Búsqueda por nombre"
+                  icon="/assets/Search.png"
                   onChange={(
                     _e: ChangeEvent<HTMLInputElement>,
                     value: string
@@ -159,6 +174,7 @@ const SearchDeck = () => {
               <SearchInputWrapper>
                 <InputText
                   placeholder="Búsqueda por código"
+                  icon="/assets/Search.png"
                   onChange={(
                     _e: ChangeEvent<HTMLInputElement>,
                     value: string
@@ -169,6 +185,9 @@ const SearchDeck = () => {
               </SearchInputWrapper>
             )}
           </SearchBothInputWrapper>
+          <DesktopSeparator />
+          <Separator />
+          <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>
           <SearchAndMyDeckWrapper>
             <AllCardsWrapper>
               {foundCards &&
@@ -185,9 +204,13 @@ const SearchDeck = () => {
                   />
                 ))}
             </AllCardsWrapper>
-            <CardFrameVertical />
+            <Separator />
+            <DesktopVerticalSeparator />
             <MyDeckWrapper ref={drop}>
-              My Deck ${totalDeckPrice.reduce((a, b) => a + b, 0)} dls
+              <MyDeckPriceWrapper>
+                <Subtitle>My Deck</Subtitle>
+                <Price>${totalDeckPrice.reduce((a, b) => a + b, 0)} dls</Price>
+              </MyDeckPriceWrapper>
               <DeckWrapper>
                 {myDeck &&
                   myDeck.map((item: any, index) => (
