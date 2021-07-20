@@ -1,4 +1,4 @@
-import { CardImage, CardName, CardWrapper } from "../../styles/deckPrice/Card";
+import { CardImage, CardName, CardTitle, CardWrapper, CloseImage } from "../../styles/deckPrice/Card";
 import { useDrag } from "react-dnd";
 import { FaTimesCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -77,7 +77,8 @@ const Card = ({
         }}
       />
       {isEditable && (
-        <FaTimesCircle
+        <CloseImage
+          src="/assets/Close.png"
           onClick={(e) => {
             e.preventDefault();
             setIsClickedDelete(!isClickedDelete);
@@ -85,15 +86,21 @@ const Card = ({
           }}
           style={{
             float: "right",
-            color: "red",
             zIndex: 2,
-            top: "-150px",
+            top: "-145px",
+            left: "10px",
             position: "relative",
             cursor: "pointer",
           }}
         />
       )}
+      {console.log(item)}
+      <CardTitle>Card name:</CardTitle>
       <CardName>{name}</CardName>
+      <CardTitle>Card Type:</CardTitle>
+      <CardName>{item.type}</CardName>
+      <CardTitle>Type:</CardTitle>
+      <CardName>{item.race}</CardName>
     </CardWrapper>
   );
 };

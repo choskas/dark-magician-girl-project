@@ -2,15 +2,17 @@ import styled from 'styled-components';
 
 export const Label = styled.label`
   font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 	position: relative;
 `;
 
 export const Input = styled.input`
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     box-sizing: border-box;
     display: block;
     width: 100%;
-    border: 3px solid #23C1BC;
+    border: 3px solid #EF5DA8;
     padding-left: 10px;
     color: black;
     background: transparent;
@@ -19,8 +21,8 @@ export const Input = styled.input`
 		height: 35px;
 		&:focus{
 			outline: none !important;
-    	border: 1px solid #23C1BC;
-    	box-shadow: 0 0 5px #23C1BC;
+    	border: 1px solid #EF5DA8;
+    	box-shadow: 0 0 5px #EF5DA8;
 		}
     &:focus,
     &:not(:placeholder-shown) {
@@ -33,6 +35,7 @@ export const Input = styled.input`
 
 export const Span = styled.span`
     font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     position: absolute;
     left: 0;
     top: 0;
@@ -52,4 +55,11 @@ export const Span = styled.span`
         transform: translate(.1rem, -65%) scale(.8);
         color: var(--color-accent);
     }
+`;
+
+export const InputIcon = styled.img`
+  position: relative;
+  float: right;
+  margin: -30px 10px 0 0;
+
 `;

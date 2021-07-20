@@ -9,6 +9,25 @@ export const SearchDeckWrapper = styled.div`
     padding: 20px;
 `;
 
+export const Title = styled.p`
+    font-family: 'Dharma-Regular';
+    font-size: 96px;
+    color: black;
+    margin: 10px 0;
+    text-align: center;
+`;
+
+export const Subtitle = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 0;
+`;
+
+export const SwitchDiv = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+`;
+
 export const SearchBothInputWrapper = styled.div`
     // Desktop
     @media screen and (min-width: 1000px) {
@@ -21,8 +40,8 @@ export const SearchBothInputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100px;
-    margin: 20px 0 20px 0;
+    height: 75px;
+    margin: 20px 0 0 0;
 `;
 
 export const SearchInputWrapper = styled.div`
@@ -100,4 +119,15 @@ export const DeckWrapper = styled.div`
     flex-wrap: wrap;
     overflow-y: auto;
     justify-content: center;
+`;
+
+export const MyDeckPriceWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const Price = styled.p`
+    color: #F178B6;
+    font-size: 28px;
+    margin: 0;
 `;
