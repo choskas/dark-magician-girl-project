@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FacebookLogin from "react-facebook-login";
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
@@ -79,7 +79,7 @@ const Login = () => {
               Login with facebook
             </LoginButton>
             <FacebookLogin
-              appId={process.env.REACT_FACEBOOK_APP_ID}
+              appId={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
               autoload={true}
               callback={responseFacebook}
               cssClass="facebook-button"
