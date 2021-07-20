@@ -1,6 +1,5 @@
 import { CardImage, CardName, CardTitle, CardWrapper, CloseImage } from "../../styles/deckPrice/Card";
 import { useDrag } from "react-dnd";
-import { FaTimesCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 interface CardProps {
