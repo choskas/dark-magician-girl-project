@@ -3,12 +3,13 @@ import { LoginButtonContainer, LoginButtonImage } from "../../styles/common/Logi
 interface LoginButtonProps {
     icon?: string;
     children: any;
+    onClick?: Function;
 }
 
-const LoginButton = ({children, icon}: LoginButtonProps) => (
+const LoginButton = ({children, icon, onClick}: LoginButtonProps) => (
     <>
     <LoginButtonImage src={icon} />
-    <LoginButtonContainer>{children}</LoginButtonContainer>
+    <LoginButtonContainer onClick={() => onClick()}>{children}</LoginButtonContainer>
     </>
 )
 

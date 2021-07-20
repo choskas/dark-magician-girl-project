@@ -21,6 +21,10 @@ body {
   font-weight: 600;
 }
 
+.facebook-button {
+  visibility: hidden !important;
+}
+
 /* FULL SCREEN LOADER */
 
 #loader{

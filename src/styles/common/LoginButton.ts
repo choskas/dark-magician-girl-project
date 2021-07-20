@@ -21,7 +21,7 @@ export const LoginButtonContainer = styled.button`
 `;
 
 export const LoginButtonImage = styled.img`
-    top: 37px;
+    top: 35px;
     position: relative;
     left: -150px;
     width: 30px;
