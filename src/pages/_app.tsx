@@ -5,9 +5,12 @@ import { AppProps } from 'next/app';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 
 const App = ({ Component, pageProps }: AppProps) => (
     <>
+	<Provider store={store}>
 		<DndProvider backend={HTML5Backend}>
 			<Head>
 				<title>YugiCards</title>
@@ -29,6 +32,7 @@ const App = ({ Component, pageProps }: AppProps) => (
 			/>
 			<Component {...pageProps} />
 		</DndProvider>
+		</Provider>
     </>
 );
 

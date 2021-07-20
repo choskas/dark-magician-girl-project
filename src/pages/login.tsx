@@ -3,6 +3,7 @@ import FacebookLogin from "react-facebook-login";
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
 import Footer from "../components/Footer/Footer";
+import { useDispatch } from 'react-redux';
 import NavBar from "../components/index/NavBar";
 import { Separator, VerticalSeparatorMini } from "../styles/common/Separtor";
 import {
@@ -15,6 +16,7 @@ import {
   TitleContainer,
   TitleLogin,
 } from "../styles/login/login";
+import { signInAction } from "../redux/modules/auth";
 
 const Login = () => {
   const [isActiveLogin, setIsActiveLogin] = useState(true);
@@ -28,8 +30,11 @@ const Login = () => {
 
   const responseFacebook = (response) => {
     console.log(response);
+    dispatch(signInAction(response))
   };
+
   //LOGIN WITH FACEBOOK
+  const dispatch = useDispatch();
   return (
     <>
       <NavBar />
