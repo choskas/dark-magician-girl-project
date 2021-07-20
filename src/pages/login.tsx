@@ -79,7 +79,7 @@ const Login = () => {
               Login with facebook
             </LoginButton>
             <FacebookLogin
-              appId="663000657976576"
+              appId={process.env.REACT_FACEBOOK_APP_ID}
               autoload={true}
               callback={responseFacebook}
               cssClass="facebook-button"
