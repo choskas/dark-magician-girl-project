@@ -4,12 +4,16 @@ export const SearchDeckWrapper = styled.div`
     // Desktop
     @media screen and (min-width: 1000px) {
         padding: 50px 30px 50px 30px;
-        height: 60vh;
+        height: auto;
     }
     padding: 20px;
 `;
 
 export const Title = styled.p`
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        font-size: 130px;
+    }
     font-family: 'Dharma-Regular';
     font-size: 96px;
     color: black;
@@ -18,11 +22,21 @@ export const Title = styled.p`
 `;
 
 export const Subtitle = styled.p`
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        font-size: 20px;
+        margin: 40px 0;
+    }
     font-family: 'Montserrat', sans-serif;
     margin: 10px 0;
 `;
 
 export const SwitchDiv = styled.div`
+    // Desktop
+    @media screen and (min-width: 1000px) {
+        justify-content: flex-end;
+        margin: 20px 0;
+    }
     display: flex;
     justify-content: flex-end;
     margin: 20px 0;
@@ -97,7 +111,7 @@ export const MyDeckWrapper = styled.div`
         height: 400px;
         overflow-y: auto;
         margin: 0;
-        margin-top: -100px;
+        margin-top: 0;
     }
     font-family: 'Montserrat', sans-serif;
     height: 400px;

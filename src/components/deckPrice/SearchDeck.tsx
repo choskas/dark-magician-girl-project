@@ -21,7 +21,7 @@ import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
-import { Separator } from "../../styles/common/Separtor";
+import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
 
 const ItemTypes = {
   CARD: "card",
@@ -185,6 +185,7 @@ const SearchDeck = () => {
               </SearchInputWrapper>
             )}
           </SearchBothInputWrapper>
+          <DesktopSeparator />
           <Separator />
           <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>
           <SearchAndMyDeckWrapper>
@@ -204,6 +205,7 @@ const SearchDeck = () => {
                 ))}
             </AllCardsWrapper>
             <Separator />
+            <DesktopVerticalSeparator />
             <MyDeckWrapper ref={drop}>
               <MyDeckPriceWrapper>
                 <Subtitle>My Deck</Subtitle>
