@@ -45,17 +45,11 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
-				authenticated: true
-			},
-		});
-		dispatch({
-			type: USER_DATA,
-			payload: {
 				picture: response.user.picture.data.url,
 				userName: response.user.name,
 				email: response.user.email,
 			}
-		})
+		});
         if (typeof window !== 'undefined') {
             window.sessionStorage.setItem('userName', response.user.name);
             window.sessionStorage.setItem('email', response.user.email);
