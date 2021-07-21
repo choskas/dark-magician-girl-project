@@ -22,9 +22,9 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 	}
 }
 
-export const signUpAction = (data: any) => async (dispatch: Dispatch<any>) => {
+export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
-		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signup', data)
+		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signupFacebook', data)
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
@@ -40,6 +40,6 @@ export const signUpAction = (data: any) => async (dispatch: Dispatch<any>) => {
         }
 	} catch (error) {
 		console.log(error)
-		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/login', data)
+		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
 	}
 };
