@@ -37,9 +37,11 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 		dispatch({
 			type: USER_DATA,
 			payload: {
+				userData: {
 				picture: response.user.picture.data.url,
 				userName: response.user.name,
 				email: response.user.email,
+				}
 			}
 		})
         if (typeof window !== 'undefined') {
