@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 export default function auth(state = INITIAL_STATE, action: AnyAction) {
 	switch (action.type) {
 		case AUTHENTICATED:
-			return { ...state, authenticated: true, userData: action.payload };
+			return { ...state, authenticated: action.payload };
 		case USER_DATA:
 				return { ...state, userData: action.payload };
 		default:
@@ -50,5 +50,24 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 	} catch (error) {
 		console.log(error)
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
+		dispatch({
+			type: AUTHENTICATED,
+			payload: {
+				authenticated: true
+			},
+		});
+		dispatch({
+			type: USER_DATA,
+			payload: {
+				picture: response.user.picture.data.url,
+				userName: response.user.name,
+				email: response.user.email,
+			}
+		})
+        if (typeof window !== 'undefined') {
+            window.sessionStorage.setItem('userName', response.user.name);
+            window.sessionStorage.setItem('email', response.user.email);
+            window.sessionStorage.setItem('picure', response.user.picture.data.url);
+        }
 	}
 };
