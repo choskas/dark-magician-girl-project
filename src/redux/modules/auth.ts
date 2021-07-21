@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const AUTHENTICATED = 'yugi/auth/AUTHENTICATED_USER';;
 
@@ -21,14 +22,15 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 	}
 }
 
-export const signInAction = (data: any) => async (dispatch: Dispatch<any>) => {
+export const logInAction = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
+		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/login', data)
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
-				picture: data.picture.data.url,
-				userName: data.name,
-				email: data.email,
+				picture: response.picture.data.url,
+				userName: response.name,
+				email: response.email,
 			},
 		});
         if (typeof window !== 'undefined') {
