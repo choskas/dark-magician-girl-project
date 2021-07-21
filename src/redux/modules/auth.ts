@@ -22,7 +22,7 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 	}
 }
 
-export const logInAction = (data: any) => async (dispatch: Dispatch<any>) => {
+export const signUpAction = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signup', data)
 		dispatch({
@@ -40,5 +40,6 @@ export const logInAction = (data: any) => async (dispatch: Dispatch<any>) => {
         }
 	} catch (error) {
 		console.log(error)
+		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/login', data)
 	}
 };

@@ -19,7 +19,7 @@ import {
   TitleContainer,
   TitleLogin,
 } from "../styles/login/login";
-import { logInAction } from "../redux/modules/auth";
+import { signUpAction } from "../redux/modules/auth";
 
 const Login = () => {
   const [isActiveLogin, setIsActiveLogin] = useState(true);
@@ -34,7 +34,7 @@ const Login = () => {
   const responseFacebook = (response) => {
     console.log(response);
     dispatch(
-      logInAction({
+      signUpAction({
         email: response.email,
         password: "-",
         facebookId: response.userID,
