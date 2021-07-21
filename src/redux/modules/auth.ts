@@ -17,9 +17,7 @@ const INITIAL_STATE = {
 export default function auth(state = INITIAL_STATE, action: AnyAction) {
 	switch (action.type) {
 		case AUTHENTICATED:
-			return { ...state, authenticated: action.payload };
-		case USER_DATA:
-				return { ...state, userData: action.payload };
+			return { ...state, authenticated: true, userData: action.payload };
 		default:
 			return state;
 	}
@@ -31,19 +29,11 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
-				authenticated: true
-			},
-		});
-		dispatch({
-			type: USER_DATA,
-			payload: {
-				userData: {
 				picture: response.user.picture.data.url,
 				userName: response.user.name,
 				email: response.user.email,
-				}
-			}
-		})
+			},
+		});
         if (typeof window !== 'undefined') {
             window.sessionStorage.setItem('userName', response.user.name);
             window.sessionStorage.setItem('email', response.user.email);
