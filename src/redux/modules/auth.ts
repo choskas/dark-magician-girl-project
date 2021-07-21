@@ -24,19 +24,13 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 
 export const logInAction = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
-		let config = {
-			headers: {
-			  "Content-Type": "application/json",
-			  'Access-Control-Allow-Origin': '*',
-			  }
-			}
-		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signup', data, config)
+		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signup', data)
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
-				picture: response.picture.data.url,
-				userName: response.name,
-				email: response.email,
+				picture: response.user.picture.data.url,
+				userName: response.user.name,
+				email: response.user.email,
 			},
 		});
         if (typeof window !== 'undefined') {
