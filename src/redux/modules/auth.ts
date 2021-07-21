@@ -8,9 +8,9 @@ const USER_DATA = 'yugi/auth/AUTHENTICATED_USER';
 const INITIAL_STATE = {
 	authenticated: false,
 	userData: {
-		userName: typeof window !== "undefined" ? window.sessionStorage.name : '',
-		email: typeof window !== "undefined" ? window.sessionStorage.email : '',
-		picture: typeof window !== "undefined" ? window.sessionStorage.picture : '',
+		userName: typeof window !== "undefined" ? sessionStorage.name : '',
+		email: typeof window !== "undefined" ? sessionStorage.email : '',
+		picture: typeof window !== "undefined" ? sessionStorage.picture : '',
 	},
 };
 
@@ -26,7 +26,7 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/signupFacebook', data)
-		await dispatch({
+		dispatch({
 			type: AUTHENTICATED,
 			payload: {
 				picture: response.user.picture.data.url,
@@ -35,14 +35,14 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 			},
 		});
         if (typeof window !== 'undefined') {
-            window.sessionStorage.setItem('userName', response.user.name);
-            window.sessionStorage.setItem('email', response.user.email);
-            window.sessionStorage.setItem('picure', response.user.picture.data.url);
+            sessionStorage.setItem('userName', response.user.name);
+            sessionStorage.setItem('email', response.user.email);
+            sessionStorage.setItem('picure', response.user.picture.data.url);
         }
 	} catch (error) {
 		console.log(error)
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
-		await dispatch({
+		dispatch({
 			type: AUTHENTICATED,
 			payload: {
 				picture: response.user.picture.data.url,
@@ -51,9 +51,9 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 			}
 		});
         if (typeof window !== 'undefined') {
-            window.sessionStorage.setItem('userName', response.user.name);
-            window.sessionStorage.setItem('email', response.user.email);
-            window.sessionStorage.setItem('picure', response.user.picture.data.url);
+            sessionStorage.setItem('userName', response.user.name);
+            sessionStorage.setItem('email', response.user.email);
+            sessionStorage.setItem('picure', response.user.picture.data.url);
         }
 	}
 };

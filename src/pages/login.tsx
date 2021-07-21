@@ -24,13 +24,14 @@ import { signUpFacebookAction } from "../redux/modules/auth";
 const Login = () => {
   const [isActiveLogin, setIsActiveLogin] = useState(true);
   const [isActiveRegister, setIsActiveRegister] = useState(false);
-  // LOGIN WITH FACEBOOK
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [picture, setPicture] = useState("");
 
+  const dispatch = useDispatch();
+  // LOGIN WITH FACEBOOK
   const responseFacebook = (response) => {
     console.log(response);
     dispatch(
@@ -43,9 +44,8 @@ const Login = () => {
       })
     );
   };
+  // LOGIN WITH FACEBOOK
 
-  //LOGIN WITH FACEBOOK
-  const dispatch = useDispatch();
   return (
     <>
       <NavBar />
