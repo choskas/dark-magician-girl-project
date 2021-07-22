@@ -40,7 +40,6 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 	} catch (error) {
 		console.log(error)
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
-		console.log(response)
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
