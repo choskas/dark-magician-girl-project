@@ -35,6 +35,7 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 			},
 		});
         if (typeof window !== 'undefined') {
+			alert(1)
             sessionStorage.setItem('userName', response.user.name);
             sessionStorage.setItem('email', response.user.email);
             sessionStorage.setItem('picure', response.user.picture.data.url);
@@ -51,6 +52,7 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 			}
 		});
         if (typeof window !== 'undefined') {
+			alert(1)
             sessionStorage.setItem('userName', response.user.name);
             sessionStorage.setItem('email', response.user.email);
             sessionStorage.setItem('picure', response.user.picture.data.url);
