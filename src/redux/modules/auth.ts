@@ -29,29 +29,27 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 		dispatch({
 			type: AUTHENTICATED,
 			payload: {
-				picture: response.user.picture.data.url,
-				userName: response.user.name,
-				email: response.user.email,
+				picture: response.data.user.picture.data.url,
+				userName: response.data.user.name,
+				email: response.data.user.email,
 			},
 		});
-            sessionStorage.setItem('userName', response.user.name);
-            sessionStorage.setItem('email', response.user.email);
-            sessionStorage.setItem('picure', response.user.picture.data.url);
+            sessionStorage.setItem('userName', response.data.user.name);
+            sessionStorage.setItem('email', response.data.user.email);
+            sessionStorage.setItem('picure', response.data.user.picture.data.url);
 	} catch (error) {
 		console.log(error)
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
-		console.log(response)
-		// dispatch({
-		// 	type: AUTHENTICATED,
-		// 	payload: {
-		// 		picture: response.user.picture.data.url,
-		// 		userName: response.user.name,
-		// 		email: response.user.email,
-		// 	}
-		// });
-        //     sessionStorage.setItem('userName', response.user.name);
-        //     sessionStorage.setItem('email', response.user.email);
-        //     sessionStorage.setItem('picure', response.user.picture.data.url);
-		// 	alert(1)
+		dispatch({
+			type: AUTHENTICATED,
+			payload: {
+				picture: response.data.user.picture.data.url,
+				userName: response.data.user.name,
+				email: response.data.user.email,
+			}
+		});
+            sessionStorage.setItem('userName', response.data.user.name);
+            sessionStorage.setItem('email', response.data.user.email);
+            sessionStorage.setItem('picure', response.data.user.picture.data.url);
 	}
 };
