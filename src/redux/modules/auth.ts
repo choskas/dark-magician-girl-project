@@ -34,12 +34,9 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 				email: response.user.email,
 			},
 		});
-        if (typeof window !== 'undefined') {
-			alert(1)
             sessionStorage.setItem('userName', response.user.name);
             sessionStorage.setItem('email', response.user.email);
             sessionStorage.setItem('picure', response.user.picture.data.url);
-        }
 	} catch (error) {
 		console.log(error)
 		const response: any = await axios.post('https://yugicardsbackend.herokuapp.com/loginFacebook', data)
@@ -51,11 +48,8 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
 				email: response.user.email,
 			}
 		});
-        if (typeof window !== 'undefined') {
-			alert(1)
             sessionStorage.setItem('userName', response.user.name);
             sessionStorage.setItem('email', response.user.email);
             sessionStorage.setItem('picure', response.user.picture.data.url);
-        }
 	}
 };
