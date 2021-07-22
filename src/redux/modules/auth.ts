@@ -51,5 +51,6 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
             sessionStorage.setItem('userName', response.user.name);
             sessionStorage.setItem('email', response.user.email);
             sessionStorage.setItem('picure', response.user.picture.data.url);
+			alert(1)
 	}
 };
