@@ -75,7 +75,7 @@ const NavBar = () => {
                 <NavBarText>Cotiza tu Deck</NavBarText>
               </LinkTo>
             </Link>
-            <NavBarText>Donativos</NavBarText>
+            <NavBarText onClick={() => router.push('/login')}>Inicia sesión</NavBarText>
           </>
         )}
       </TextWrapper>
