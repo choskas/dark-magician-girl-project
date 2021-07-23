@@ -100,6 +100,7 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
     margin-top: 10px;
     right: 0;
     border-radius: 9px;
+    flex-direction: column;
 `;
 
 export const CollapseOption = styled.p`

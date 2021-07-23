@@ -23,6 +23,7 @@ const NavBar = () => {
   const logout = () => {
     dispatch(logOut());
   };
+  console.log(user.email)
   const dropdownOptions = (isLoggedIn = false) =>
     isLoggedIn ? (
       <>
@@ -49,7 +50,7 @@ const NavBar = () => {
         }}
       />
       <NavBarCollapse isOpen={isOpenCollapse}>
-        {user.email ? dropdownOptions() : dropdownOptions(false)}
+        {user.email ? dropdownOptions(true) : dropdownOptions(false)}
       </NavBarCollapse>
       <TextWrapper>
         {user.email ? (
@@ -64,7 +65,7 @@ const NavBar = () => {
               <UserImage src={user.picture} />
             </ProfileInfoWrapper>
             <NavBarCollapse isOpen={isOpenCollapse}>
-              {user.email ? dropdownOptions() : dropdownOptions(false)}
+              {user.email ? dropdownOptions(true) : dropdownOptions(false)}
             </NavBarCollapse>
           </>
         ) : (
