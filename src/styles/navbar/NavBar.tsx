@@ -36,7 +36,7 @@ export const TextWrapper = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        width: 400px;
+        width: 410px;
         padding-right: 100px;
         align-items: center;
     }
