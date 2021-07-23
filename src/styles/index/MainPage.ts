@@ -112,6 +112,14 @@ export const Subtitle = styled.p`
     margin: 32px 35px 32px 35px;
 `;
 
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const StartButton = styled.button`
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
@@ -122,6 +130,7 @@ export const StartButton = styled.button`
     border: none;
     width: 341px;
     height: 48px;
+    cursor: pointer;
     &:focus{
         background: radial-gradient(50% 50% at 50% 50%, #2295D0 0%, #154387 100%);
     }

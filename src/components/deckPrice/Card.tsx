@@ -93,7 +93,6 @@ const Card = ({
           }}
         />
       )}
-      {console.log(item)}
       <CardTitle>Card name:</CardTitle>
       <CardName>{name}</CardName>
       <CardTitle>Card Type:</CardTitle>

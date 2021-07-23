@@ -88,7 +88,7 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
     }
     padding: 0 18px;
     background-color: white;
-    height: 200px;
+    height: auto;
     width: 90px;
     overflow: hidden;
     position: absolute;
@@ -96,7 +96,7 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
     transition: max-height 0.2s ease-out;
     top: 60px;
     width: 200px;
-    max-height: ${({ isOpen }) => isOpen ? '200px' : '0'};
+    max-height: ${({ isOpen }) => isOpen ? '100%' : '0'};
     margin-top: 10px;
     right: 0;
     border-radius: 9px;
@@ -105,7 +105,7 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
 export const CollapseOption = styled.p`
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    margin: 5px 0;
+    margin: 15px 0;
     border-bottom: 1px solid black;
     width: 100%;
     color: black;

@@ -15,13 +15,16 @@ import {
   SwitchDiv,
   Title,
 } from "../../styles/deckPrice/deckPrice";
-import { CardFrameVertical } from "../../styles/index/MainPage";
+import { ButtonContainer, CardFrameVertical, StartButton } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
 import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
+import { UserImage } from "../../styles/navbar/NavBar";
+import { useDispatch, useSelector } from "react-redux";
+import { addToMyDeck } from "../../redux/modules/deck";
 
 const ItemTypes = {
   CARD: "card",
@@ -40,6 +43,8 @@ const SearchDeck = () => {
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
 
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.auth.user);
 
   const getAllCards = async () => {
     try {
@@ -235,6 +240,19 @@ const SearchDeck = () => {
                     />
                   ))}
               </DeckWrapper>
+              <ButtonContainer>
+                  {myDeck.length >= 1 && (
+                    <StartButton onClick={(e) => {
+                      e.preventDefault();
+                      if(!user){
+                        router.push('/login')
+                        dispatch(addToMyDeck({myDeck}))
+                      } else {
+
+                      }
+                    }}>Guardar deck</StartButton>
+                  )}
+                  </ButtonContainer>
             </MyDeckWrapper>
           </SearchAndMyDeckWrapper>
         </>

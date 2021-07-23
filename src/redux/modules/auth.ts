@@ -53,3 +53,20 @@ export const signUpFacebookAction = (data: any) => async (dispatch: Dispatch<any
             sessionStorage.setItem('picure', response.data.image);
 	}
 };
+
+export const logOut = () => async (dispatch: Dispatch<any>) => {
+	try {
+		dispatch({
+			type: AUTHENTICATED,
+			authenticated: false,
+			payload: {
+				picture: '',
+				userName: '',
+				email: '',
+			},
+		});
+            sessionStorage.clear();
+	} catch (error) {
+		console.log(error)
+	}
+};
