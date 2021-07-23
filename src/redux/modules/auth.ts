@@ -6,11 +6,11 @@ const AUTHENTICATED = 'yugi/auth/AUTHENTICATED_USER';
 const USER_DATA = 'yugi/auth/AUTHENTICATED_USER';
 
 const INITIAL_STATE = {
-	authenticated: false,
+	authenticated: typeof window !== "undefined" && sessionStorage.getItem('email') ? true : false,
 	userData: {
-		userName: typeof window !== "undefined" ? sessionStorage.name : '',
-		email: typeof window !== "undefined" ? sessionStorage.email : '',
-		picture: typeof window !== "undefined" ? sessionStorage.picture : '',
+		userName:typeof window !== "undefined" ? sessionStorage.getItem('userName') : '',
+		email: typeof window !== "undefined" ? sessionStorage.getItem('email') : '',
+		picture: typeof window !== "undefined" ? sessionStorage.getItem('picture') : '',
 	},
 };
 

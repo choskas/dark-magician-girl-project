@@ -22,6 +22,7 @@ export const HaamburgerImage = styled.img`
     width: 24px;
     height: 21px;
     cursor: pointer;
+    border-radius: 9px;
     // desktop
     @media screen and (min-width: 1000px) {
         display: none;
@@ -34,9 +35,10 @@ export const TextWrapper = styled.div`
     @media screen and (min-width: 1000px) {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-end;
         width: 400px;
         padding-right: 100px;
+        align-items: center;
     }
 `;
 
@@ -46,7 +48,68 @@ export const NavBarText = styled.p`
     @media screen and (min-width: 1000px) {
         display: block;
         font-size: 24px;
+        margin: 0 20px;
         font-family: 'Montserrat', sans-serif;
         cursor: pointer;
     }
+`;
+
+export const UserImage = styled.img`
+    // desktop
+    @media screen and (min-width: 1000px) {
+    border: 1px solid #fff;
+    border-radius: 9px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    margin: 10px 0 0 20px;
+    }
+`;
+
+export const ProfileInfoWrapper = styled.div`
+    // desktop
+    @media screen and (min-width: 1000px) {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+`;
+
+interface NavBarCollapse {
+    isOpen: boolean;
+}
+
+export const NavBarCollapse = styled.div<NavBarCollapse>`
+    // desktop
+    @media screen and (min-width: 1000px) {
+        cursor: pointer;
+        display: flex;
+        right: 120px;
+    }
+    padding: 0 18px;
+    background-color: white;
+    height: 200px;
+    width: 90px;
+    overflow: hidden;
+    position: absolute;
+    -webkit-transition: max-height 0.2s ease-out;
+    transition: max-height 0.2s ease-out;
+    top: 60px;
+    width: 200px;
+    max-height: ${({ isOpen }) => isOpen ? '200px' : '0'};
+    margin-top: 10px;
+    right: 0;
+    border-radius: 9px;
+`;
+
+export const CollapseOption = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    margin: 5px 0;
+    border-bottom: 1px solid black;
+    width: 100%;
+    color: black;
+    height: 20%;
+    display: flex;
+    align-items: center;
 `;

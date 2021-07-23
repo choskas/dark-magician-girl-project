@@ -20,8 +20,10 @@ import {
   TitleLogin,
 } from "../styles/login/login";
 import { signUpFacebookAction } from "../redux/modules/auth";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
   const [isActiveLogin, setIsActiveLogin] = useState(true);
   const [isActiveRegister, setIsActiveRegister] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,9 +34,8 @@ const Login = () => {
 
   const dispatch = useDispatch();
   // LOGIN WITH FACEBOOK
-  const responseFacebook = (response) => {
-    console.log(response);
-    dispatch(
+  const responseFacebook = async (response) => {
+    await dispatch(
       signUpFacebookAction({
         email: response.email,
         password: "-",
@@ -43,6 +44,7 @@ const Login = () => {
         image: response.picture.data.url,
       })
     );
+    router.push('/')
   };
   // LOGIN WITH FACEBOOK
 
