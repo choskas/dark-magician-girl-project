@@ -25,7 +25,7 @@ export default function auth(state = INITIAL_STATE, action: AnyAction) {
 
 export const signUpFacebookAction = () => async (dispatch: Dispatch<any>) => {
 	try {
-		const response: any = await axios.get('http://localhost:3001/loginFacebook', {withCredentials: true})
+		const response: any = await fetch('http://localhost:3001/loginFacebook', {credentials: 'include'})
 		// dispatch({
 		// 	type: AUTHENTICATED,
 		// 	payload: {
