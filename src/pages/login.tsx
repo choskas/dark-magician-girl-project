@@ -34,17 +34,11 @@ const Login = () => {
 
   const dispatch = useDispatch();
   // LOGIN WITH FACEBOOK
-  const responseFacebook = async (response) => {
+  const responseFacebook = async () => {
     await dispatch(
-      signUpFacebookAction({
-        email: response.email,
-        password: "-",
-        facebookId: response.userID,
-        name: response.name,
-        image: response.picture.data.url,
-      })
+      signUpFacebookAction()
     );
-    router.push('/')
+    // router.push('/')
   };
   // LOGIN WITH FACEBOOK
 
@@ -91,22 +85,23 @@ const Login = () => {
               <Separator />
               <LoginButton
                 onClick={() => {
-                  const facebookButton = document.getElementsByClassName(
-                    "facebook-button"
-                  )[0] as HTMLElement;
-                  facebookButton.click();
+                  responseFacebook();
+                  // const facebookButton = document.getElementsByClassName(
+                  //   "facebook-button"
+                  // )[0] as HTMLElement;
+                  // facebookButton.click();
                 }}
                 icon="/assets/facebook.png"
               >
                 Login with facebook
               </LoginButton>
-              <FacebookLogin
+              {/* <FacebookLogin
                 appId={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
                 autoload={true}
                 callback={responseFacebook}
                 cssClass="facebook-button"
                 fields="name,email,picture"
-              />
+              /> */}
             </LoginButtonsWrapper>
           </LoginFormContainer>
         </LoginWrapper>
