@@ -83,9 +83,10 @@ const Login = () => {
             <LoginButtonsWrapper>
               <LoginButton>Iniciar sesión</LoginButton>
               <Separator />
+              <a href="http://localhost:3001/loginFacebook">
               <LoginButton
                 onClick={() => {
-                  responseFacebook();
+                  // responseFacebook();
                   // const facebookButton = document.getElementsByClassName(
                   //   "facebook-button"
                   // )[0] as HTMLElement;
@@ -93,8 +94,10 @@ const Login = () => {
                 }}
                 icon="/assets/facebook.png"
               >
+                
                 Login with facebook
               </LoginButton>
+              </a>
               {/* <FacebookLogin
                 appId={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
                 autoload={true}
