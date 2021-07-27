@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 const Profile = () => {
 const getProfile = async () => {
-    const response = await axios.get('https://yugicardsbackend.herokuapp.com/profile', {withCredentials: true})
+    const response = await axios.post('https://yugicardsbackend.herokuapp.com/profile', {withCredentials: true})
     console.log(response)
   }
   useEffect(() => {
