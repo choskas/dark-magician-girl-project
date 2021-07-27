@@ -4,8 +4,16 @@ import DonateSection from "../components/index/DonateSection";
 import MainPageFirstSection from "../components/index/MainPageFirstSection"
 import WhatToDoSection from "../components/index/WhatToDoSection";
 import { CardFrame } from "../styles/index/MainPage";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  const getProfile = async () => {
+    const response = await fetch('https://yugicardsbackend.herokuapp.com/profile', {credentials: 'include'})
+    console.log(response)
+  }
+  useEffect(() => {
+    getProfile()
+  },[])
     return (
       <>
       <NavBar/>
