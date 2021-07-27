@@ -9,7 +9,7 @@ import axios from "axios";
 
 const HomePage = () => {
   const getProfile = async () => {
-    const response = await axios.get('https://yugicardsbackend.herokuapp.com/profile')
+    const response = await axios.get('https://yugicardsbackend.herokuapp.com/profile', {withCredentials: true})
     console.log(response)
   }
   useEffect(() => {
