@@ -37,13 +37,6 @@ const NavBar = () => {
         <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
       </>
     );
-    const getProfile = async () => {
-      const response = await axios.get('https://yugicardsbackend.herokuapp.com/profile')
-      console.log(response)
-    }
-    useEffect(() => {
-      getProfile()
-    })
   return (
     <Wrapper>
       <Link href="/">

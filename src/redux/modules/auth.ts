@@ -56,6 +56,7 @@ export const signUpFacebookAction = () => async (dispatch: Dispatch<any>) => {
 
 export const logOut = () => async (dispatch: Dispatch<any>) => {
 	try {
+		await axios.get('http://localhost:3001/logout')
 		dispatch({
 			type: AUTHENTICATED,
 			authenticated: false,
