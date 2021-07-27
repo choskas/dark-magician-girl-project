@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { logOut } from "../../redux/modules/auth";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const NavBar = () => {
   const user = useSelector((state: any) => state.auth.userData);
@@ -36,6 +37,13 @@ const NavBar = () => {
         <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
       </>
     );
+    const getProfile = async () => {
+      const user = await axios.get('https://yugicardsbackend.herokuapp.com/profile')
+      console.log(user)
+    }
+    useEffect(() => {
+      getProfile();
+    })
   return (
     <Wrapper>
       <Link href="/">

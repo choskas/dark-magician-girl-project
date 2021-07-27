@@ -83,9 +83,9 @@ const Login = () => {
             <LoginButtonsWrapper>
               <LoginButton>Iniciar sesión</LoginButton>
               <Separator />
-              <a href="https://yugicardsbackend.herokuapp.com/loginFacebook">
               <LoginButton
                 onClick={() => {
+                  window.open("https://yugicardsbackend.herokuapp.com/loginFacebook", "_self");
                   // responseFacebook();
                   // const facebookButton = document.getElementsByClassName(
                   //   "facebook-button"
@@ -97,7 +97,6 @@ const Login = () => {
                 
                 Login with facebook
               </LoginButton>
-              </a>
               {/* <FacebookLogin
                 appId={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
                 autoload={true}
