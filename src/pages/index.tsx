@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 const HomePage = () => {
   const getProfile = async () => {
-    const response = await fetch('https://yugicardsbackend.herokuapp.com/profile', {credentials: 'include'})
+    const response = await fetch('https://yugicardsbackend.herokuapp.com/profile', {credentials : 'same-origin'})
     console.log(response)
   }
   useEffect(() => {
