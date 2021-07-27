@@ -83,7 +83,7 @@ const Login = () => {
             <LoginButtonsWrapper>
               <LoginButton>Iniciar sesión</LoginButton>
               <Separator />
-              <a href="http://localhost:3001/loginFacebook">
+              <a href="https://yugicardsbackend.herokuapp.com/loginFacebook">
               <LoginButton
                 onClick={() => {
                   // responseFacebook();
