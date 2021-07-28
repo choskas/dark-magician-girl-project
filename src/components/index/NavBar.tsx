@@ -10,26 +10,19 @@ import {
 } from "../../styles/navbar/NavBar";
 import Link from "next/link";
 import { LinkTo } from "../../styles/common/Link";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { logOut } from "../../redux/modules/auth";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { useSession, signOut } from 'next-auth/client'
 
 const NavBar = () => {
-  const user = useSelector((state: any) => state.auth.userData);
-  const dispatch = useDispatch();
   const router = useRouter();
+  const [session, isLoading] = useSession();
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
-  const logout = () => {
-    dispatch(logOut());
-  };
-  console.log(user.email)
   const dropdownOptions = (isLoggedIn = false) =>
     isLoggedIn ? (
       <>
-        <CollapseOption> Mi perfil </CollapseOption>
-        <CollapseOption onClick={() => logout()}>Salir</CollapseOption>
+        <CollapseOption onClick={() => router.push('/profile')}> Mi perfil </CollapseOption>
+        <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
       </>
     ) : (
       <>
@@ -42,19 +35,20 @@ const NavBar = () => {
       <Link href="/">
         <LinkTo>YugiCards!</LinkTo>
       </Link>
+
       <HaamburgerImage
-        src={user.picture ? user.picture : "/assets/hamburger.png"}
-        style={user.picture ? { width: "40px", height: "40px" } : {}}
+        src={isLoading === false && session ? session.user.image : "/assets/hamburger.png"}
+        style={isLoading === false && session ? { width: "40px", height: "40px" } : {}}
         onClick={(e) => {
           e.preventDefault();
           setIsOpenCollapse(!isOpenCollapse);
         }}
       />
       <NavBarCollapse isOpen={isOpenCollapse}>
-        {user.email ? dropdownOptions(true) : dropdownOptions(false)}
+        {session ? dropdownOptions(true) : dropdownOptions(false)}
       </NavBarCollapse>
       <TextWrapper>
-        {user.email ? (
+        {session ? (
           <>
             <ProfileInfoWrapper
               onClick={(e) => {
@@ -62,11 +56,11 @@ const NavBar = () => {
                 setIsOpenCollapse(!isOpenCollapse);
               }}
             >
-              <NavBarText>Hola, {user.userName}</NavBarText>
-              <UserImage src={user.picture} />
+              <NavBarText>Hola, {session.user.name}</NavBarText>
+              <UserImage src={session.user.image} />
             </ProfileInfoWrapper>
             <NavBarCollapse isOpen={isOpenCollapse}>
-              {user.email ? dropdownOptions(true) : dropdownOptions(false)}
+              {session.user ? dropdownOptions(true) : dropdownOptions(false)}
             </NavBarCollapse>
           </>
         ) : (
