@@ -1,17 +1,14 @@
 import axios from "axios";
 import { useEffect } from "react";
+import Footer from "../components/Footer/Footer";
+import NavBar from "../components/index/NavBar";
 
 const Profile = () => {
-    const getProfile = async () => {
-        const response = await axios.get('https://yugicardsbackend.herokuapp.com/profile', {withCredentials : true})
-        console.log(response)
-      }
-      useEffect(() => {
-        getProfile()
-      },[])
 return (
     <>
+    <NavBar />
     profile
+    <Footer />
     </>
 )};
 

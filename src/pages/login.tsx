@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import FacebookLogin from "react-facebook-login";
+import { useState } from "react";
+import { signIn, signOut, useSession } from 'next-auth/client'
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
 import Footer from "../components/Footer/Footer";
-import { useDispatch } from "react-redux";
 import NavBar from "../components/index/NavBar";
 import { Separator, VerticalSeparatorMini } from "../styles/common/Separtor";
 import {
@@ -19,99 +18,81 @@ import {
   TitleContainer,
   TitleLogin,
 } from "../styles/login/login";
-import { signUpFacebookAction } from "../redux/modules/auth";
 import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
   const [isActiveLogin, setIsActiveLogin] = useState(true);
   const [isActiveRegister, setIsActiveRegister] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [picture, setPicture] = useState("");
+  const [session, loading] = useSession()
+  
+  const login = () => {
+    if (!session && !loading) {
+      return (
+        <>
+        <NavBar />
+          <LoginWrapper>
+            <LoginImageContainer>
+              <LoginImage />
+            </LoginImageContainer>
+            <LoginFormContainer>
+              <TitleContainer>
+                <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
+                <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
+              </TitleContainer>
+              <LoginRegisterWrapper>
+                <TextLogin
+                  isActive={isActiveLogin}
+                  onClick={() => {
+                    setIsActiveRegister(false);
+                    setIsActiveLogin(true);
+                  }}
+                >
+                  Login
+                </TextLogin>
+                <VerticalSeparatorMini></VerticalSeparatorMini>
+                <TextLogin
+                  isActive={isActiveRegister}
+                  onClick={() => {
+                    setIsActiveRegister(true);
+                    setIsActiveLogin(false);
+                  }}
+                >
+                  Registrar
+                </TextLogin>
+              </LoginRegisterWrapper>
+              <InputsWrapper>
+                <InputText placeholder="Correo electronico" onChange={() => {}} />
+                <InputText placeholder="Contraseña" onChange={() => {}} />
+              </InputsWrapper>
+              <LoginButtonsWrapper>
+                <LoginButton>Iniciar sesión</LoginButton>
+                <Separator />
+                <LoginButton
+                  onClick={async () => {
+                    await signIn("facebook", { callbackUrl: 'http://locahost:3000/profile' })
+                  }}
+                  icon="/assets/facebook.png"
+                >
+                  
+                  Login with facebook
+                </LoginButton>
+              </LoginButtonsWrapper>
+            </LoginFormContainer>
+          </LoginWrapper>
+  
+        <Footer />
+        </>
+      )
+    } else {
+      setTimeout(() => {
+        router.push('/')
+      }, 2000);
+      return <>You are logged in</>
+    }
+  }
 
-  const dispatch = useDispatch();
-  // LOGIN WITH FACEBOOK
-  const responseFacebook = async () => {
-    await dispatch(
-      signUpFacebookAction()
-    );
-    // router.push('/')
-  };
-  // LOGIN WITH FACEBOOK
-
-  return (
-    <>
-      <NavBar />
-      {!isLoggedIn && (
-        <LoginWrapper>
-          <LoginImageContainer>
-            <LoginImage />
-          </LoginImageContainer>
-          <LoginFormContainer>
-            <TitleContainer>
-              <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
-              <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
-            </TitleContainer>
-            <LoginRegisterWrapper>
-              <TextLogin
-                isActive={isActiveLogin}
-                onClick={() => {
-                  setIsActiveRegister(false);
-                  setIsActiveLogin(true);
-                }}
-              >
-                Login
-              </TextLogin>
-              <VerticalSeparatorMini></VerticalSeparatorMini>
-              <TextLogin
-                isActive={isActiveRegister}
-                onClick={() => {
-                  setIsActiveRegister(true);
-                  setIsActiveLogin(false);
-                }}
-              >
-                Registrar
-              </TextLogin>
-            </LoginRegisterWrapper>
-            <InputsWrapper>
-              <InputText placeholder="Correo electronico" onChange={() => {}} />
-              <InputText placeholder="Contraseña" onChange={() => {}} />
-            </InputsWrapper>
-            <LoginButtonsWrapper>
-              <LoginButton>Iniciar sesión</LoginButton>
-              <Separator />
-              <LoginButton
-                onClick={() => {
-                  window.open("https://yugicardsbackend.herokuapp.com/loginFacebook", "_self");
-                  // responseFacebook();
-                  // const facebookButton = document.getElementsByClassName(
-                  //   "facebook-button"
-                  // )[0] as HTMLElement;
-                  // facebookButton.click();
-                }}
-                icon="/assets/facebook.png"
-              >
-                
-                Login with facebook
-              </LoginButton>
-              {/* <FacebookLogin
-                appId={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
-                autoload={true}
-                callback={responseFacebook}
-                cssClass="facebook-button"
-                fields="name,email,picture"
-              /> */}
-            </LoginButtonsWrapper>
-          </LoginFormContainer>
-        </LoginWrapper>
-      )}
-
-      <Footer />
-    </>
-  );
+  return login();
 };
 
 export default Login;
