@@ -70,7 +70,7 @@ const Login = () => {
                 <Separator />
                 <LoginButton
                   onClick={async () => {
-                    await signIn("facebook", { callbackUrl: 'http://locahost:3000/profile' })
+                    await signIn("facebook", { callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/profile` })
                   }}
                   icon="/assets/facebook.png"
                 >
