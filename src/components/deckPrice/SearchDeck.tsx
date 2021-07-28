@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useDrop } from "react-dnd";
 import { useEffect, useState, ChangeEvent } from "react";
+import { useSession } from 'next-auth/client'
 import {
   AllCardsWrapper,
   DeckWrapper,
@@ -15,24 +16,19 @@ import {
   SwitchDiv,
   Title,
 } from "../../styles/deckPrice/deckPrice";
-import { ButtonContainer, CardFrameVertical, StartButton } from "../../styles/index/MainPage";
+import { ButtonContainer, StartButton } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
 import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
-import { UserImage } from "../../styles/navbar/NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { addToMyDeck } from "../../redux/modules/deck";
 
 const ItemTypes = {
   CARD: "card",
 };
-
-interface SearchDeskProps {
-  history: any;
-}
 
 const SearchDeck = () => {
   const [allCards, setAllCards] = useState([]);
@@ -41,10 +37,10 @@ const SearchDeck = () => {
   const [isClickedDelete, setIsClickedDelete] = useState(false);
   const [searchByCode, setSearchByCode] = useState(false);
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
+  const [session, loading] = useSession();
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.auth.user);
 
   const getAllCards = async () => {
     try {
@@ -244,7 +240,7 @@ const SearchDeck = () => {
                   {myDeck.length >= 1 && (
                     <StartButton onClick={(e) => {
                       e.preventDefault();
-                      if(!user){
+                      if(!session){
                         router.push('/login')
                         dispatch(addToMyDeck({myDeck}))
                       } else {

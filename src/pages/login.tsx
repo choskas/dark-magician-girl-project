@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/client'
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
 import Footer from "../components/Footer/Footer";
@@ -25,7 +25,7 @@ const Login = () => {
   const [isActiveLogin, setIsActiveLogin] = useState(true);
   const [isActiveRegister, setIsActiveRegister] = useState(false);
   const [session, loading] = useSession()
-  
+
   const login = () => {
     if (!session && !loading) {
       return (
