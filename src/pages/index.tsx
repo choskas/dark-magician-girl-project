@@ -7,13 +7,6 @@ import { CardFrame } from "../styles/index/MainPage";
 import { useEffect } from "react";
 
 const HomePage = () => {
-  const getProfile = async () => {
-    const response = await fetch('https://yugicardsbackend.herokuapp.com/profile', {credentials : 'same-origin'})
-    console.log(response)
-  }
-  useEffect(() => {
-    getProfile()
-  },[])
     return (
       <>
       <NavBar/>
