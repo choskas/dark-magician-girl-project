@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn, useSession } from 'next-auth/client'
+import { signIn, useSession } from "next-auth/client";
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
 import Footer from "../components/Footer/Footer";
@@ -24,13 +24,13 @@ const Login = () => {
   const router = useRouter();
   const [isActiveLogin, setIsActiveLogin] = useState(true);
   const [isActiveRegister, setIsActiveRegister] = useState(false);
-  const [session, loading] = useSession()
+  const [session, loading] = useSession();
 
   const login = () => {
     if (!session && !loading) {
       return (
         <>
-        <NavBar />
+          <NavBar />
           <LoginWrapper>
             <LoginImageContainer>
               <LoginImage />
@@ -62,7 +62,10 @@ const Login = () => {
                 </TextLogin>
               </LoginRegisterWrapper>
               <InputsWrapper>
-                <InputText placeholder="Correo electronico" onChange={() => {}} />
+                <InputText
+                  placeholder="Correo electronico"
+                  onChange={() => {}}
+                />
                 <InputText placeholder="Contraseña" onChange={() => {}} />
               </InputsWrapper>
               <LoginButtonsWrapper>
@@ -70,27 +73,28 @@ const Login = () => {
                 <Separator />
                 <LoginButton
                   onClick={async () => {
-                    await signIn("facebook", { callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/profile` })
+                    await signIn("facebook", {
+                      callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/profile`,
+                    });
                   }}
                   icon="/assets/facebook.png"
                 >
-                  
                   Login with facebook
                 </LoginButton>
               </LoginButtonsWrapper>
             </LoginFormContainer>
           </LoginWrapper>
-  
-        <Footer />
+
+          <Footer />
         </>
-      )
+      );
     } else {
       setTimeout(() => {
-        router.push('/')
+        router.push("/");
       }, 2000);
-      return <>You are logged in</>
+      return <>You are logged in</>;
     }
-  }
+  };
 
   return login();
 };
