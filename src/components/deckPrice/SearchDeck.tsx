@@ -291,9 +291,9 @@ const SearchDeck = () => {
                 </SaveDeckInputs>
                 <SmallText>* Ambos campos son obligatorios</SmallText>
                 <ButtonsWrapper>
-                <StartButton onClick={() => {
+                <StartButton onClick={async() => {
                   if (deckName && deckType && myDeck) {
-                    dispatch(createDeck({
+                    await dispatch(createDeck({
                       deckName,
                       deckType,
                       deck: myDeck,
@@ -302,6 +302,7 @@ const SearchDeck = () => {
                       deckPrice: totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2),
                     }))
                     setIsOpenDrawer(false);
+                    router.push('/profile')
                   }else {
                     toast.error("Llena ambos campos")
                   }
