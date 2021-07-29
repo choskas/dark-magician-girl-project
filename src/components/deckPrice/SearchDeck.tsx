@@ -4,14 +4,17 @@ import { useEffect, useState, ChangeEvent } from "react";
 import { useSession } from 'next-auth/client'
 import {
   AllCardsWrapper,
+  ButtonsWrapper,
   DeckWrapper,
   MyDeckPriceWrapper,
   MyDeckWrapper,
   Price,
+  SaveDeckInputs,
   SearchAndMyDeckWrapper,
   SearchBothInputWrapper,
   SearchDeckWrapper,
   SearchInputWrapper,
+  SmallText,
   Subtitle,
   SwitchDiv,
   Title,
@@ -24,7 +27,9 @@ import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
 import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
 import { useDispatch, useSelector } from "react-redux";
-import { addToMyDeck } from "../../redux/modules/deck";
+import { addToMyDeck, createDeck } from "../../redux/modules/deck";
+import BottomDrawer from "../common/BottomDrawer";
+import { toast } from "react-toastify";
 
 const ItemTypes = {
   CARD: "card",
@@ -37,7 +42,12 @@ const SearchDeck = () => {
   const [isClickedDelete, setIsClickedDelete] = useState(false);
   const [searchByCode, setSearchByCode] = useState(false);
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const [deckName, setDeckName] = useState('');
+  const [deckType, setDeckType] = useState('');
   const [session, loading] = useSession();
+
+  console.log(isOpenDrawer)
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -129,6 +139,8 @@ const SearchDeck = () => {
     setTotalDeckPrice(priceArray);
   };
 
+  console.log(myDeck)
+
   useEffect(() => {
     myDeckPrice();
   }, [myDeck]);
@@ -210,7 +222,7 @@ const SearchDeck = () => {
             <MyDeckWrapper ref={drop}>
               <MyDeckPriceWrapper>
                 <Subtitle>My Deck</Subtitle>
-                <Price>${totalDeckPrice.reduce((a, b) => a + b, 0)} dls</Price>
+                <Price>${totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2)} dls</Price>
               </MyDeckPriceWrapper>
               <DeckWrapper>
                 {myDeck &&
@@ -244,7 +256,7 @@ const SearchDeck = () => {
                         router.push('/login')
                         dispatch(addToMyDeck({myDeck}))
                       } else {
-
+                        setIsOpenDrawer(!isOpenDrawer);
                       }
                     }}>Guardar deck</StartButton>
                   )}
@@ -253,6 +265,50 @@ const SearchDeck = () => {
           </SearchAndMyDeckWrapper>
         </>
       )}
+          <BottomDrawer isOpen={isOpenDrawer} >
+          <SmallText>* Tu primera carta será tu carta principal</SmallText>
+            <SaveDeckInputs>
+          <InputText
+                  placeholder="Nombre del deck"
+                  value={deckName}
+                  onChange={(
+                    _e: ChangeEvent<HTMLInputElement>,
+                    value: string
+                  ) => {
+                    setDeckName(value);
+                  }}
+                />
+                              <InputText
+                  placeholder="Tipo de deck"
+                  value={deckType}
+                  onChange={(
+                    _e: ChangeEvent<HTMLInputElement>,
+                    value: string
+                  ) => {
+                    setDeckType(value);
+                  }}
+                />
+                </SaveDeckInputs>
+                <SmallText>* Ambos campos son obligatorios</SmallText>
+                <ButtonsWrapper>
+                <StartButton onClick={() => {
+                  if (deckName && deckType && myDeck) {
+                    dispatch(createDeck({
+                      deckName,
+                      deckType,
+                      deck: myDeck,
+                      mainCard: myDeck[0].card_images[0].image_url,
+                      email: session.user.email,
+                      deckPrice: totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2),
+                    }))
+                    setIsOpenDrawer(false);
+                  }else {
+                    toast.error("Llena ambos campos")
+                  }
+                }}>Guardar</StartButton>
+                <StartButton onClick={() => setIsOpenDrawer(false)}>Cancelar</StartButton>
+                </ButtonsWrapper>
+            </BottomDrawer>
     </SearchDeckWrapper>
   );
 };
