@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDrop } from "react-dnd";
 import { useEffect, useState, ChangeEvent } from "react";
-import { useSession } from 'next-auth/client'
+import { useSession } from "next-auth/client";
 import {
   AllCardsWrapper,
   ButtonsWrapper,
@@ -25,7 +25,11 @@ import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
-import { DesktopSeparator, DesktopVerticalSeparator, Separator } from "../../styles/common/Separtor";
+import {
+  DesktopSeparator,
+  DesktopVerticalSeparator,
+  Separator,
+} from "../../styles/common/Separtor";
 import { useDispatch, useSelector } from "react-redux";
 import { addToMyDeck, createDeck } from "../../redux/modules/deck";
 import BottomDrawer from "../common/BottomDrawer";
@@ -43,14 +47,14 @@ const SearchDeck = () => {
   const [searchByCode, setSearchByCode] = useState(false);
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-  const [deckName, setDeckName] = useState('');
-  const [deckType, setDeckType] = useState('');
+  const [deckName, setDeckName] = useState("");
+  const [deckType, setDeckType] = useState("");
   const [session, loading] = useSession();
 
-  console.log(isOpenDrawer)
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const myDeckRedux = useSelector((state: any) => state.deck.myDeck);
 
   const getAllCards = async () => {
     try {
@@ -139,7 +143,7 @@ const SearchDeck = () => {
     setTotalDeckPrice(priceArray);
   };
 
-  console.log(myDeck)
+  console.log(myDeck);
 
   useEffect(() => {
     myDeckPrice();
@@ -147,7 +151,11 @@ const SearchDeck = () => {
 
   useEffect(() => {
     getAllCards();
+    if (myDeckRedux !== []) {
+      setMyDeck(myDeckRedux);
+    }
   }, []);
+
   return (
     <SearchDeckWrapper>
       {allCards.length <= 10000 ? (
@@ -160,14 +168,14 @@ const SearchDeck = () => {
             código el precio que se mostrará será el más aproximado a esa carta.
           </Subtitle>
           <SwitchDiv>
-          <Switch
-            onText="Name"
-            offText="Code"
-            onImage="/assets/Card.png"
-            offImage="/assets/Code.png"
-            isActive={searchByCode}
-            onClick={() => setSearchByCode(!searchByCode)}
-          />
+            <Switch
+              onText="Name"
+              offText="Code"
+              onImage="/assets/Card.png"
+              offImage="/assets/Code.png"
+              isActive={searchByCode}
+              onClick={() => setSearchByCode(!searchByCode)}
+            />
           </SwitchDiv>
           <SearchBothInputWrapper>
             {!searchByCode ? (
@@ -222,7 +230,9 @@ const SearchDeck = () => {
             <MyDeckWrapper ref={drop}>
               <MyDeckPriceWrapper>
                 <Subtitle>My Deck</Subtitle>
-                <Price>${totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2)} dls</Price>
+                <Price>
+                  ${totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2)} dls
+                </Price>
               </MyDeckPriceWrapper>
               <DeckWrapper>
                 {myDeck &&
@@ -249,68 +259,75 @@ const SearchDeck = () => {
                   ))}
               </DeckWrapper>
               <ButtonContainer>
-                  {myDeck.length >= 1 && (
-                    <StartButton onClick={(e) => {
+                {myDeck.length >= 1 && (
+                  <StartButton
+                    onClick={(e) => {
                       e.preventDefault();
-                      if(!session){
-                        router.push('/login')
-                        dispatch(addToMyDeck({myDeck}))
+                      if (!session) {
+                        router.push("/login");
+                        dispatch(addToMyDeck({ myDeck }));
                       } else {
                         setIsOpenDrawer(!isOpenDrawer);
                       }
-                    }}>Guardar deck</StartButton>
-                  )}
-                  </ButtonContainer>
+                    }}
+                  >
+                    Guardar deck
+                  </StartButton>
+                )}
+              </ButtonContainer>
             </MyDeckWrapper>
           </SearchAndMyDeckWrapper>
         </>
       )}
-          <BottomDrawer isOpen={isOpenDrawer} >
-          <SmallText>* Tu primera carta será tu carta principal</SmallText>
-            <SaveDeckInputs>
+      <BottomDrawer isOpen={isOpenDrawer}>
+        <SmallText>* Tu primera carta será tu carta principal</SmallText>
+        <SaveDeckInputs>
           <InputText
-                  placeholder="Nombre del deck"
-                  value={deckName}
-                  onChange={(
-                    _e: ChangeEvent<HTMLInputElement>,
-                    value: string
-                  ) => {
-                    setDeckName(value);
-                  }}
-                />
-                              <InputText
-                  placeholder="Tipo de deck"
-                  value={deckType}
-                  onChange={(
-                    _e: ChangeEvent<HTMLInputElement>,
-                    value: string
-                  ) => {
-                    setDeckType(value);
-                  }}
-                />
-                </SaveDeckInputs>
-                <SmallText>* Ambos campos son obligatorios</SmallText>
-                <ButtonsWrapper>
-                <StartButton onClick={async() => {
-                  
-                  if (deckName && deckType && myDeck) {
-                    await dispatch(createDeck({
-                      deckName,
-                      deckType,
-                      deck: myDeck,
-                      mainCard: myDeck[0].card_images[0].image_url,
-                      email: session.user.email,
-                      deckPrice: totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2),
-                    }))
-                    setIsOpenDrawer(false);
-                    router.push('/profile')
-                  }else {
-                    toast.error("Llena ambos campos")
-                  }
-                }}>Guardar</StartButton>
-                <StartButton onClick={() => setIsOpenDrawer(false)}>Cancelar</StartButton>
-                </ButtonsWrapper>
-            </BottomDrawer>
+            placeholder="Nombre del deck"
+            value={deckName}
+            onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
+              setDeckName(value);
+            }}
+          />
+          <InputText
+            placeholder="Tipo de deck"
+            value={deckType}
+            onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
+              setDeckType(value);
+            }}
+          />
+        </SaveDeckInputs>
+        <SmallText>* Ambos campos son obligatorios</SmallText>
+        <ButtonsWrapper>
+          <StartButton
+            onClick={async () => {
+              if (deckName && deckType && myDeck) {
+                await dispatch(
+                  createDeck({
+                    deckName,
+                    deckType,
+                    deck: myDeck,
+                    mainCard: myDeck[0].card_images[0].image_url,
+                    email: session.user.email,
+                    deckPrice: totalDeckPrice
+                      .reduce((a, b) => a + b, 0)
+                      .toFixed(2),
+                  })
+                );
+                setIsOpenDrawer(false);
+                router.push("/profile");
+              } else {
+                toast.error("Llena ambos campos");
+              }
+            }}
+          >
+            Guardar
+          </StartButton>
+          <StartButton onClick={() => setIsOpenDrawer(false)}>
+            Cancelar
+          </StartButton>
+        </ButtonsWrapper>
+      </BottomDrawer>
     </SearchDeckWrapper>
   );
 };

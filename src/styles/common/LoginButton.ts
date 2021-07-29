@@ -24,7 +24,7 @@ export const LoginButtonContainer = styled.button`
 export const LoginButtonImage = styled.img`
     // Desktop
     @media screen and (min-width: 1000px) {
-        top: 50px;
+        top: 58px;
     }
     cursor: pointer;
     top: 33px;

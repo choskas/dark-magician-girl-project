@@ -7,6 +7,10 @@ export default NextAuth({
       clientId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
       clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_APP_SECRET,
     }),
+    Providers.Google({
+        clientId: process.env.NEXT_PUBLIC_GOOGLE_APP_ID,
+        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_APP_SECRET
+      }),
   ],
   callbacks: {
     /**

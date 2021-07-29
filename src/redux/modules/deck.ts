@@ -3,15 +3,19 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const DECK = 'yugi/auth/AUTHENTICATED_USER';
+const ALL_USER_DECKS = 'yugi/auth/ALL_USER_DECKS';
 
 const INITIAL_STATE = {
 	myDeck: [],
+	allUserDecks: [],
 };
 
 export default function deck(state = INITIAL_STATE, action: AnyAction) {
 	switch (action.type) {
 		case DECK:
 			return { ...state, myDeck: action.payload };
+		case ALL_USER_DECKS:
+			return { ...state, allUserDecks: action.payload };
 		default:
 			return state;
 	}
@@ -31,7 +35,10 @@ export const addToMyDeck = (data: any) => async (dispatch: Dispatch<any>) => {
 export const getAllUserDecks = (email: any) => async (dispatch: Dispatch<any>) => {
 	try {
 		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/getAllUserDecks`, {email})
-	
+		dispatch({
+            type: ALL_USER_DECKS,
+			payload: response.data.decks,
+		});
 	} catch (error) {
 		console.log(error)
 	}
