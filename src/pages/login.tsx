@@ -73,6 +73,7 @@ const Login = () => {
                 <Separator />
                 <LoginButton
                   onClick={async () => {
+                    
                     await signIn("facebook", {
                       callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/profile`,
                     });
