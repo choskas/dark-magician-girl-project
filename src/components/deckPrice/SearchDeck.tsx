@@ -292,6 +292,7 @@ const SearchDeck = () => {
                 <SmallText>* Ambos campos son obligatorios</SmallText>
                 <ButtonsWrapper>
                 <StartButton onClick={async() => {
+                  
                   if (deckName && deckType && myDeck) {
                     await dispatch(createDeck({
                       deckName,
