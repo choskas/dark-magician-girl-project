@@ -41,12 +41,14 @@ const ItemTypes = {
 
 const SearchDeck = () => {
   const [allCards, setAllCards] = useState([]);
+  const [allCardsName, setAllCardsName] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [myDeck, setMyDeck] = useState([]);
   const [isClickedDelete, setIsClickedDelete] = useState(false);
   const [searchByCode, setSearchByCode] = useState(false);
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const [searchCardValue, setSearchCardValue] = useState("");
   const [deckName, setDeckName] = useState("");
   const [deckType, setDeckType] = useState("");
   const [session, loading] = useSession();
@@ -62,6 +64,10 @@ const SearchDeck = () => {
         "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
       );
       setAllCards(response.data.data);
+      const onlyNames = response.data.data.map((item) => {
+        return item.name;
+      })
+      setAllCardsName(onlyNames);
     } catch (error) {
       console.log(error);
       router.push("/");
@@ -156,6 +162,10 @@ const SearchDeck = () => {
     }
   }, []);
 
+  useEffect(() => {
+    searchCard(searchCardValue);
+  },[searchCardValue])
+
   return (
     <SearchDeckWrapper>
       {allCards.length <= 10000 ? (
@@ -181,13 +191,17 @@ const SearchDeck = () => {
             {!searchByCode ? (
               <SearchInputWrapper>
                 <InputText
+                  autoCompleteValues={allCardsName}
                   placeholder="Búsqueda por nombre"
+                  value={searchCardValue}
+                  setValue={setSearchCardValue}
                   icon="/assets/Search.png"
                   onChange={(
                     _e: ChangeEvent<HTMLInputElement>,
                     value: string
                   ) => {
                     searchCard(value);
+                    setSearchCardValue(value);
                   }}
                 />
               </SearchInputWrapper>
