@@ -22,11 +22,13 @@ const NavBar = () => {
     isLoggedIn ? (
       <>
         <CollapseOption onClick={() => router.push('/profile')}> Mi perfil </CollapseOption>
+        <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
         <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
       </>
     ) : (
       <>
         <CollapseOption onClick={() => router.push('/login')}> Acceder </CollapseOption>
+        <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
         <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
       </>
     );

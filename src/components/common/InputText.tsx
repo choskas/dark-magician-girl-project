@@ -17,6 +17,9 @@ interface InputTextProps {
   width?: string;
   icon?: string;
   autoCompleteValues?: Array<any>;
+  onKeyPress?: Function;
+  onClickIcon?: Function;
+  onClickListValue?: Function;
 }
 const InputText = ({
   placeholder,
@@ -26,6 +29,9 @@ const InputText = ({
   icon,
   autoCompleteValues,
   setValue,
+  onKeyPress,
+  onClickIcon,
+  onClickListValue,
 }: InputTextProps) => {
   const [namesArr, setNamesArr] = useState([]);
   const searchCard = (value: string) => {
@@ -43,6 +49,7 @@ const InputText = ({
   return (
     <Label style={{ width }}>
       <Input
+	  	onKeyPress={(e) => onKeyPress(e)}
         onChange={(e) => {
           e.preventDefault();
           onChange(e, e.target.value);
@@ -55,15 +62,18 @@ const InputText = ({
         value={value}
       />
       <Span className="input__label">{placeholder}</Span>
-      <InputIcon src={icon} />
+      <InputIcon src={icon} onClick={() => onClickIcon()}/>
       <Autocomplete>
         <List>
-          {namesArr.map((item) => (
+          {namesArr.map((item, key) => (
             <ListName
+			  key={key}
               value={item}
               onClick={(e) => {
                 e.preventDefault();
-                setValue(e.currentTarget.getAttribute("value"));
+				const value = e.currentTarget.getAttribute("value")
+				onClickListValue(value);
+                setValue(value);
                 setNamesArr([]);
               }}
             >

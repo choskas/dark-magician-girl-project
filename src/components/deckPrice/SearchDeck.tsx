@@ -61,10 +61,10 @@ const SearchDeck = () => {
   const getAllCards = async () => {
     try {
       const response = await axios.get(
-        "https://db.ygoprodeck.com/api/v7/cardinfo.php?"
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/allCards`
       );
-      setAllCards(response.data.data);
-      const onlyNames = response.data.data.map((item) => {
+      setAllCards(response.data.cards);
+      const onlyNames = response.data.cards.map((item) => {
         return item.name;
       })
       setAllCardsName(onlyNames);
@@ -148,8 +148,6 @@ const SearchDeck = () => {
     });
     setTotalDeckPrice(priceArray);
   };
-
-  console.log(myDeck);
 
   useEffect(() => {
     myDeckPrice();
