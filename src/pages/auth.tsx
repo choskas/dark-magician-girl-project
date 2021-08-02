@@ -5,9 +5,10 @@ import { useSession } from "next-auth/client";
 const Auth = () => {
   const router = useRouter();
   const [session, loading] = useSession();
+  console.log(session)
   useEffect(() => {
     // @ts-ignore
-    if (session && session.user.role === undefined) {
+    if (session && !session.user.role) {
       router.push("/storeOrClient");
     } else {
       router.push("/profile");

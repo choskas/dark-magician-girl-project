@@ -41,7 +41,7 @@ export const TitleContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 20px 0;
+    margin: 0px 0;
 `;
 
 export const TitleLogin = styled.img`
@@ -75,16 +75,18 @@ export const TextLogin = styled.p`
 `;
 
 export const InputsWrapper = styled.div`
-    margin: 30px 30px;
+    margin: 0px 30px;
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
 `;
 
 export const LoginButtonsWrapper = styled.div`
     display: flex;
-    height: 200px;
+    height: 350px;
     justify-content: space-around;
     flex-direction: column;
     align-items: center;

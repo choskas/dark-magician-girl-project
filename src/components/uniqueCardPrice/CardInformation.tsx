@@ -1,7 +1,9 @@
+import { useState } from "react";
 import {
   AlternativeImages,
   AlternativeImagesTitle,
   AlternativeImagesWrapper,
+  AlternativeImagesWrapperAndTitleWrapper,
   CardArchetype,
   CardAtk,
   CardAtkDefWrapper,
@@ -10,23 +12,32 @@ import {
   CardDescriptionWrapper,
   CardIcon,
   CardImage,
+  CardImageAndButtonWrapper,
   CardImageWrapper,
   CardInfoWrapper,
   CardName,
+  DescritpionAndButtonWrapper,
+  IWantItButtonWrapper,
   SetCode,
   SetCodePriceWrapper,
   SetName,
   SetPrice,
+  SetsContainer,
+  SetsTitle,
   SetWrapper,
 } from "../../styles/uniqueCardPrice/CardInformation";
+import BottomDrawer from "../common/BottomDrawer";
+import LoginButton from "../common/LoginButton";
 
 interface CardInformationProps {
   cardInfo: any;
 }
 
 const CardInformation = ({ cardInfo }: CardInformationProps) => {
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   return (
     <CardInfoWrapper>
+      <CardImageAndButtonWrapper>
       <CardImageWrapper>
         <CardImage
           src={
@@ -37,7 +48,15 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
         />
       </CardImageWrapper>
       {cardInfo && (
+      <IWantItButtonWrapper>
+      <LoginButton onClick={() => setIsOpenDrawer(!isOpenDrawer)}>¡La quiero!</LoginButton>
+      </IWantItButtonWrapper>
+      )}
+      </CardImageAndButtonWrapper>
+
+      {cardInfo && (
         <>
+        <DescritpionAndButtonWrapper>
           <CardDescriptionWrapper>
             <CardName>{cardInfo.name}</CardName>
             <CardAtkDefWrapper>
@@ -55,16 +74,10 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
               Description: <br /> {cardInfo.desc}
             </CardDescription>
           </CardDescriptionWrapper>
-          <AlternativeImagesTitle>
-            Ilustraciones alternativas
-          </AlternativeImagesTitle>
-          <AlternativeImagesWrapper>
-            {cardInfo.card_images.slice(1).map((item, key) => (
-              <AlternativeImages key={key} src={item.image_url} />
-            ))}
-          </AlternativeImagesWrapper>
-          <AlternativeImagesTitle>Sets</AlternativeImagesTitle>
+          <SetsContainer>
+          <SetsTitle>Sets</SetsTitle>
           <SetWrapper>
+          
             {cardInfo.card_sets.map((item, key) => (
               <>
                 <SetName key={key}>{item.set_name}</SetName>
@@ -75,8 +88,22 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
               </>
             ))}
           </SetWrapper>
+          </SetsContainer>
+          <AlternativeImagesWrapperAndTitleWrapper>
+          <AlternativeImagesTitle>
+            Ilustraciones alternativas
+          </AlternativeImagesTitle>
+          <AlternativeImagesWrapper>
+            {cardInfo.card_images.slice(1).map((item, key) => (
+              <AlternativeImages key={key} src={item.image_url} />
+            ))}
+          </AlternativeImagesWrapper>
+          </AlternativeImagesWrapperAndTitleWrapper>
+          </DescritpionAndButtonWrapper>
+
         </>
       )}
+      <BottomDrawer isOpen={isOpenDrawer}> </BottomDrawer>
     </CardInfoWrapper>
   );
 };

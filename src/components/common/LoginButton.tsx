@@ -7,8 +7,9 @@ interface LoginButtonProps {
 }
 
 const LoginButton = ({children, icon, onClick}: LoginButtonProps) => (
-    <>
+    <>{ icon && (
     <LoginButtonImage src={icon} />
+    )}
     <LoginButtonContainer onClick={() => onClick()}>{children}</LoginButtonContainer>
     </>
 )

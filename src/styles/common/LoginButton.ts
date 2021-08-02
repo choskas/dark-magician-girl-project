@@ -24,13 +24,13 @@ export const LoginButtonContainer = styled.button`
 export const LoginButtonImage = styled.img`
     // Desktop
     @media screen and (min-width: 1000px) {
-        top: 58px;
+        top: 45px;
     }
     cursor: pointer;
-    top: 33px;
+    top: 35px;
     position: relative;
     left: -150px;
-    width: 30px;
+    width: 25px;
     &:hover{
 		opacity: 0.5;
 	}

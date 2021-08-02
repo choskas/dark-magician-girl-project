@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
@@ -19,82 +19,102 @@ import {
   TitleLogin,
 } from "../styles/login/login";
 import { useRouter } from "next/router";
+import Select from "../components/common/Select";
 
 const Login = () => {
   const router = useRouter();
-  const [isActiveLogin, setIsActiveLogin] = useState(true);
-  const [isActiveRegister, setIsActiveRegister] = useState(false);
   const [session, loading] = useSession();
+  const [selectValue, setSelectValue] = useState(null);
+
+  useEffect(() => {
+    if (session && session.user) {
+      router.push("/");
+    }
+  }, []);
 
   const login = () => {
-    if (!session && !loading) {
-      return (
-        <>
-          <NavBar />
-          <LoginWrapper>
-            <LoginImageContainer>
-              <LoginImage />
-            </LoginImageContainer>
-            <LoginFormContainer>
-              <TitleContainer>
-                <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
-                <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
-              </TitleContainer>
-              <LoginRegisterWrapper>
-                <TextLogin
-                  isActive={isActiveLogin}
-                  onClick={() => {
-                    setIsActiveRegister(false);
-                    setIsActiveLogin(true);
-                  }}
-                >
-                  Login
-                </TextLogin>
-                <VerticalSeparatorMini></VerticalSeparatorMini>
-                <TextLogin
-                  isActive={isActiveRegister}
-                  onClick={() => {
-                    setIsActiveRegister(true);
-                    setIsActiveLogin(false);
-                  }}
-                >
-                  Registrar
-                </TextLogin>
-              </LoginRegisterWrapper>
-              <InputsWrapper>
-                <InputText
-                  placeholder="Correo electronico"
-                  onChange={() => {}}
-                />
-                <InputText placeholder="Contraseña" onChange={() => {}} />
-              </InputsWrapper>
-              <LoginButtonsWrapper>
-                <LoginButton>Iniciar sesión</LoginButton>
-                <Separator />
-                <LoginButton
-                  onClick={async () => {
-
+    return (
+      <>
+        <NavBar />
+        <LoginWrapper>
+          <LoginImageContainer>
+            <LoginImage />
+          </LoginImageContainer>
+          <LoginFormContainer>
+            <TitleContainer>
+              <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
+              <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
+            </TitleContainer>
+            <InputsWrapper>
+              Las contraseñas ya no son tan seguras, olvidate de anotarlas en un
+              papel o recordarlas, no te preocupes tu cuenta sera mucho mas
+              segura de esta forma. Accede con uno de estos servicios:
+            </InputsWrapper>
+            <LoginButtonsWrapper>
+              <Separator />
+              <LoginButton
+                icon="/assets/googleIcon.png"
+                onClick={async () => {
+                  try {
+                  await signIn("google", {
+                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                  });
+                } catch (error) {
+                  console.log(error)
+                }
+                }}
+              >
+                Login with Google
+              </LoginButton>
+              <LoginButton
+                onClick={async () => {
+                  try {
                     await signIn("facebook", {
                       callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
                     });
-                  }}
-                  icon="/assets/facebook.png"
-                >
-                  Login with facebook
-                </LoginButton>
-              </LoginButtonsWrapper>
-            </LoginFormContainer>
-          </LoginWrapper>
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+                icon="/assets/facebook.png"
+              >
+                Login with facebook
+              </LoginButton>
+              <LoginButton
+                icon="/assets/discordIcon.png"
+                onClick={async () => {
+                  try{
+                  await signIn("discord", {
+                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                  });
+                } catch (error) {
+                  console.log(error)
+                }
+                }}
+              >
+                Login with Discord
+              </LoginButton>
+              <LoginButton
+                icon="/assets/twitchIcon.png"
+                onClick={async () => {
+                  try{
+                  await signIn("twitch", {
+                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                  });
+                } catch (error) {
+                  console.log(error)
+                }
+                }}
+              >
+                Login with Twitch
+              </LoginButton>
+            </LoginButtonsWrapper>
+          </LoginFormContainer>
+        </LoginWrapper>
 
-          <Footer />
-        </>
-      );
-    } else {
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
-      return <>You are logged in</>;
-    }
+        <Footer />
+      </>
+    );
   };
 
   return login();

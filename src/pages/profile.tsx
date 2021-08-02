@@ -19,6 +19,10 @@ const Profile = () => {
     if (session) {
       // @ts-ignore
       dispatch(getAllUserDecks(session.user.id));
+      // @ts-ignore
+      if (!session.user.role){
+        router.push('/auth')
+      }
     } else if (session && myDeck !== []) {
       router.push("/deckPrice");
     }

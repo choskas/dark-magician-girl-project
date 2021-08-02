@@ -20,6 +20,8 @@ interface InputTextProps {
   onKeyPress?: Function;
   onClickIcon?: Function;
   onClickListValue?: Function;
+  onClick?: Function;
+  onBlur?: Function;
 }
 const InputText = ({
   placeholder,
@@ -29,9 +31,11 @@ const InputText = ({
   icon,
   autoCompleteValues,
   setValue,
-  onKeyPress,
+  onKeyPress = () => {},
   onClickIcon,
   onClickListValue,
+  onClick = () => {},
+  onBlur = () => {},
 }: InputTextProps) => {
   const [namesArr, setNamesArr] = useState([]);
   const searchCard = (value: string) => {
@@ -49,6 +53,8 @@ const InputText = ({
   return (
     <Label style={{ width }}>
       <Input
+      onBlur={() => onBlur()}
+      onClick={() => onClick()}
 	  	onKeyPress={(e) => onKeyPress(e)}
         onChange={(e) => {
           e.preventDefault();

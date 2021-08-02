@@ -4,9 +4,21 @@ export const CardInfoWrapper = styled.div`
   padding: 20px 0px;
 `;
 
+export const CardImageAndButtonWrapper = styled.div`
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
 export const CardImageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    width: 500px;
+  }
 `;
 
 export const CardImage = styled.img`
@@ -14,11 +26,37 @@ export const CardImage = styled.img`
   width: 215px;
 `;
 
+export const DescritpionAndButtonWrapper = styled.div`
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
 export const CardDescriptionWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   border: 1px solid #ef5da8;
   margin: 10px 0;
-  color: ${({color}) => color ? color : 'black'}
+  color: ${({ color }) => (color ? color : "black")};
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    width: 500px;
+    height: 300px;
+    font-size: 20px;
+    border: 3px solid #ef5da8;
+  }
+`;
+
+export const IWantItButtonWrapper = styled.div`
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px -30px;
+    // Desktop
+    @media screen and (min-width: 1000px) {
+      width: 300px;
+  }
 `;
 
 export const CardName = styled.div`
@@ -34,6 +72,10 @@ export const CardAtkDefWrapper = styled.div`
   border: 1px solid #ef5da8;
   display: flex;
   padding: 5px 10px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    border: 3px solid #ef5da8;
+  }
 `;
 
 export const CardAtk = styled.div`
@@ -42,6 +84,10 @@ export const CardAtk = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    border-right: 3px solid #ef5da8;
+  }
 `;
 
 export const CardIcon = styled.img`
@@ -63,19 +109,40 @@ export const CardArchetype = styled.div`
 export const CardDescription = styled.div`
   border-top: 1px solid #ef5da8;
   padding: 5px 10px;
+  overflow-y: auto;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    font-size: 20px;
+    border-top: 3px solid #ef5da8;
+  }
 `;
 
 export const AlternativeImagesTitle = styled.p`
   margin: 10px 0;
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
-  font-size: 20px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    font-size: 28px;
+  }
+`;
+
+export const AlternativeImagesWrapperAndTitleWrapper = styled.div`
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
 `;
 
 export const AlternativeImagesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0 15px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+  }
 `;
 
 export const AlternativeImages = styled.img`
@@ -83,9 +150,36 @@ export const AlternativeImages = styled.img`
   width: 100px;
 `;
 
+export const SetsTitle = styled.p`
+  margin: 10px 0;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    display: none;
+  }
+`;
+
+export const SetsContainer = styled.div`
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 10px 0;
+  }
+`;
+
 export const SetWrapper = styled.div`
   border: 1px solid #ef5da8;
   font-family: "Montserrat", sans-serif;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    height: 300px;
+    border: 3px solid #ef5da8;
+    overflow-y: auto;
+  }
 `;
 
 export const SetName = styled.div`
@@ -95,6 +189,12 @@ export const SetName = styled.div`
   width: 100%;
   border-top: 1px solid #ef5da8;
   padding: 5px 0;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    font-size: 20px;
+    border-bottom: 3px solid #ef5da8;
+    font-weight: bolder;
+  }
 `;
 
 export const SetCodePriceWrapper = styled.div`
@@ -105,6 +205,10 @@ export const SetCodePriceWrapper = styled.div`
 export const SetCode = styled.div`
   border-right: 1px solid #ef5da8;
   width: 50%;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    border-right: 3px solid #ef5da8;
+  }
 `;
 
 export const SetPrice = styled.div`
