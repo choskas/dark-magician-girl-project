@@ -16,6 +16,7 @@ const StoreOrClient = () => {
       // @ts-ignore
       id: session.user.id,
     });
+    router.push('/')
   };
   useEffect(() => {
     // @ts-ignore
