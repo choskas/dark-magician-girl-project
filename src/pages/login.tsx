@@ -75,7 +75,7 @@ const Login = () => {
                   onClick={async () => {
 
                     await signIn("facebook", {
-                      callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/profile`,
+                      callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
                     });
                   }}
                   icon="/assets/facebook.png"

@@ -80,4 +80,5 @@ export const List = styled.ul`
 export const ListName = styled.li`
   font-family: "Montserrat", sans-serif;
   margin: 2px 0;
+  cursor: pointer;
 `;

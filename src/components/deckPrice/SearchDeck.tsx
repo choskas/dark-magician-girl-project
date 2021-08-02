@@ -44,6 +44,7 @@ const SearchDeck = () => {
   const [allCardsName, setAllCardsName] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [myDeck, setMyDeck] = useState([]);
+  const [cardByCodeInfo, setCardByCodeInfo] = useState<any>([]);
   const [isClickedDelete, setIsClickedDelete] = useState(false);
   const [searchByCode, setSearchByCode] = useState(false);
   const [totalDeckPrice, setTotalDeckPrice] = useState([]);
@@ -100,6 +101,7 @@ const SearchDeck = () => {
         const cardInfo = card.card_sets.find(
           (el: any) => el.set_code === value.toUpperCase()
         );
+        setCardByCodeInfo(cardInfo);
         setFoundCards([
           {
             id: card.id,
@@ -111,6 +113,7 @@ const SearchDeck = () => {
             atk: card.atk,
             def: card.def,
             type: card.type,
+            desc: card.desc,
             card_images: card.card_images,
             set_code: cardInfo.set_code,
             set_name: cardInfo.set_name,
@@ -129,7 +132,24 @@ const SearchDeck = () => {
   const [{ isActive }, drop] = useDrop(() => ({
     accept: ItemTypes.CARD,
     drop: (item: any) => {
-      setMyDeck((myDeck) => [...myDeck, item]);
+      setMyDeck((myDeck) => [...myDeck, {
+        id: item.id,
+        name: item.name,
+        level: item.level,
+        race: item.race,
+        archetype: item.archetype,
+        attribute: item.attribute,
+        atk: item.atk,
+        def: item.def,
+        type: item.type,
+        desc: item.desc,
+        cardPrices: item.card_prices,
+        card_images: item.card_images, 
+        setCode: item && item.set_code,
+        setName: item && item.set_name,
+        setPrice: item.set_price ? item.set_price : item.card_prices[0].tcgplayer_price,
+        setRarity: item && item.set_rarity,
+      }]);
     },
     collect: (monitor) => ({
       isActive: monitor.canDrop() && monitor.isOver(),
@@ -139,10 +159,10 @@ const SearchDeck = () => {
   const myDeckPrice = () => {
     const priceArray = [];
     myDeck.map((item: any) => {
-      if (item.set_price) {
-        priceArray.push(parseFloat(item.set_price));
+      if (item.setPrice) {
+        priceArray.push(parseFloat(item.setPrice));
       } else {
-        priceArray.push(parseFloat(item.card_prices[0].tcgplayer_price));
+        priceArray.push(parseFloat(item.cardPrices[0].tcgplayer_price));
       }
     });
     setTotalDeckPrice(priceArray);
@@ -230,7 +250,24 @@ const SearchDeck = () => {
                   <Card
                     item={item}
                     onTouchCard={() => {
-                      setMyDeck((myDeck) => [...myDeck, item]);
+                      setMyDeck((myDeck) => [...myDeck, {
+                        id: item.id,
+                        name: item.name,
+                        level: item.level,
+                        race: item.race,
+                        archetype: item.archetype,
+                        attribute: item.attribute,
+                        atk: item.atk,
+                        def: item.def,
+                        desc: item.desc,
+                        type: item.type,
+                        cardPrices: item.card_prices,
+                        card_images: item.card_images, 
+                        setCode: cardByCodeInfo && cardByCodeInfo.set_code,
+                        setName: cardByCodeInfo && cardByCodeInfo.set_name,
+                        setPrice: cardByCodeInfo.set_price ? cardByCodeInfo.set_price : item.card_prices[0].tcgplayer_price,
+                        setRarity: cardByCodeInfo && cardByCodeInfo.set_rarity,
+                      }]);
                     }}
                     isEditable={false}
                     foundCards={foundCards}
@@ -322,7 +359,26 @@ const SearchDeck = () => {
                   createDeck({
                     deckName,
                     deckType,
-                    deck: myDeck,
+                    deck: myDeck.map((item) => {
+                      return {
+                        id: item.id,
+                        name: item.name,
+                        type: item.type,
+                        desc: item.desc,
+                        atk: item.atk,
+                        def: item.def,
+                        level: item.level,
+                        race: item.race,
+                        attribute: item.attribute,
+                        archetype: item.archetype,
+                        cardImageSmall: item.card_images[0].image_url_small,
+                        cardImage: item.card_images[0].image_url,
+                        setCode: item.setCode && item.setCode,
+                        setName: item.setName && item.setName,
+                        setPrice: item.setPrice && item.setPrice,
+                        setRarity: item.setRarity && item.setRarity, 
+                      }
+                    }),
                     mainCard: myDeck[0].card_images[0].image_url,
                     // @ts-ignore
                     id: session.user.id,

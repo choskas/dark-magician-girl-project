@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const ProfileWrapper = styled.div`
+  height: auto;
+`;
+
 export const DeckWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -101,6 +105,7 @@ export const Card = styled.img`
   height: 70%;
   width: 15%;
   margin: 4% 2%;
+  cursor: pointer;
   // Desktop
   @media screen and (min-width: 1000px) {
     height: 100px;
@@ -130,4 +135,20 @@ export const NoDecksMessage = styled.p`
     font-size: 34px;
     margin: 15px 33%;
   }
+`;
+
+export const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ModalImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export const ModalImage = styled.img`
+    height: 350px;
+    width: 250px;
 `;

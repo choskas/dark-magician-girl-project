@@ -18,6 +18,7 @@ export const CardDescriptionWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   border: 1px solid #ef5da8;
   margin: 10px 0;
+  color: ${({color}) => color ? color : 'black'}
 `;
 
 export const CardName = styled.div`
@@ -45,6 +46,7 @@ export const CardAtk = styled.div`
 
 export const CardIcon = styled.img`
   width: 15px;
+  background: white;
 `;
 
 export const CardDef = styled.div`

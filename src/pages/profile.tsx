@@ -7,6 +7,7 @@ import NavBar from "../components/index/NavBar";
 import MyDataSection from "../components/profile/MyDataSection";
 import MyDecksSection from "../components/profile/MyDecksSection";
 import { getAllUserDecks } from "../redux/modules/deck";
+import { ProfileWrapper } from "../styles/profile/myDecks";
 
 const Profile = () => {
   const [session, loading] = useSession();
@@ -18,10 +19,6 @@ const Profile = () => {
     if (session) {
       // @ts-ignore
       dispatch(getAllUserDecks(session.user.id));
-      // @ts-ignore
-      if (session.user.role === undefined) {
-        router.push("/storeOrClient");
-      }
     } else if (session && myDeck !== []) {
       router.push("/deckPrice");
     }
@@ -29,8 +26,10 @@ const Profile = () => {
   return (
     <>
       <NavBar />
-      <MyDataSection />
-      <MyDecksSection session={session} decks={decks} />
+      <ProfileWrapper>
+        <MyDataSection />
+        <MyDecksSection session={session} decks={decks} />
+      </ProfileWrapper>
       <Footer />
     </>
   );
