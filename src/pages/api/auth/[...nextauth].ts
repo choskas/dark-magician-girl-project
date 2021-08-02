@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import Adapters from 'next-auth/adapters'
+import Models from '../../../models';
 
 export default NextAuth({
   providers: [
@@ -12,6 +14,16 @@ export default NextAuth({
         clientSecret: process.env.NEXT_PUBLIC_GOOGLE_APP_SECRET
       }),
   ],
+  adapter: Adapters.TypeORM.Adapter(
+    process.env.NEXT_PUBLIC_MONGO_DB,
+    {
+      // @ts-ignore
+      models: {
+         // @ts-ignore
+        User: Models.User
+      }
+    }
+  ),
   callbacks: {
     /**
      * @param  {string} url      URL provided as callback URL by the client
@@ -22,6 +34,18 @@ export default NextAuth({
       return url.startsWith(baseUrl)
         ? url
         : baseUrl
+    },
+    async signIn(user, account, profile) {
+      return true
+    },
+    session: async (session, user) => {
+      if (user?.role) {
+        // @ts-ignore
+        session.user.role = user.role
+      }
+      // @ts-ignore
+      session.user.id = user.id;    
+      return Promise.resolve(session);
     }
   },
   database: process.env.NEXT_PUBLIC_MONGO_DB

@@ -10,25 +10,30 @@ import { getAllUserDecks } from "../redux/modules/deck";
 
 const Profile = () => {
   const [session, loading] = useSession();
-  const dispatch = useDispatch()
-  const decks = useSelector((state: any) => state.deck.allUserDecks)
+  const dispatch = useDispatch();
+  const decks = useSelector((state: any) => state.deck.allUserDecks);
   const myDeck = useSelector((state: any) => state.deck.myDeck);
   const router = useRouter();
   useEffect(() => {
-    if (session){
-    dispatch(getAllUserDecks(session.user.email))
+    if (session) {
+      // @ts-ignore
+      dispatch(getAllUserDecks(session.user.id));
+      // @ts-ignore
+      if (session.user.role === undefined) {
+        router.push("/storeOrClient");
+      }
     } else if (session && myDeck !== []) {
-      alert(1)
-      router.push('/deckPrice')
+      router.push("/deckPrice");
     }
-  }, [session])
-return (
+  }, [session]);
+  return (
     <>
-    <NavBar />
+      <NavBar />
       <MyDataSection />
       <MyDecksSection session={session} decks={decks} />
-    <Footer />
+      <Footer />
     </>
-)};
+  );
+};
 
 export default Profile;

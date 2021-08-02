@@ -53,7 +53,6 @@ const SearchDeck = () => {
   const [deckType, setDeckType] = useState("");
   const [session, loading] = useSession();
 
-
   const router = useRouter();
   const dispatch = useDispatch();
   const myDeckRedux = useSelector((state: any) => state.deck.myDeck);
@@ -66,7 +65,7 @@ const SearchDeck = () => {
       setAllCards(response.data.cards);
       const onlyNames = response.data.cards.map((item) => {
         return item.name;
-      })
+      });
       setAllCardsName(onlyNames);
     } catch (error) {
       console.log(error);
@@ -162,7 +161,7 @@ const SearchDeck = () => {
 
   useEffect(() => {
     searchCard(searchCardValue);
-  },[searchCardValue])
+  }, [searchCardValue]);
 
   return (
     <SearchDeckWrapper>
@@ -189,6 +188,8 @@ const SearchDeck = () => {
             {!searchByCode ? (
               <SearchInputWrapper>
                 <InputText
+                  onKeyPress={() => {}}
+                  onClickListValue={() => {}}
                   autoCompleteValues={allCardsName}
                   placeholder="Búsqueda por nombre"
                   value={searchCardValue}
@@ -206,6 +207,7 @@ const SearchDeck = () => {
             ) : (
               <SearchInputWrapper>
                 <InputText
+                  onKeyPress={() => {}}
                   placeholder="Búsqueda por código"
                   icon="/assets/Search.png"
                   onChange={(
@@ -295,6 +297,7 @@ const SearchDeck = () => {
         <SmallText>* Tu primera carta será tu carta principal</SmallText>
         <SaveDeckInputs>
           <InputText
+            onKeyPress={() => {}}
             placeholder="Nombre del deck"
             value={deckName}
             onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
@@ -302,6 +305,7 @@ const SearchDeck = () => {
             }}
           />
           <InputText
+            onKeyPress={() => {}}
             placeholder="Tipo de deck"
             value={deckType}
             onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
@@ -320,6 +324,8 @@ const SearchDeck = () => {
                     deckType,
                     deck: myDeck,
                     mainCard: myDeck[0].card_images[0].image_url,
+                    // @ts-ignore
+                    id: session.user.id,
                     email: session.user.email,
                     deckPrice: totalDeckPrice
                       .reduce((a, b) => a + b, 0)

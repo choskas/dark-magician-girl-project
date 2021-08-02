@@ -32,9 +32,9 @@ export const addToMyDeck = (data: any) => async (dispatch: Dispatch<any>) => {
 	}
 };
 
-export const getAllUserDecks = (email: any) => async (dispatch: Dispatch<any>) => {
+export const getAllUserDecks = (id: any) => async (dispatch: Dispatch<any>) => {
 	try {
-		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/getAllUserDecks`, {email})
+		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/getAllUserDecks`, {id})
 		dispatch({
             type: ALL_USER_DECKS,
 			payload: response.data.decks,
