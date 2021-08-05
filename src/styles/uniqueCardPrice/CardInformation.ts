@@ -53,9 +53,9 @@ export const IWantItButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 10px 0 10px -30px;
-    // Desktop
-    @media screen and (min-width: 1000px) {
-      width: 300px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    width: 300px;
   }
 `;
 
@@ -214,4 +214,45 @@ export const SetCode = styled.div`
 export const SetPrice = styled.div`
   width: 50%;
   text-align: right;
+`;
+
+export const DrawerText = styled.p`
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+`;
+
+export const SelectContainer = styled.div`
+  width: 70%;
+`;
+
+export const ButtonDrawerContainer = styled.div`
+  width: 300px;
+  display: flex;
+
+
+  margin: 5px 0 20px 0px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    width: 300px;
+  }
+`;
+
+export const DrawerImagesContainer = styled.div`
+  width: 90%;
+  height: 70px;
+  overflow-x: auto;
+`;
+
+interface DrawerImageProps {
+  isActive: boolean;
+}
+
+export const DrawerImage = styled.img<DrawerImageProps>`
+  height: 50px;
+  width: 40px;
+  margin: 0 5px;
+  &:hover {
+    zoom: 1.1;
+  }
+  border: ${({ isActive }) => (isActive ? "2px solid #ef5da8" : "none")};
 `;

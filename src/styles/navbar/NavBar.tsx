@@ -95,6 +95,7 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
     -webkit-transition: max-height 0.2s ease-out;
     transition: max-height 0.2s ease-out;
     top: 60px;
+    z-index: 1;
     width: 200px;
     max-height: ${({ isOpen }) => isOpen ? '100%' : '0'};
     margin-top: 10px;
