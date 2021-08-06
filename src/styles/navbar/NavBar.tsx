@@ -49,7 +49,6 @@ export const NavBarText = styled.p`
         display: block;
         font-size: 24px;
         margin: 0 20px;
-        font-family: 'Montserrat', sans-serif;
         cursor: pointer;
     }
 `;
