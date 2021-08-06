@@ -62,8 +62,8 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
   }, [cardInfo]);
   return (
     <CardInfoWrapper>
-      <CardImageAndButtonWrapper>
-        <CardImageWrapper>
+      <CardImageAndButtonWrapper cardInfo={cardInfo}>
+        <CardImageWrapper cardInfo={cardInfo}>
           <CardImage
             src={
               cardInfo
@@ -102,7 +102,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
               </CardDescription>
             </CardDescriptionWrapper>
             <SetsContainer>
-              <SetsTitle>Sets</SetsTitle>
+              <SetsTitle>Sets y precios</SetsTitle>
               <SetWrapper>
                 {cardInfo.card_sets.map((item, key) => (
                   <>

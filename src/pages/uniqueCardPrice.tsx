@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
@@ -6,7 +7,12 @@ import InputText from "../components/common/InputText";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/index/NavBar";
 import CardInformation from "../components/uniqueCardPrice/CardInformation";
-import { UniqueCardPriceWrapper } from "../styles/uniqueCardPrice/uniqueCardPrice";
+import {
+  UniqueCardPriceWrapper,
+  InputTextWrapper,
+  Text,
+  TextBold,
+} from "../styles/uniqueCardPrice/uniqueCardPrice";
 
 const UniqueCardPrice = () => {
   const [session, loading] = useSession();
@@ -43,20 +49,50 @@ const UniqueCardPrice = () => {
         <>
           <NavBar />
           <UniqueCardPriceWrapper>
-            <InputText
-              onKeyPress={(e) => e.charCode == 13 && getCardInfo()}
-              onClickIcon={() => getCardInfo()}
-              onClickListValue={(value) => getCardInfo(value)}
-              setValue={setSearchValue}
-              icon="/assets/Search.png"
-              autoCompleteValues={allCardsName}
-              value={searchValue}
-              placeholder="Busquéda"
-              onChange={(e, value) => {
-                setSearchValue(value);
-              }}
-            />
+            <InputTextWrapper>
+              <InputText
+                onKeyPress={(e) => e.charCode == 13 && getCardInfo()}
+                onClickIcon={() => getCardInfo()}
+                onClickListValue={(value) => getCardInfo(value)}
+                setValue={setSearchValue}
+                icon="/assets/Search.png"
+                autoCompleteValues={allCardsName}
+                value={searchValue}
+                placeholder="Busquéda"
+                onChange={(e, value) => {
+                  setSearchValue(value);
+                }}
+              />
+            </InputTextWrapper>
             <CardInformation session={session} cardInfo={cardInfo} />
+            {!cardInfo && session && (
+              <>
+                {session.user.role === "client" ? (
+                  <>
+                    <Text>
+                      ¿Buscas una carta super rara? o simplemente quieres saber
+                      su precio en sus diferentes formatos.
+                      <TextBold>Pues estas en el lugar indicado.</TextBold>
+                      Busca la carta por nombre, da click en "!La quiero!",
+                      selecciona la rareza deseada, e informaremos a diferentes
+                      tiendas al rededor del Mundo, las cuales te informaran su
+                      mejor precio.
+                    </Text>
+                  </>
+                ) : (
+                  <>
+                    <Text>
+                      ¿Tienes una carta super rara? o simplemente quieres saber
+                      su precio.
+                      <TextBold>Pues estas en el lugar indicado.</TextBold>
+                      Busca la carta por nombre, da click en "!La tengo!",
+                      selecciona la rareza que tienes, y la agregaremos a tu
+                      perfil en la seccion "Rarezas".
+                    </Text>
+                  </>
+                )}
+              </>
+            )}
           </UniqueCardPriceWrapper>
           <Footer />
         </>

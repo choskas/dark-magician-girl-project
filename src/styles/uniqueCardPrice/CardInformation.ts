@@ -4,20 +4,27 @@ export const CardInfoWrapper = styled.div`
   padding: 20px 0px;
 `;
 
-export const CardImageAndButtonWrapper = styled.div`
+interface CardImageAndButtonWrapperProps {
+  cardInfo: any;
+}
+
+export const CardImageAndButtonWrapper = styled.div<CardImageAndButtonWrapperProps>`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   // Desktop
   @media screen and (min-width: 1000px) {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: ${({cardInfo}) => cardInfo ? 'space-between' : 'center'};
   }
 `;
 
-export const CardImageWrapper = styled.div`
+export const CardImageWrapper = styled.div<CardImageAndButtonWrapperProps>`
   display: flex;
   justify-content: center;
   // Desktop
   @media screen and (min-width: 1000px) {
-    width: 500px;
+    width: ${({cardInfo}) => cardInfo ? '500px' : '100%'};
   }
 `;
 
@@ -228,7 +235,6 @@ export const SelectContainer = styled.div`
 export const ButtonDrawerContainer = styled.div`
   width: 300px;
   display: flex;
-
 
   margin: 5px 0 20px 0px;
   // Desktop

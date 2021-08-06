@@ -6,6 +6,7 @@ interface DrawerWrapperProps {
 
 export const DrawerWrapper = styled.div<DrawerWrapperProps>`
   position: fixed;
+  overflow-y: auto;
   bottom: 0;
   left: 0;
   width: 100%;

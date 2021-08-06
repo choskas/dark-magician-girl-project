@@ -2,10 +2,14 @@ import { useState } from "react";
 import {
   AllImagesContainer,
   CardImage,
+  CardInfoButtonWrapper,
   CardInfoDescription,
   CardInfoImage,
+  CardInfoInputWrapper,
   CardInfoModalContainer,
 } from "../../styles/wantedCards/allCardsContainer";
+import BottomDrawer from "../common/BottomDrawer";
+import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
 
@@ -16,7 +20,9 @@ interface AllCardsContainerProps {
 
 const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [ isVisiblePriceDrawer ,setIsVisiblePriceDrawer] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
+  const [price, setPrice] = useState(null);
   return (
     <AllImagesContainer>
       {allCards &&
@@ -33,7 +39,10 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
       {cardInfo && (
         <Modal
           isVisible={isVisibleModal}
-          onClose={() => setIsVisibleModal(false)}
+          onClose={() => {
+            setIsVisibleModal(false);
+            setIsVisiblePriceDrawer(false);
+          }}
         >
           <CardInfoModalContainer>
             <CardInfoImage
@@ -48,16 +57,52 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
             </CardInfoDescription>
             <LoginButton
               onClick={async () => {
-                await foundCard({
-                  userId: cardInfo.userId,
-                  rarityCode: cardInfo.card.rarityCode,
-                });
-                setIsVisibleModal(false);
+                setIsVisiblePriceDrawer(true);
               }}
             >
               ¡La tengo!
             </LoginButton>
           </CardInfoModalContainer>
+          {isVisiblePriceDrawer && (
+         <BottomDrawer isOpen={isVisiblePriceDrawer} >
+            <>
+         <CardInfoInputWrapper>
+             <InputText value={price} placeholder="Tu mejor precio" onChange={(e, value)=>{
+               var reg = new RegExp('^[0-9]*$');
+               if (reg.test(value)){
+                 setPrice(value);
+               }
+             }} />
+             </CardInfoInputWrapper>
+             <CardInfoButtonWrapper>
+             <LoginButton
+             onClick={async () => {
+               await foundCard({
+                 userId: cardInfo.userId,
+                 rarityCode: cardInfo.card.rarityCode,
+                 price,
+               });
+               setIsVisibleModal(false);
+               setIsVisiblePriceDrawer(false);
+             }}
+           >
+             ¡Mandar precio!
+           </LoginButton>
+           </CardInfoButtonWrapper>
+           <CardInfoButtonWrapper>
+           <LoginButton
+             onClick={async () => {
+               setIsVisibleModal(false);
+               setIsVisiblePriceDrawer(false);
+             }}
+           >
+             Cancelar
+           </LoginButton>
+           </CardInfoButtonWrapper>
+           </>
+         </BottomDrawer>
+          )}
+ 
         </Modal>
       )}
     </AllImagesContainer>

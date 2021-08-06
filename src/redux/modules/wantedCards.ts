@@ -40,7 +40,6 @@ export const getAllWantedCards = () => async (dispatch: Dispatch<any>) => {
       type: WANTED_CARDS,
       payload: response.data.allCards,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
