@@ -1,6 +1,5 @@
 import { options } from "next-auth/client";
 import { useEffect, useRef, useState } from "react";
-import { useStore } from "react-redux";
 import { Option, OptionsContainer } from "../../styles/common/Select";
 import InputText from "./InputText";
 
@@ -36,6 +35,9 @@ const Select = ({ options, placeholder, value, onChange }) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   });
+  useEffect(() => {
+    setOptionsArr(options)
+  }, [options])
   return (
     <div ref={ref}>
       <InputText

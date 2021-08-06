@@ -49,11 +49,12 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
   const [selectedRarity, setSelectedRarity] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [cardImages, setCardImages] = useState([]);
+  console.log(cardInfo)
   useEffect(() => {
     if (cardInfo) {
       const newArr = cardInfo.card_images.map((item) => {
         return {
-          image: item.image_url_small,
+          image: item.image_url,
           isActive: false,
         };
       });
@@ -181,14 +182,16 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
                 name: session.user.name,
                 email: session.user.email,
                 card: {
+                  name: cardInfo.name,
                   image: image,
                   rarityCode: selectedRarity,
+                  isFound: false,
               },
               userId: session.user.id
               }))
               const newArr = cardInfo.card_images.map((item) => {
                 return {
-                  image: item.image_url_small,
+                  image: item.image_url,
                   isActive: false,
                 };
               });

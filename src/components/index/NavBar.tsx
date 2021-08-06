@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   CollapseOption,
   HaamburgerImage,
@@ -23,6 +24,7 @@ const NavBar = () => {
       <>
         <CollapseOption onClick={() => router.push('/profile')}> Mi perfil </CollapseOption>
         <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
+        {session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
         <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
       </>
     ) : (
