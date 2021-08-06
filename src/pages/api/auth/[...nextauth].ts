@@ -39,7 +39,6 @@ export default NextAuth({
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     async signIn(user, account, profile) {
-      console.log(user, account, profile)
       return true;
     },
     session: async (session, user) => {

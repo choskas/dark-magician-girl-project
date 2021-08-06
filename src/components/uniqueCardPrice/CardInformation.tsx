@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { addToMyWantedCards } from "../../redux/modules/wantedCards";
 import {
   AlternativeImages,
   AlternativeImagesTitle,
@@ -37,11 +40,14 @@ import Select from "../common/Select";
 
 interface CardInformationProps {
   cardInfo: any;
+  session: any;
 }
 
-const CardInformation = ({ cardInfo }: CardInformationProps) => {
+const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
+  const dispatch = useDispatch();
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-  const [selectedRarity, setSelectedRarity] = useState("");
+  const [selectedRarity, setSelectedRarity] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
   const [cardImages, setCardImages] = useState([]);
   useEffect(() => {
     if (cardInfo) {
@@ -51,11 +57,9 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
           isActive: false,
         };
       });
-      console.log(newArr, "ola");
       setCardImages(newArr);
     }
   }, [cardInfo]);
-  console.log(cardInfo);
   return (
     <CardInfoWrapper>
       <CardImageAndButtonWrapper>
@@ -158,7 +162,7 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
                       }
                       return item;
                     });
-                    console.log(newArr, "olo");
+                    setSelectedImage(src);
                     setCardImages(newArr);
                   }}
                   src={item.image}
@@ -167,8 +171,34 @@ const CardInformation = ({ cardInfo }: CardInformationProps) => {
               ))}
           </DrawerImagesContainer>
           <ButtonDrawerContainer>
-            <LoginButton onClick={() => {
-              setIsOpenDrawer(!isOpenDrawer)     
+            <LoginButton onClick={async() => {
+              let image = selectedImage
+              if (!image) {
+                image = cardImages[0].image
+              }
+              if (selectedRarity){
+              await dispatch(addToMyWantedCards({
+                name: session.user.name,
+                email: session.user.email,
+                card: {
+                  image: image,
+                  rarityCode: selectedRarity,
+              },
+              userId: session.user.id
+              }))
+              const newArr = cardInfo.card_images.map((item) => {
+                return {
+                  image: item.image_url_small,
+                  isActive: false,
+                };
+              });
+              setCardImages(newArr);
+              setSelectedImage(null);
+              setSelectedRarity(''); 
+              setIsOpenDrawer(!isOpenDrawer)
+            } else {
+              toast('Debes seleccionar una rareza')
+            }     
               }}>
               ¡La quiero!
             </LoginButton>

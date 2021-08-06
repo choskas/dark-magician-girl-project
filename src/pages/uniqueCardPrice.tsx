@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/client";
 import FullScreenLoader from "../components/common/FullScreenLoader";
 import InputText from "../components/common/InputText";
 import Footer from "../components/Footer/Footer";
@@ -8,6 +9,7 @@ import CardInformation from "../components/uniqueCardPrice/CardInformation";
 import { UniqueCardPriceWrapper } from "../styles/uniqueCardPrice/uniqueCardPrice";
 
 const UniqueCardPrice = () => {
+  const [session, loading] = useSession();
   const [searchValue, setSearchValue] = useState("");
   const [allCards, setAllCards] = useState([]);
   const [allCardsName, setAllCardsName] = useState([]);
@@ -54,7 +56,7 @@ const UniqueCardPrice = () => {
                 setSearchValue(value);
               }}
             />
-            <CardInformation cardInfo={cardInfo} />
+            <CardInformation session={session} cardInfo={cardInfo} />
           </UniqueCardPriceWrapper>
           <Footer />
         </>
