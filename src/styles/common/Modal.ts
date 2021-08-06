@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface ModalContainerProps {
-    isVisible: boolean;
+  isVisible: boolean;
 }
 
 export const ModalContainer = styled.div<ModalContainerProps>`
-  display: ${({isVisible}) => isVisible ? 'block' : 'none'};
+  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -14,12 +14,16 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.3);
   @keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
   animation-name: zoom;
   animation-duration: 0.6s;
 `;
@@ -32,15 +36,15 @@ export const CloseButton = styled.span`
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
-  &:focus{
+  &:focus {
     color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
   }
-  &:hover{
+  &:hover {
     color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
   }
 `;
 
@@ -50,9 +54,13 @@ export const ModalContent = styled.div`
   width: 80%;
   max-width: 700px;
   @keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
   animation-name: zoom;
   animation-duration: 0.6s;
   width: 100%;

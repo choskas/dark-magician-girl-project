@@ -12,6 +12,7 @@ import BottomDrawer from "../common/BottomDrawer";
 import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
+import Popover from "../common/Popover";
 
 interface AllCardsContainerProps {
   allCards: Array<any>;
@@ -55,16 +56,9 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
             <CardInfoDescription>
               Rareza: {cardInfo.card.rarityCode}
             </CardInfoDescription>
-            <LoginButton
-              onClick={async () => {
-                setIsVisiblePriceDrawer(true);
-              }}
-            >
-              ¡La tengo!
-            </LoginButton>
-          </CardInfoModalContainer>
-          {isVisiblePriceDrawer && (
-         <BottomDrawer isOpen={isVisiblePriceDrawer} >
+
+            {isVisiblePriceDrawer && (
+            <Popover isVisible={isVisiblePriceDrawer}>
             <>
          <CardInfoInputWrapper>
              <InputText value={price} placeholder="Tu mejor precio" onChange={(e, value)=>{
@@ -86,7 +80,7 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
                setIsVisiblePriceDrawer(false);
              }}
            >
-             ¡Mandar precio!
+             Mandar
            </LoginButton>
            </CardInfoButtonWrapper>
            <CardInfoButtonWrapper>
@@ -100,8 +94,16 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
            </LoginButton>
            </CardInfoButtonWrapper>
            </>
-         </BottomDrawer>
+            </Popover>
           )}
+            <LoginButton
+              onClick={async () => {
+                setIsVisiblePriceDrawer(!isVisiblePriceDrawer);
+              }}
+            >
+              ¡La tengo!
+            </LoginButton>
+          </CardInfoModalContainer>
  
         </Modal>
       )}

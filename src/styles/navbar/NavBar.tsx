@@ -47,6 +47,7 @@ export const NavBarText = styled.p`
     // desktop
     @media screen and (min-width: 1000px) {
         display: block;
+        font-family: 'Montserrat', sans-serif;
         font-size: 24px;
         margin: 0 20px;
         cursor: pointer;
