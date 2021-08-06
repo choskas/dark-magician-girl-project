@@ -24,13 +24,12 @@ import Select from "../components/common/Select";
 const Login = () => {
   const router = useRouter();
   const [session, loading] = useSession();
-  const [selectValue, setSelectValue] = useState(null);
 
   useEffect(() => {
     if (session && session.user) {
       router.push("/");
     }
-  }, []);
+  }, [session]);
 
   const login = () => {
     return (
