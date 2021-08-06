@@ -5,7 +5,6 @@ import { useSession } from "next-auth/client";
 const Auth = () => {
   const router = useRouter();
   const [session, loading] = useSession();
-  console.log(session)
   useEffect(() => {
     // @ts-ignore
     if (session && !session.user.role) {

@@ -17,7 +17,6 @@ interface AllCardsContainerProps {
 const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
-  console.log(cardInfo);
   return (
     <AllImagesContainer>
       {allCards &&

@@ -49,7 +49,6 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
   const [selectedRarity, setSelectedRarity] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [cardImages, setCardImages] = useState([]);
-  console.log(cardInfo)
   useEffect(() => {
     if (cardInfo) {
       const newArr = cardInfo.card_images.map((item) => {
