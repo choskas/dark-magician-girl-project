@@ -117,10 +117,13 @@ export const CardDescription = styled.div`
   border-top: 1px solid #ef5da8;
   padding: 5px 10px;
   overflow-y: auto;
+  height: 100px;
   // Desktop
   @media screen and (min-width: 1000px) {
     font-size: 20px;
     border-top: 3px solid #ef5da8;
+    height: 160px;
+    overflow-y: auto;
   }
 `;
 

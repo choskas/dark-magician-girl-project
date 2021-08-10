@@ -6,6 +6,7 @@ import Footer from "../components/Footer/Footer";
 import NavBar from "../components/index/NavBar";
 import MyDataSection from "../components/profile/MyDataSection";
 import MyDecksSection from "../components/profile/MyDecksSection";
+import SearchedCardsSection from "../components/profile/SearchedCardsSection";
 import { getAllUserDecks } from "../redux/modules/deck";
 import { ProfileWrapper } from "../styles/profile/myDecks";
 
@@ -32,6 +33,7 @@ const Profile = () => {
       <NavBar />
       <ProfileWrapper>
         <MyDataSection />
+        <SearchedCardsSection />
         <MyDecksSection session={session} decks={decks} />
       </ProfileWrapper>
       <Footer />

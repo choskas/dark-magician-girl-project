@@ -17,9 +17,10 @@ import Popover from "../common/Popover";
 interface AllCardsContainerProps {
   allCards: Array<any>;
   foundCard: Function;
+  session: any;
 }
 
-const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
+const AllCardsContainer = ({ allCards, foundCard, session }: AllCardsContainerProps) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [ isVisiblePriceDrawer ,setIsVisiblePriceDrawer] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
@@ -75,6 +76,8 @@ const AllCardsContainer = ({ allCards, foundCard }: AllCardsContainerProps) => {
                  userId: cardInfo.userId,
                  rarityCode: cardInfo.card.rarityCode,
                  price,
+                 foundBy: session.user.id,
+                 foundByName: session.user.name,
                });
                setIsVisibleModal(false);
                setIsVisiblePriceDrawer(false);

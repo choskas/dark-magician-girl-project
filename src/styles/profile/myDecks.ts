@@ -27,8 +27,8 @@ export const DeckWrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Title = styled.p`
@@ -68,7 +68,7 @@ export const DeckPrice = styled.span`
   font-weight: bold;
   line-height: 1.2;
   margin: 10px 10px;
-  color: #EF5DA8;
+  color: #ef5da8;
   // Desktop
   @media screen and (min-width: 1000px) {
     font-size: 24px;
@@ -115,7 +115,7 @@ export const Card = styled.img`
 `;
 
 export const NoDecksMessage = styled.p`
-      font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   padding-left: 10px;
   padding-right: 10px;
@@ -149,6 +149,11 @@ export const ModalImageWrapper = styled.div`
 `;
 
 export const ModalImage = styled.img`
+  height: 300px;
+  width: 200px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
     height: 350px;
     width: 250px;
+  }
 `;

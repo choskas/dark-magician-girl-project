@@ -19,7 +19,7 @@ const WantedCards = () => {
   const allCards = useSelector(
     (state: any) => state.wantedCards.allWantedCards
   );
-  const foundCard = async (data: { userId: string; rarityCode: string }) =>
+  const foundCard = async (data: { userId: string; rarityCode: string, foundBy: string, foundByName: string }) =>
     await dispatch(hasFoundCard(data));
   useEffect(() => {
     dispatch(getAllWantedCards());
@@ -47,7 +47,7 @@ const WantedCards = () => {
       </WantedCardsDescription>
       {allCards && (
         <AllWantedCardsWrapper>
-          <AllCardsContainer foundCard={foundCard} allCards={allCards} />
+          <AllCardsContainer session={session} foundCard={foundCard} allCards={allCards} />
         </AllWantedCardsWrapper>
       )}
       <Footer />
