@@ -10,7 +10,12 @@ const Auth = () => {
     if (session && !session.user.role) {
       router.push("/storeOrClient");
     } else {
-      router.push("/profile");
+      // @ts-ignore
+      if (session.user.role === "store") {
+        router.push("/storeProfile");
+      } else {
+        router.push("/profile");
+      }
     }
   }, [session]);
   return <>redirecting</>;
