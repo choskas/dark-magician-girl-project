@@ -56,7 +56,7 @@ const SearchedCardsSection = () => {
           <ModalFoundByContainer>
             {cardInfo.foundBy.map((item) => (
               <Link href={`/storeProfile/${item.foundById}`}>
-                <ModalFoundBy>{item.foundByName}</ModalFoundBy>
+                <ModalFoundBy>{item.foundByName} por ${item.price}</ModalFoundBy>
               </Link>
             ))}
           </ModalFoundByContainer>

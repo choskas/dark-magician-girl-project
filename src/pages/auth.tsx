@@ -12,7 +12,7 @@ const Auth = () => {
       router.push("/storeOrClient");
     } else if (session && session.user.role === 'store'){
       router.push("/storeProfile");
-    } else if (session && session.user.role === 'store'){
+    } else if (session && session.user.role === 'client'){
       router.push('/profile');
     }
   }, [session]);
