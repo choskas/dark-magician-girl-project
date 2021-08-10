@@ -10,9 +10,9 @@ const Auth = () => {
   useEffect(() => {
     if (session && !session.user.role) {
       router.push("/storeOrClient");
-    } else if (session && !session.user.role === 'store'){
+    } else if (session && session.user.role === 'store'){
       router.push("/storeProfile");
-    } else if (session && !session.user.role === 'store'){
+    } else if (session && session.user.role === 'store'){
       router.push('/profile');
     }
   }, [session]);
