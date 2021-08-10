@@ -22,7 +22,7 @@ const NavBar = () => {
   const dropdownOptions = (isLoggedIn = false) =>
     isLoggedIn ? (
       <>
-        <CollapseOption onClick={() => router.push('/profile')}> Mi perfil </CollapseOption>
+        <CollapseOption onClick={() => session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
         <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
         {session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
         <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
