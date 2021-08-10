@@ -12,7 +12,6 @@ const [storeInfo, setStoreInfo] = useState(null);
 const getStoreInfo = async () => {
     try {
     const id = router.query.id;
-    console.log(id, '<<<<')
     const store = await axios.post( `${process.env.NEXT_PUBLIC_BACKEND_URL}/getStoreById`, {id} )
     setStoreInfo(store.data.store);
     } catch (error) {
