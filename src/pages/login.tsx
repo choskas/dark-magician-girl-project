@@ -34,84 +34,89 @@ const Login = () => {
   const login = () => {
     return (
       <>
-        <NavBar />
-        <LoginWrapper>
-          <LoginImageContainer>
-            <LoginImage />
-          </LoginImageContainer>
-          <LoginFormContainer>
-            <TitleContainer>
-              <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
-              <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
-            </TitleContainer>
-            <InputsWrapper>
-              Las contraseñas ya no son tan seguras, olvidate de anotarlas en un
-              papel o recordarlas, no te preocupes tu cuenta sera mucho mas
-              segura de esta forma. Accede con uno de estos servicios:
-            </InputsWrapper>
-            <LoginButtonsWrapper>
-              <Separator />
-              <LoginButton
-                icon="/assets/googleIcon.png"
-                onClick={async () => {
-                  try {
-                  await signIn("google", {
-                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
-                  });
-                } catch (error) {
-                  console.log(error)
-                }
-                }}
-              >
-                Login with Google
-              </LoginButton>
-              <LoginButton
-                onClick={async () => {
-                  try {
-                    await signIn("facebook", {
-                      callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
-                    });
-                  } catch (error) {
-                    console.log(error);
-                  }
-                }}
-                icon="/assets/facebook.png"
-              >
-                Login with facebook
-              </LoginButton>
-              <LoginButton
-                icon="/assets/discordIcon.png"
-                onClick={async () => {
-                  try{
-                  await signIn("discord", {
-                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
-                  });
-                } catch (error) {
-                  console.log(error)
-                }
-                }}
-              >
-                Login with Discord
-              </LoginButton>
-              <LoginButton
-                icon="/assets/twitchIcon.png"
-                onClick={async () => {
-                  try{
-                  await signIn("twitch", {
-                    callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
-                  });
-                } catch (error) {
-                  console.log(error)
-                }
-                }}
-              >
-                Login with Twitch
-              </LoginButton>
-            </LoginButtonsWrapper>
-          </LoginFormContainer>
-        </LoginWrapper>
+        {!session && (
+          <>
+            <NavBar />
+            <LoginWrapper>
+              <LoginImageContainer>
+                <LoginImage />
+              </LoginImageContainer>
+              <LoginFormContainer>
+                <TitleContainer>
+                  <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
+                  <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
+                </TitleContainer>
+                <InputsWrapper>
+                  Las contraseñas ya no son tan seguras, olvidate de anotarlas
+                  en un papel o recordarlas, no te preocupes tu cuenta sera
+                  mucho mas segura de esta forma. Accede con uno de estos
+                  servicios:
+                </InputsWrapper>
+                <LoginButtonsWrapper>
+                  <Separator />
+                  <LoginButton
+                    icon="/assets/googleIcon.png"
+                    onClick={async () => {
+                      try {
+                        await signIn("google", {
+                          callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    }}
+                  >
+                    Login with Google
+                  </LoginButton>
+                  <LoginButton
+                    onClick={async () => {
+                      try {
+                        await signIn("facebook", {
+                          callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    }}
+                    icon="/assets/facebook.png"
+                  >
+                    Login with facebook
+                  </LoginButton>
+                  <LoginButton
+                    icon="/assets/discordIcon.png"
+                    onClick={async () => {
+                      try {
+                        await signIn("discord", {
+                          callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    }}
+                  >
+                    Login with Discord
+                  </LoginButton>
+                  <LoginButton
+                    icon="/assets/twitchIcon.png"
+                    onClick={async () => {
+                      try {
+                        await signIn("twitch", {
+                          callbackUrl: `${process.env.NEXT_PUBLIC_URL_WEB}/auth`,
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    }}
+                  >
+                    Login with Twitch
+                  </LoginButton>
+                </LoginButtonsWrapper>
+              </LoginFormContainer>
+            </LoginWrapper>
 
-        <Footer />
+            <Footer />
+          </>
+        )}
       </>
     );
   };
