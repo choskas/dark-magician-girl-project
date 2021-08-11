@@ -19,12 +19,12 @@ const NavBar = () => {
   const router = useRouter();
   const [session, isLoading] = useSession();
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
-  const dropdownOptions = (isLoggedIn = false) =>
-    isLoggedIn ? (
+  const dropdownOptions = () =>
+    session ? (
       <>
-        <CollapseOption onClick={() => session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
+        <CollapseOption onClick={() => session && session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
         <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
-        {session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
+        {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
         <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
       </>
     ) : (
@@ -43,13 +43,13 @@ const NavBar = () => {
       <HaamburgerImage
         src={isLoading === false && session ? session.user.image : "/assets/hamburger.png"}
         style={isLoading === false && session ? { width: "40px", height: "40px" } : {}}
-        onClick={(e) => {
+        onClick={async (e) => {
           e.preventDefault();
           setIsOpenCollapse(!isOpenCollapse);
         }}
       />
       <NavBarCollapse isOpen={isOpenCollapse}>
-        {session ? dropdownOptions(true) : dropdownOptions(false)}
+        {dropdownOptions()}
       </NavBarCollapse>
       <TextWrapper>
         {session ? (
@@ -64,7 +64,7 @@ const NavBar = () => {
               <UserImage src={session.user.image} />
             </ProfileInfoWrapper>
             <NavBarCollapse isOpen={isOpenCollapse}>
-              {session.user ? dropdownOptions(true) : dropdownOptions(false)}
+              {dropdownOptions()}
             </NavBarCollapse>
           </>
         ) : (

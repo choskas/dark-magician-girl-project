@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import InputText from "../components/common/InputText";
 import LoginButton from "../components/common/LoginButton";
@@ -50,6 +51,14 @@ const StoreExtraData = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if(!window.location.hash) {
+      // @ts-ignore
+      window.location = window.location + '#loaded';
+      window.location.reload();
+  }
+  }, [])
 
   return (
     <>

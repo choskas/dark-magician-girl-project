@@ -35,8 +35,8 @@ const StoreOrClient = () => {
         <StoreOrClientWrapper>
           <ClientWrapper>
             <StartButton
-              onClick={() => {
-                selectRole("client");
+              onClick={async () => {
+                await selectRole("client");
                 router.push("/profile");
               }}
             >
@@ -47,8 +47,8 @@ const StoreOrClient = () => {
           <StoreWrapper>
             <StartButton
               style={{ height: "auto" }}
-              onClick={() => {
-                selectRole("store");
+              onClick={async () => {
+                await selectRole("store");
                 router.push("/storeExtraData");
               }}
             >
