@@ -25,6 +25,11 @@ export const ProfileTitle = styled.p`
     text-align: center;
 `;
 
+export const ProfileBold = styled.span`
+    font-size: 22px;
+    font-weight: bolder;
+`;
+
 export const MainInfoContainer = styled.div`
     display: flex;
     justify-content: space-around;

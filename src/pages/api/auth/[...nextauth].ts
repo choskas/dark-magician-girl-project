@@ -1,3 +1,4 @@
+// @ts-nocheck
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
@@ -23,9 +24,7 @@ export default NextAuth({
     }),
   ],
   adapter: Adapters.TypeORM.Adapter(process.env.NEXT_PUBLIC_MONGO_DB, {
-    // @ts-ignore
     models: {
-      // @ts-ignore
       User: Models.User,
     },
   }),
@@ -43,11 +42,12 @@ export default NextAuth({
     },
     session: async (session, user) => {
       if (user?.role) {
-        // @ts-ignore
         session.user.role = user.role;
       }
-      // @ts-ignore
       session.user.id = user.id;
+      session.user.storeName = user.storeName;
+      session.user.address = user.address;
+      session.user.contact = user.contact;
       return Promise.resolve(session);
     },
   },

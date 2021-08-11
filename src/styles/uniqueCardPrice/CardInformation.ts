@@ -235,6 +235,11 @@ export const SelectContainer = styled.div`
   width: 70%;
 `;
 
+export const InputContainer = styled.div`
+  width: 70%;
+  margin: 5px 0 20px 0;
+`;
+
 export const ButtonDrawerContainer = styled.div`
   width: 300px;
   display: flex;

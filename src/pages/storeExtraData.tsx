@@ -34,7 +34,7 @@ const StoreExtraData = () => {
       const data = {
         // @ts-ignore
         id: session.user.id,
-        storeName: storeNameField.value ? storeNameField.value : session.user.name,
+        storeName: storeNameField.value !== '' ? storeNameField.value : session.user.name,
         street: addressStreetField.value,
         postalCode: addressPostalCodeField.value,
         number: addressExtNumber.value,

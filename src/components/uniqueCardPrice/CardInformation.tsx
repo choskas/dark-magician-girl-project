@@ -25,6 +25,7 @@ import {
   DrawerImage,
   DrawerImagesContainer,
   DrawerText,
+  InputContainer,
   IWantItButtonWrapper,
   SelectContainer,
   SetCode,
@@ -36,6 +37,7 @@ import {
   SetWrapper,
 } from "../../styles/uniqueCardPrice/CardInformation";
 import BottomDrawer from "../common/BottomDrawer";
+import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
 import Select from "../common/Select";
 
@@ -47,8 +49,9 @@ interface CardInformationProps {
 const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
   const dispatch = useDispatch();
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-  const [selectedRarity, setSelectedRarity] = useState('');
+  const [selectedRarity, setSelectedRarity] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [cardPrice, setCardPrice] = useState(null);
   const [cardImages, setCardImages] = useState([]);
   useEffect(() => {
     if (cardInfo) {
@@ -76,7 +79,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
         {cardInfo && (
           <IWantItButtonWrapper>
             <LoginButton onClick={() => setIsOpenDrawer(!isOpenDrawer)}>
-             {session.user.role === 'client' ? '!La quiero!' : '¡La tengo!' }
+              {session.user.role === "client" ? "!La quiero!" : "¡La tengo!"}
             </LoginButton>
           </IWantItButtonWrapper>
         )}
@@ -171,51 +174,78 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
                 />
               ))}
           </DrawerImagesContainer>
+          {session.user.role === "store" && (
+            <InputContainer>
+              <InputText
+                placeholder="Precio"
+                onChange={(item, value) => {
+                  setCardPrice(value);
+                }}
+                value={cardPrice}
+              />
+            </InputContainer>
+          )}
           <ButtonDrawerContainer>
-            <LoginButton onClick={async() => {
-              let image = selectedImage
-              if (!image) {
-                image = cardImages[0].image
-              }
-              if (selectedRarity){
-                if (session.user.role === 'store'){
-                  await dispatch(addToMyUniqueCards({
-                    userId: session.user.id,
-                    email: session.user.email,
-                    card: {
-                      name: cardInfo.name,
-                      rarityCode: selectedRarity,
-                      image,
-                    }
-                  }))
-                } else {
-                  await dispatch(addToMyWantedCards({
-                    name: session.user.name,
-                    email: session.user.email,
-                    card: {
-                      name: cardInfo.name,
-                      image: image,
-                      rarityCode: selectedRarity,
-                      isFound: false,
-                  },
-                  userId: session.user.id
-                  }))
+            <LoginButton
+              onClick={async () => {
+                let passed = false;
+                let image = selectedImage;
+                if (!image) {
+                  image = cardImages[0].image;
                 }
-              const newArr = cardInfo.card_images.map((item) => {
-                return {
-                  image: item.image_url,
-                  isActive: false,
-                };
-              });
-              setCardImages(newArr);
-              setSelectedImage(null);
-              setSelectedRarity(''); 
-              setIsOpenDrawer(!isOpenDrawer)
-            } else {
-              toast('Debes seleccionar una rareza')
-            }     
-              }}>
-              {session.user.role === 'client' ? '!La quiero!' : '¡La tengo!' }
+                if (selectedRarity && session.user.role === "client") {
+                  await dispatch(
+                    addToMyWantedCards({
+                      name: session.user.name,
+                      email: session.user.email,
+                      card: {
+                        name: cardInfo.name,
+                        image: image,
+                        rarityCode: selectedRarity,
+                        isFound: false,
+                      },
+                      userId: session.user.id,
+                    })
+                  );
+                  passed = true;
+                  }
+                  if (selectedRarity && cardPrice && session.user.role === "store") {
+                    await dispatch(
+                      addToMyUniqueCards({
+                        userId: session.user.id,
+                        email: session.user.email,
+                        card: {
+                          name: cardInfo.name,
+                          rarityCode: selectedRarity,
+                          image,
+                          price: cardPrice,
+                        },
+                      })
+                    );
+                    passed = true;
+                  }
+                  if (passed) {
+                  const newArr = cardInfo.card_images.map((item) => {
+                    return {
+                      image: item.image_url,
+                      isActive: false,
+                    };
+                  });
+                  setCardImages(newArr);
+                  setSelectedImage(null);
+                  setSelectedRarity("");
+                  setCardPrice(null);
+                  setIsOpenDrawer(!isOpenDrawer);
+                } else {
+                  if (session.user.role === 'store') {
+                    toast("Debes seleccionar una rareza y un precio");
+                  } else {
+                    toast("Debes seleccionar una rareza");
+                  }
+                }
+              }}
+            >
+              {session.user.role === "client" ? "!La quiero!" : "¡La tengo!"}
             </LoginButton>
           </ButtonDrawerContainer>
         </BottomDrawer>
