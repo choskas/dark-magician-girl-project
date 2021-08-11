@@ -24,7 +24,6 @@ const StoreOrClient = () => {
     });
   };
   useEffect(() => {
-    console.log(session)
     if (session && session.user.role === 'store' && !session.user.contact ){
       router.push("/storeExtraData")
       }
@@ -38,7 +37,7 @@ const StoreOrClient = () => {
             <StartButton
               onClick={() => {
                 selectRole("client");
-                router.push("/");
+                router.push("/profile");
               }}
             >
               ¡Busco cartas!
