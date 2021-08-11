@@ -8,13 +8,19 @@ const Auth = () => {
   const router = useRouter();
   const [session, loading] = useSession();
   useEffect(() => {
-    if (session && !session.user.role) {
+    if(!window.location.hash) {
+      // @ts-ignore
+      window.location = window.location + '#loaded';
+      window.location.reload();
+  } else {
+if (session && !session.user.role) {
       router.push("/storeOrClient");
     } else if (session && session.user.role === 'store'){
       router.push("/storeProfile");
     } else if (session && session.user.role === 'client'){
       router.push('/profile');
     }
+} 
   }, [session]);
   return <>redirecting</>;
 };
