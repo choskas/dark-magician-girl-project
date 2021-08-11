@@ -24,16 +24,10 @@ const StoreOrClient = () => {
     });
   };
   useEffect(() => {
-
-    if (session && session.user.role === 'client') {
-      router.push("/profile");
-    } else if (session && session.user.role === 'store') {
-      if (session.user.storeName){
-      router.push("/profile")
-      } else {
-        router.push("/storeExtraData")
+    console.log(session)
+    if (session && session.user.role === 'store' && !session.user.contact ){
+      router.push("/storeExtraData")
       }
-    }
   }, [session]);
   return (
     <>

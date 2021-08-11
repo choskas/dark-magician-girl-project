@@ -20,6 +20,7 @@ import {
 } from "../styles/login/login";
 import { useRouter } from "next/router";
 import Select from "../components/common/Select";
+import FullScreenLoader from "../components/common/FullScreenLoader";
 
 const Login = () => {
   const router = useRouter();
