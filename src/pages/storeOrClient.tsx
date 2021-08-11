@@ -37,7 +37,7 @@ const StoreOrClient = () => {
             <StartButton
               onClick={async () => {
                 await selectRole("client");
-                router.push("/profile");
+                router.push("/auth");
               }}
             >
               ¡Busco cartas!
