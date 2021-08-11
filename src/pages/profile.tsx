@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -15,14 +16,15 @@ const Profile = () => {
   const dispatch = useDispatch();
   const decks = useSelector((state: any) => state.deck.allUserDecks);
   const myDeck = useSelector((state: any) => state.deck.myDeck);
+  const cards = useSelector(
+    (state: any) => state.wantedCards.allWantedCardsById
+  );
   const router = useRouter();
   useEffect(() => {
     if (session) {
-      // @ts-ignore
       dispatch(getAllUserDecks(session.user.id));
-      // @ts-ignore
-      if (!session.user.role){
-        router.push('/auth')
+      if (!session.user.role) {
+        router.push("/auth");
       }
     } else if (session && myDeck !== []) {
       router.push("/deckPrice");
@@ -30,13 +32,17 @@ const Profile = () => {
   }, [session]);
   return (
     <>
-      <NavBar />
-      <ProfileWrapper>
-        <MyDataSection />
-        <SearchedCardsSection />
-        <MyDecksSection session={session} decks={decks} />
-      </ProfileWrapper>
-      <Footer />
+      {!loading && (
+          <>
+            <NavBar />
+            <ProfileWrapper>
+              <MyDataSection session={session} cards={cards} decks={decks} />
+              <SearchedCardsSection cards={cards} />
+              <MyDecksSection session={session} decks={decks} />
+            </ProfileWrapper>
+            <Footer />
+          </>
+        )}
     </>
   );
 };

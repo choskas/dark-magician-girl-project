@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllWantedCardsById } from "../../redux/modules/wantedCards";
+import { useDispatch } from "react-redux";
+import { getAllWantedCardsById, selectedCardFunc } from "../../redux/modules/wantedCards";
 import Link from "next/link";
 import {
   BigTitle,
@@ -20,11 +20,12 @@ import {
 } from "../../styles/profile/searchedCardsStyles";
 import Modal from "../common/Modal";
 
-const SearchedCardsSection = () => {
+interface SearchedCardsSectionProps {
+  cards: any;
+}
+
+const SearchedCardsSection = ({cards}: SearchedCardsSectionProps) => {
   const dispatch = useDispatch();
-  const cards = useSelector(
-    (state: any) => state.wantedCards.allWantedCardsById
-  );
   const [session, loading] = useSession();
   const [cardInfo, setCardInfo] = useState(null);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -56,7 +57,7 @@ const SearchedCardsSection = () => {
           <ModalFoundByContainer>
             {cardInfo.foundBy.map((item) => (
               <Link href={`/storeProfile/${item.foundById}`}>
-                <ModalFoundBy>{item.foundByName} por ${item.price}</ModalFoundBy>
+                <ModalFoundBy onClick={() => dispatch(selectedCardFunc(cardInfo))}>{item.foundByName} por ${item.price}</ModalFoundBy>
               </Link>
             ))}
           </ModalFoundByContainer>

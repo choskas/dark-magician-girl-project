@@ -11,7 +11,6 @@ export const WhatsappButtonStyle = styled.a`
   border-radius: 50px;
   text-align: center;
   font-size: 30px;
-  z-index: 3;
   &:hover{
       opacity: 0.5;
   }

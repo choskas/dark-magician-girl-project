@@ -5,7 +5,7 @@ export const CardsWrapper = styled.div`
   font-weight: 600;
   box-sizing: border-box;
   display: block;
-  width: 90vw;
+  width: 87%;
   border: 3px solid #ef5da8;
   padding-left: 10px;
   color: black;

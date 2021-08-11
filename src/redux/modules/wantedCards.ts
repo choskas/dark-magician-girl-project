@@ -4,10 +4,12 @@ import { toast } from "react-toastify";
 
 const WANTED_CARDS = "yugi/wantedCards/WANTED_CARDS";
 const WANTED_CARDS_BY_ID = "yugi/wantedCards/WANTED_CARDS_BY_ID";
+const SELECTED_CARD = "yugi/wantedCards/SELECTED_CARD";
 
 const INITIAL_STATE = {
   allWantedCards: [],
   allWantedCardsById: [],
+  selectedCard: null,
 };
 
 export default function wantedCards(state = INITIAL_STATE, action: AnyAction) {
@@ -16,6 +18,8 @@ export default function wantedCards(state = INITIAL_STATE, action: AnyAction) {
       return { ...state, allWantedCards: action.payload };
     case WANTED_CARDS_BY_ID:
       return { ...state, allWantedCardsById: action.payload}
+    case SELECTED_CARD:
+      return { ...state, selectedCard: action.payload}
     default:
       return state;
   }
@@ -60,6 +64,18 @@ export const getAllWantedCardsById = (userId: any) => async (dispatch: Dispatch<
       payload: response.data.cards,
     });
     return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const selectedCardFunc = (card: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    dispatch({
+      type: SELECTED_CARD,
+      payload: card,
+    });
+    return card;
   } catch (error) {
     console.log(error);
   }

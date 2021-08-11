@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { addToMyUniqueCards } from "../../redux/modules/storeCards";
 import { addToMyWantedCards } from "../../redux/modules/wantedCards";
 import {
   AlternativeImages,
@@ -75,7 +76,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
         {cardInfo && (
           <IWantItButtonWrapper>
             <LoginButton onClick={() => setIsOpenDrawer(!isOpenDrawer)}>
-              ¡La quiero!
+             {session.user.role === 'client' ? '!La quiero!' : '¡La tengo!' }
             </LoginButton>
           </IWantItButtonWrapper>
         )}
@@ -177,17 +178,29 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
                 image = cardImages[0].image
               }
               if (selectedRarity){
-              await dispatch(addToMyWantedCards({
-                name: session.user.name,
-                email: session.user.email,
-                card: {
-                  name: cardInfo.name,
-                  image: image,
-                  rarityCode: selectedRarity,
-                  isFound: false,
-              },
-              userId: session.user.id
-              }))
+                if (session.user.role === 'store'){
+                  await dispatch(addToMyUniqueCards({
+                    userId: session.user.id,
+                    email: session.user.email,
+                    card: {
+                      name: cardInfo.name,
+                      rarityCode: selectedRarity,
+                      image,
+                    }
+                  }))
+                } else {
+                  await dispatch(addToMyWantedCards({
+                    name: session.user.name,
+                    email: session.user.email,
+                    card: {
+                      name: cardInfo.name,
+                      image: image,
+                      rarityCode: selectedRarity,
+                      isFound: false,
+                  },
+                  userId: session.user.id
+                  }))
+                }
               const newArr = cardInfo.card_images.map((item) => {
                 return {
                   image: item.image_url,
@@ -202,7 +215,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
               toast('Debes seleccionar una rareza')
             }     
               }}>
-              ¡La quiero!
+              {session.user.role === 'client' ? '!La quiero!' : '¡La tengo!' }
             </LoginButton>
           </ButtonDrawerContainer>
         </BottomDrawer>

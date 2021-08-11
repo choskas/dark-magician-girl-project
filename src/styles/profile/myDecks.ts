@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
   height: auto;
+    border: 2px solid #ef5da8;
+    margin: 10px 10px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 93%;
 `;
 
 export const DeckWrapper = styled.div`
@@ -9,7 +15,7 @@ export const DeckWrapper = styled.div`
   font-weight: 600;
   box-sizing: border-box;
   display: block;
-  width: 90vw;
+  width: 87%;
   border: 3px solid #ef5da8;
   padding-left: 10px;
   color: black;
