@@ -1,15 +1,14 @@
-import NavBar from "../components/index/NavBar"
+import NavBar from "../components/index/NavBar";
 import Footer from "../components/Footer/Footer";
 import DonateSection from "../components/index/DonateSection";
-import MainPageFirstSection from "../components/index/MainPageFirstSection"
+import MainPageFirstSection from "../components/index/MainPageFirstSection";
 import WhatToDoSection from "../components/index/WhatToDoSection";
 import { CardFrame } from "../styles/index/MainPage";
-import { useEffect } from "react";
 
 const HomePage = () => {
-    return (
-      <>
-      <NavBar/>
+  return (
+    <>
+      <NavBar />
       <CardFrame />
       <MainPageFirstSection />
       <CardFrame />
@@ -18,8 +17,8 @@ const HomePage = () => {
       <DonateSection />
       <CardFrame />
       <Footer />
-      </>
-    ); 
-  }
-  
-  export default HomePage
+    </>
+  );
+};
+
+export default HomePage;

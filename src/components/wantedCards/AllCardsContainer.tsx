@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { foundCardSocket } from "../../config/socketConfig";
 import {
   AllImagesContainer,
   CardImage,
@@ -81,6 +82,7 @@ const AllCardsContainer = ({ allCards, foundCard, session }: AllCardsContainerPr
                });
                setIsVisibleModal(false);
                setIsVisiblePriceDrawer(false);
+               foundCardSocket(cardInfo);
              }}
            >
              Mandar

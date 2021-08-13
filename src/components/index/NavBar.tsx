@@ -11,9 +11,10 @@ import {
 } from "../../styles/navbar/NavBar";
 import Link from "next/link";
 import { LinkTo } from "../../styles/common/Link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession, signOut } from 'next-auth/client'
+import socket, { disconnectSocket, initiateSocket } from "../../config/socketConfig";
 
 const NavBar = () => {
   const router = useRouter();
@@ -25,7 +26,10 @@ const NavBar = () => {
         <CollapseOption onClick={() => session && session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
         <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
-        <CollapseOption onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB })}>Salir</CollapseOption>
+        <CollapseOption onClick={() => {
+          disconnectSocket();
+          signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB 
+          })}}>Salir</CollapseOption>
       </>
     ) : (
       <>
@@ -34,6 +38,16 @@ const NavBar = () => {
         <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
       </>
     );
+    const connectToSocket = async () => {
+      if (session && !socket) {
+        const { user } = session;
+        initiateSocket(user);
+      }
+     
+    }
+    useEffect(() => {
+      connectToSocket();
+    }, [socket]);
   return (
     <Wrapper>
       <Link href="/">
