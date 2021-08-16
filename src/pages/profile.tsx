@@ -21,7 +21,7 @@ const Profile = () => {
   );
   const router = useRouter();
   useEffect(() => {
-    if (!session) {
+    if (!loading && !session) {
       router.push('/')
       return;
     }

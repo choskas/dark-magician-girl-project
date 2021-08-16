@@ -29,7 +29,7 @@ const StoreProfileIndex = () => {
   };
   useEffect(() => {
     getCards();
-    if (!session) {
+    if (!loading && !session) {
       router.push('/')
     }
   }, [loading]);
