@@ -40,9 +40,14 @@ export const getAllUniqueCardsById = (userId: any) => async (dispatch: Dispatch<
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/getAllUniqueCardsById`, userId
     );
+    console.log(response.data.cards.decksBases)
     dispatch({
       type: STORE_UNIQUE_CARDS,
       payload: response.data.cards.uniqueCards,
+    });
+    dispatch({
+      type: STORE_DECK_BASES,
+      payload: response.data.cards.decksBases,
     });
     return response.data;
   } catch (error) {

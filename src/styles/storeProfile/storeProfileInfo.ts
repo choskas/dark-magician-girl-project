@@ -82,9 +82,22 @@ export const StoreMainInfoUniqueCardsContainer = styled.div`
     width: 87%;
 `;
 
+export const StoreMainInfoUniqueCardsContainerModal = styled.div`
+    margin: 10px 10px;
+    border: 2px solid #ef5da8;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    height: 50vh;
+    padding: 10px;
+    width: 87%;
+    overflow-y: auto;
+`;
+
 export const StoreMainInfoCardImage = styled.img`
     width: 75px;
     height: 100px;
+    margin: 10px;
 `;
 
 export const StoreMainInfoModalContainer = styled.div`

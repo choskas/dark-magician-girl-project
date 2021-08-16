@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import FullScreenLoader from "../../components/common/FullScreenLoader";
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/index/NavBar";
+import MyBasesSection from "../../components/storeProfile/MyBasesSection";
 import MyCardsSection from "../../components/storeProfile/MyCardsSection";
 import MyDataSectionStore from "../../components/storeProfile/MyDataSectionStore";
 import { getAllUniqueCardsById } from "../../redux/modules/storeCards";
+import { StoreProfileWrapper } from "../../styles/storeProfile";
 
 const StoreProfileIndex = () => {
   const dispatch = useDispatch();
@@ -22,21 +24,24 @@ const StoreProfileIndex = () => {
       // @ts-ignore
       dispatch(getAllUniqueCardsById({ userId: session.user.id }));
     }
-  }
+  };
   useEffect(() => {
-     getCards();
+    getCards();
   }, [loading]);
   return (
     <>
       {session ? (
         <>
           <NavBar />
-          <MyDataSectionStore
-            cards={storeUniqueCards}
-            decks={storeDeckBases}
-            session={session}
-          />
-          <MyCardsSection cards={storeUniqueCards} />
+          <StoreProfileWrapper>
+            <MyDataSectionStore
+              cards={storeUniqueCards}
+              decks={storeDeckBases}
+              session={session}
+            />
+            <MyCardsSection cards={storeUniqueCards} />
+            <MyBasesSection decks={storeDeckBases}/>
+          </StoreProfileWrapper>
           <Footer />
         </>
       ) : (

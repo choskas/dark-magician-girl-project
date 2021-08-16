@@ -39,7 +39,7 @@ return (
     <NavBar />
     <StoreProfileInfo storeDeckBases={storeDeckBases} storeUniqueCards={storeUniqueCards} storeInfo={storeInfo} />
     {storeInfo.contact.phoneNumber && (
-    <WhatsAppButton phoneNumber={storeInfo.contact.phoneNumber} cardName={selectedCard.name} />
+    <WhatsAppButton phoneNumber={storeInfo.contact.phoneNumber} cardName={selectedCard && selectedCard.name} />
     )}
 
     <Footer />

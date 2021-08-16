@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NoDecksMessage } from "../../styles/profile/myDecks";
 import {
   MainInfo,
   StoreMainInfoCardImage,
@@ -17,6 +18,7 @@ import {
   ProfileImageContainer,
   StoreProfileInfoContainer,
   ProfileTitle,
+  StoreMainInfoUniqueCardsContainerModal,
 } from "../../styles/storeProfile/storeProfileInfo";
 import Modal from "../common/Modal";
 interface StoreProfileInfoProps {
@@ -27,7 +29,9 @@ interface StoreProfileInfoProps {
 
 const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [isVisibleModalBases, setIsVisibleModalBases] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
+  const [deckBaseInfo, setDeckBaseInfo] = useState(null);
   return (
     <StoreProfileInfoContainer>
       <ProfileImageContainer>
@@ -37,24 +41,23 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
           }
         />
       </ProfileImageContainer>
-      <ProfileTitle>
-        {storeInfo.name ? storeInfo.name : "Unknown"}
-      </ProfileTitle>
+      <ProfileTitle>{storeInfo.name ? storeInfo.name : "Unknown"}</ProfileTitle>
       <MainInfoContainer>
         <MainInfo>
           <MainInfoTitle>Cartas</MainInfoTitle>
-          <MainInfoSubtitle>
-            {storeUniqueCards.length}
-          </MainInfoSubtitle>
+          <MainInfoSubtitle>{storeUniqueCards.length}</MainInfoSubtitle>
         </MainInfo>
         <MainInfo>
           <MainInfoTitle>Bases</MainInfoTitle>
-          <MainInfoSubtitle>{storeDeckBases.length}</MainInfoSubtitle>
+          <MainInfoSubtitle>
+            {storeDeckBases && storeDeckBases.length}
+          </MainInfoSubtitle>
         </MainInfo>
       </MainInfoContainer>
       <StoreMainInfoSocialContainer>
-          <StoreMainInfoSocialImage src="/assets/facebook.png"/>
-          <StoreMainInfoSocialImage src="/assets/instagram.png"/>
+        {storeInfo.contact.facebookLink && <StoreMainInfoSocialImage src="/assets/facebook.png" />}
+        {storeInfo.contact.instagramLink && <StoreMainInfoSocialImage src="/assets/instagram.png" />}
+        
       </StoreMainInfoSocialContainer>
       <MainInfoTitle>Cartas disponibles</MainInfoTitle>
       <StoreMainInfoUniqueCardsContainer>
@@ -71,7 +74,20 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
       </StoreMainInfoUniqueCardsContainer>
       <MainInfoTitle>Bases disponibles</MainInfoTitle>
       <StoreMainInfoUniqueCardsContainer>
-          
+        {storeDeckBases ? (
+          storeDeckBases.map((item) => (
+            <StoreMainInfoCardImage
+              onClick={() => {
+                setDeckBaseInfo(item);
+                setIsVisibleModalBases(true);
+              }}
+              src={item.mainCard}
+              alt={`alt ${item.mainCard}`}
+            />
+          ))
+        ) : (
+          <NoDecksMessage>No hay bases disponibles.</NoDecksMessage>
+        )}
       </StoreMainInfoUniqueCardsContainer>
       {cardInfo && (
         <Modal
@@ -90,6 +106,27 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
             </StoreMainInfoModalCardName>
             <StoreMainInfoModalCardRarity>
               Rareza: {cardInfo.rarityCode}
+            </StoreMainInfoModalCardRarity>
+          </StoreMainInfoModalContainer>
+        </Modal>
+      )}
+
+      {deckBaseInfo && (
+        <Modal
+          isVisible={isVisibleModalBases}
+          onClose={() => setIsVisibleModalBases(false)}
+        >
+          <StoreMainInfoModalContainer>
+            <StoreMainInfoUniqueCardsContainerModal>
+            {deckBaseInfo.deck.map((item) => (
+              <StoreMainInfoCardImage src={item.cardImage} alt={`alt ${item.cardImage}`}/>
+            ))}
+            </StoreMainInfoUniqueCardsContainerModal>
+            <StoreMainInfoModalCardName>
+              Base: {deckBaseInfo.deckName}
+            </StoreMainInfoModalCardName>
+            <StoreMainInfoModalCardRarity>
+              Precio: ${deckBaseInfo.deckPrice}
             </StoreMainInfoModalCardRarity>
           </StoreMainInfoModalContainer>
         </Modal>

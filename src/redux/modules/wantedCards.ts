@@ -35,7 +35,7 @@ export const addToMyWantedCards =
       toast(response.data.message);
       return response.data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -92,6 +92,6 @@ export const hasFoundCard =
       toast(response.data.message);
       return response.data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };

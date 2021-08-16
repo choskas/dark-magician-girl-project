@@ -1,12 +1,16 @@
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllWantedCardsById, selectedCardFunc } from "../../redux/modules/wantedCards";
+import {
+  getAllWantedCardsById,
+  selectedCardFunc,
+} from "../../redux/modules/wantedCards";
 import Link from "next/link";
 import {
   BigTitle,
   ModalImage,
   ModalImageWrapper,
+  NoDecksMessage,
 } from "../../styles/profile/myDecks";
 import {
   CardsWrapper,
@@ -24,7 +28,7 @@ interface SearchedCardsSectionProps {
   cards: any;
 }
 
-const SearchedCardsSection = ({cards}: SearchedCardsSectionProps) => {
+const SearchedCardsSection = ({ cards }: SearchedCardsSectionProps) => {
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const [cardInfo, setCardInfo] = useState(null);
@@ -45,11 +49,9 @@ const SearchedCardsSection = ({cards}: SearchedCardsSectionProps) => {
         <ModalImage src={cardInfo && cardInfo.image} />
       </ModalImageWrapper>
       <ModalFoundByTitle>{cardInfo.name}</ModalFoundByTitle>
-      <ModalFoundByTitle>
-        Estatús: 
-      </ModalFoundByTitle>
+      <ModalFoundByTitle>Estatús:</ModalFoundByTitle>
       <ModalFoundBy>
-      {cardInfo.isFound ? "Encontrada" : "Buscando"}
+        {cardInfo.isFound ? "Encontrada" : "Buscando"}
       </ModalFoundBy>
       {cardInfo.isFound && (
         <>
@@ -57,7 +59,11 @@ const SearchedCardsSection = ({cards}: SearchedCardsSectionProps) => {
           <ModalFoundByContainer>
             {cardInfo.foundBy.map((item) => (
               <Link href={`/storeProfile/${item.foundById}`}>
-                <ModalFoundBy onClick={() => dispatch(selectedCardFunc(cardInfo))}>{item.foundByName} por ${item.price}</ModalFoundBy>
+                <ModalFoundBy
+                  onClick={() => dispatch(selectedCardFunc(cardInfo))}
+                >
+                  {item.foundByName} por ${item.price}
+                </ModalFoundBy>
               </Link>
             ))}
           </ModalFoundByContainer>
@@ -76,26 +82,30 @@ const SearchedCardsSection = ({cards}: SearchedCardsSectionProps) => {
   return (
     <>
       <BigTitle>Mis busquedas</BigTitle>
-      <CardsWrapper>
-        {cards &&
-          cards.map((item) => (
-            <SearchedCardContainer
-              onClick={() => {
-                setCardInfo(item);
-                setIsVisibleModal(true);
-              }}
-              title={item.isFound ? "¡Encontrada!" : "¡Buscando!"}
-            >
-              <SearchedCardImage src={item.image} alt={`alt ${item.image}`} />
-              <SearchedIcon
-                src={
-                  item.isFound ? "/icons/comprobado.png" : "/icons/loupe.png"
-                }
-              />
-            </SearchedCardContainer>
-          ))}
-        {cardInfo && renderModal()}
-      </CardsWrapper>
+      {cards.length !== 0 ? (
+        <CardsWrapper>
+          {cards &&
+            cards.map((item) => (
+              <SearchedCardContainer
+                onClick={() => {
+                  setCardInfo(item);
+                  setIsVisibleModal(true);
+                }}
+                title={item.isFound ? "¡Encontrada!" : "¡Buscando!"}
+              >
+                <SearchedCardImage src={item.image} alt={`alt ${item.image}`} />
+                <SearchedIcon
+                  src={
+                    item.isFound ? "/icons/comprobado.png" : "/icons/loupe.png"
+                  }
+                />
+              </SearchedCardContainer>
+            ))}
+          {cardInfo && renderModal()}
+        </CardsWrapper>
+      ) : (
+        <NoDecksMessage>No tienes busquedas aun.</NoDecksMessage>
+      )}
     </>
   );
 };

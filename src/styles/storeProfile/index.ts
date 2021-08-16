@@ -20,3 +20,8 @@ export const WhatsAppImage = styled.img`
   width: 90%;
   margin: 3px 0;
 `;
+
+export const StoreProfileWrapper = styled.div`
+  border: 2px solid #ef5da8;
+  margin: 10px;
+`;

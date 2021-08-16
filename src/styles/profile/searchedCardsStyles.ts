@@ -11,9 +11,10 @@ export const CardsWrapper = styled.div`
   color: black;
   background: transparent;
   border-radius: 3px;
-  height: 100px;
+  height: auto;
   margin: 5px 20px;
   display: flex;
+  flex-wrap: wrap;
   overflow: auto;
   // Desktop
   @media screen and (min-width: 1000px) {
