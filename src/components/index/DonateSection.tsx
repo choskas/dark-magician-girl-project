@@ -12,7 +12,7 @@ const DonateSection = () => (
                     herramientas para mejorar nuestra experiencia de juego, tu apoyo nos ayudará a que 
                     sigamos inventando herramientas funcionales y divertidas para la comunidad. 
                 </DonationDescription>
-                <DonateButton>Yo si valoro su esfuerzo XD</DonateButton>
+                <DonateButton>Yo sí valoro su esfuerzo XD</DonateButton>
             </DonationTextWrapper>
         </DonateImageText>
     </DonateSectionImage>

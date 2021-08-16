@@ -41,7 +41,7 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
           }
         />
       </ProfileImageContainer>
-      <ProfileTitle>{storeInfo.name ? storeInfo.name : "Unknown"}</ProfileTitle>
+      <ProfileTitle>{storeInfo.storeName ? storeInfo.storeName : "Unknown"}</ProfileTitle>
       <MainInfoContainer>
         <MainInfo>
           <MainInfoTitle>Cartas</MainInfoTitle>

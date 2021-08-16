@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FullScreenLoader from "../../components/common/FullScreenLoader";
@@ -12,6 +13,7 @@ import { StoreProfileWrapper } from "../../styles/storeProfile";
 
 const StoreProfileIndex = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [session, loading] = useSession();
   const storeUniqueCards = useSelector(
     (state: any) => state.storeCards.uniqueCards
@@ -20,13 +22,16 @@ const StoreProfileIndex = () => {
     (state: any) => state.storeCards.deckBases
   );
   const getCards = () => {
-    if (!loading) {
+    if (session) {
       // @ts-ignore
       dispatch(getAllUniqueCardsById({ userId: session.user.id }));
     }
   };
   useEffect(() => {
     getCards();
+    if (!session) {
+      router.push('/')
+    }
   }, [loading]);
   return (
     <>

@@ -21,6 +21,10 @@ const Profile = () => {
   );
   const router = useRouter();
   useEffect(() => {
+    if (!session) {
+      router.push('/')
+      return;
+    }
     if (session) {
       dispatch(getAllUserDecks(session.user.id));
       if (!session.user.role) {
@@ -32,7 +36,7 @@ const Profile = () => {
   }, [session]);
   return (
     <>
-      {!loading && (
+      {session && (
           <>
             <NavBar />
             <ProfileWrapper>
