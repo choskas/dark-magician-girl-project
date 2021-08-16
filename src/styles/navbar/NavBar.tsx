@@ -70,8 +70,10 @@ export const ProfileInfoWrapper = styled.div`
     // desktop
     @media screen and (min-width: 1000px) {
         cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
         display: flex;
         align-items: center;
+        font-size: 18px;
     }
 `;
 
