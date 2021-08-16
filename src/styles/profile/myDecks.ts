@@ -8,6 +8,10 @@ export const ProfileWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 93%;
+      // Desktop
+  @media screen and (min-width: 1000px) {
+    width: 98%;
+  }
 `;
 
 export const DeckWrapper = styled.div`
@@ -29,6 +33,7 @@ export const DeckWrapper = styled.div`
   @media screen and (min-width: 1000px) {
     height: 150px;
     margin: 20px 40px;
+    width: 92%;
   }
 `;
 

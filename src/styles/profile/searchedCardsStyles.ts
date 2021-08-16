@@ -20,6 +20,7 @@ export const CardsWrapper = styled.div`
   @media screen and (min-width: 1000px) {
     height: 150px;
     margin: 20px 40px;
+    width: 92%;
   }
 `;
 
