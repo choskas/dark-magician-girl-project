@@ -31,4 +31,9 @@ export const foundCardSocket = (data) => {
   if (socket) socket.emit("foundCard", data);
 };
 
+export const foundBaseSocket = (data) => {
+  if (socket) socket.emit("foundBase", data);
+};
+
+
 export default socket;

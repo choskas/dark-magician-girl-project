@@ -50,3 +50,7 @@ export const CardInfoButtonWrapper = styled.div`
     width: 98%;
   }
 `;
+
+export const IHaveItButtonContainer = styled.div`
+  display: flex;
+`;

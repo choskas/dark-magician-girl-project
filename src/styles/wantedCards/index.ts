@@ -14,6 +14,13 @@ export const WantedCardsTitle = styled.p`
   font-weight: bolder;
 `;
 
+export const WantedCardsSubtitle = styled.p`
+  padding: 2px 10px;
+  font-size: 24px;
+  font-weight: bolder;
+  margin: 0;
+`;
+
 export const AllWantedCardsWrapper = styled.div`
   padding: 20px 10px;
 `;

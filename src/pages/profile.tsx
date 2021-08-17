@@ -9,6 +9,7 @@ import MyDataSection from "../components/profile/MyDataSection";
 import MyDecksSection from "../components/profile/MyDecksSection";
 import SearchedCardsSection from "../components/profile/SearchedCardsSection";
 import { getAllUserDecks } from "../redux/modules/deck";
+import { addToWantedBases, stopBaseSearch } from "../redux/modules/wantedBases";
 import { ProfileWrapper } from "../styles/profile/myDecks";
 
 const Profile = () => {
@@ -20,9 +21,17 @@ const Profile = () => {
     (state: any) => state.wantedCards.allWantedCardsById
   );
   const router = useRouter();
+  const addAndGetBases = async (id, isWanted) => {
+    if (isWanted) {
+      await dispatch(stopBaseSearch(id));
+    } else {
+      await dispatch(addToWantedBases(id));
+    }
+    await dispatch(getAllUserDecks(session.user.id));
+  };
   useEffect(() => {
     if (!loading && !session) {
-      router.push('/')
+      router.push("/");
       return;
     }
     if (session) {
@@ -37,16 +46,20 @@ const Profile = () => {
   return (
     <>
       {session && (
-          <>
-            <NavBar />
-            <ProfileWrapper>
-              <MyDataSection session={session} cards={cards} decks={decks} />
-              <SearchedCardsSection cards={cards} />
-              <MyDecksSection session={session} decks={decks} />
-            </ProfileWrapper>
-            <Footer />
-          </>
-        )}
+        <>
+          <NavBar />
+          <ProfileWrapper>
+            <MyDataSection session={session} cards={cards} decks={decks} />
+            <SearchedCardsSection cards={cards} />
+            <MyDecksSection
+              addAndGetBases={addAndGetBases}
+              session={session}
+              decks={decks}
+            />
+          </ProfileWrapper>
+          <Footer />
+        </>
+      )}
     </>
   );
 };

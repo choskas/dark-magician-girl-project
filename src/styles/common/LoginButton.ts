@@ -19,6 +19,9 @@ export const LoginButtonContainer = styled.button`
 	&:active{
 		box-shadow: none;
 	}
+  &:disabled{
+    opacity: 0.5;
+  }
 `;
 
 export const LoginButtonImage = styled.img`

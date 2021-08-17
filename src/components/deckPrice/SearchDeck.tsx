@@ -199,7 +199,7 @@ const SearchDeck = () => {
           <Title>
             {session && session.user.role === "store"
               ? "Crea tu base"
-              : "Busqueda de cartas"}
+              : "Busqueda de decks"}
           </Title>
           {session && session.user.role === "store" && (
             <Subtitle>

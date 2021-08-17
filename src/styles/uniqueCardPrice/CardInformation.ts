@@ -270,3 +270,8 @@ export const DrawerImage = styled.img<DrawerImageProps>`
   }
   border: ${({ isActive }) => (isActive ? "2px solid #ef5da8" : "none")};
 `;
+
+export const FindThisBaseButtonContainer = styled.div`
+  width: 315px;
+  display: flex;
+`;

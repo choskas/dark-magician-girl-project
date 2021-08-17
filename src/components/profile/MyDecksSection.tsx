@@ -20,17 +20,21 @@ import {
   CardDescriptionWrapper,
   CardIcon,
   CardName,
+  FindThisBaseButtonContainer,
 } from "../../styles/uniqueCardPrice/CardInformation";
+import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
 
 interface MyDeckSectionProps {
   session: object;
   decks: Array<any>;
+  addAndGetBases: Function;
 }
 
-const MyDecksSection = ({ session, decks }: MyDeckSectionProps) => {
+const MyDecksSection = ({ session, decks, addAndGetBases }: MyDeckSectionProps) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
+
   const renderDecks = () => {
     if (decks.length > 0) {
       return decks.map((item) => (
@@ -81,6 +85,14 @@ const MyDecksSection = ({ session, decks }: MyDeckSectionProps) => {
               )}
             </Modal>
           </DeckWrapper>
+          <FindThisBaseButtonContainer>
+            <LoginButton
+              onClick={() => addAndGetBases({_id: item._id}, item.isWanted)}
+              icon="/icons/loupe.png"
+            >
+              {item.isWanted ? 'Dejar de buscar' : 'Buscar esta base'}
+            </LoginButton>
+          </FindThisBaseButtonContainer>
         </>
       ));
     } else {

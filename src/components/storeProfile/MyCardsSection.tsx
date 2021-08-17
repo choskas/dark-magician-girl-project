@@ -10,6 +10,7 @@ import {
   BigTitle,
   ModalImage,
   ModalImageWrapper,
+  NoDecksMessage,
 } from "../../styles/profile/myDecks";
 import {
   CardsWrapper,
@@ -63,9 +64,9 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
   return (
     <>
       <BigTitle>Cartas</BigTitle>
-      <CardsWrapper>
-        {cards &&
-          cards.map((item) => (
+      {cards.length >= 1 ? (
+        <CardsWrapper>
+          {cards.map((item) => (
             <SearchedCardContainer
               onClick={() => {
                 setCardInfo(item);
@@ -76,8 +77,11 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
               <SearchedCardImage src={item.image} alt={`alt ${item.image}`} />
             </SearchedCardContainer>
           ))}
-        {cardInfo && renderModal()}
-      </CardsWrapper>
+          {cardInfo && renderModal()}
+        </CardsWrapper>
+      ) : (
+        <NoDecksMessage>No tienes ninguna carta.</NoDecksMessage>
+      )}
     </>
   );
 };

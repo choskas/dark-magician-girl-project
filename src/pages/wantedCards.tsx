@@ -5,11 +5,14 @@ import InputText from "../components/common/InputText";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/index/NavBar";
 import AllCardsContainer from "../components/wantedCards/AllCardsContainer";
+import AllWantedBases from "../components/wantedCards/AllWantedBases";
+import { foundBase, getAllWantedBases } from "../redux/modules/wantedBases";
 import { getAllWantedCards, hasFoundCard } from "../redux/modules/wantedCards";
 import {
   AllWantedCardsWrapper,
   SearchWrapper,
   WantedCardsDescription,
+  WantedCardsSubtitle,
   WantedCardsTitle,
 } from "../styles/wantedCards";
 
@@ -19,10 +22,21 @@ const WantedCards = () => {
   const allCards = useSelector(
     (state: any) => state.wantedCards.allWantedCards
   );
-  const foundCard = async (data: { userId: string; rarityCode: string, foundBy: string, foundByName: string }) =>
-    await dispatch(hasFoundCard(data));
+  const allBases = useSelector(
+    (state: any) => state.wantedBases.allWantedBases
+  );
+  const foundCard = async (data: {
+    userId: string;
+    rarityCode: string;
+    foundBy: string;
+    foundByName: string;
+  }) => await dispatch(hasFoundCard(data));
+  const foundBaseFunc = async (data) => {
+    await dispatch(foundBase(data));
+  };
   useEffect(() => {
     dispatch(getAllWantedCards());
+    dispatch(getAllWantedBases());
   }, []);
   return (
     <>
@@ -38,16 +52,32 @@ const WantedCards = () => {
         una carta para obtener mas información.
       </WantedCardsDescription>
       <WantedCardsDescription>
-        Si tienes la carta da click en "¡La tengo!", ponle precio y le informaremos a nuestro
-        usuario.
+        Si tienes la carta da click en "¡La tengo!", ponle precio y le
+        informaremos a nuestro usuario.
       </WantedCardsDescription>
       <SearchWrapper></SearchWrapper>
       <WantedCardsDescription>
-        Actualmentos los usuarios estan buscando {allCards.length} cartas.
+        Actualmentos los usuarios estan buscando {allCards.length} cartas y{" "}
+        {allBases.length} bases.
       </WantedCardsDescription>
+      <WantedCardsSubtitle>Cartas</WantedCardsSubtitle>
       {allCards && (
         <AllWantedCardsWrapper>
-          <AllCardsContainer session={session} foundCard={foundCard} allCards={allCards} />
+          <AllCardsContainer
+            session={session}
+            foundCard={foundCard}
+            allCards={allCards}
+          />
+        </AllWantedCardsWrapper>
+      )}
+      <WantedCardsSubtitle>Bases</WantedCardsSubtitle>
+      {allBases && (
+        <AllWantedCardsWrapper>
+          <AllWantedBases
+            foundBaseFunc={foundBaseFunc}
+            session={session}
+            allBases={allBases}
+          />
         </AllWantedCardsWrapper>
       )}
       <Footer />
