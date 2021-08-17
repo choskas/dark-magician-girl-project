@@ -37,9 +37,22 @@ export const DeckWrapper = styled.div`
   }
 `;
 
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+export const DeletButton = styled.img`
+  width: 20px;
+`;
+
+export const DeleteContainer = styled.div`
+  margin-right: 15px;
 `;
 
 export const Title = styled.p`
@@ -85,6 +98,12 @@ export const DeckPrice = styled.span`
     font-size: 24px;
     margin: 15px 15px;
   }
+`;
+
+export const BigTitleContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 20px 0 0 0;
 `;
 
 export const BigTitle = styled.p`

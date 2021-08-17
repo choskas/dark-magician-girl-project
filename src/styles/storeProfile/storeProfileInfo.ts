@@ -65,6 +65,9 @@ export const StoreMainInfoSocialContainer = styled.div`
     width: 87%;
 `;
 
+export const StoreMainInfoSocialLink = styled.a`    
+`;
+
 export const StoreMainInfoSocialImage = styled.img`
     width: 25px;
     cursor: pointer;

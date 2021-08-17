@@ -19,6 +19,7 @@ import {
   StoreProfileInfoContainer,
   ProfileTitle,
   StoreMainInfoUniqueCardsContainerModal,
+  StoreMainInfoSocialLink,
 } from "../../styles/storeProfile/storeProfileInfo";
 import Modal from "../common/Modal";
 interface StoreProfileInfoProps {
@@ -41,7 +42,9 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
           }
         />
       </ProfileImageContainer>
-      <ProfileTitle>{storeInfo.storeName ? storeInfo.storeName : "Unknown"}</ProfileTitle>
+      <ProfileTitle>
+        {storeInfo.storeName ? storeInfo.storeName : "Unknown"}
+      </ProfileTitle>
       <MainInfoContainer>
         <MainInfo>
           <MainInfoTitle>Cartas</MainInfoTitle>
@@ -55,9 +58,16 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
         </MainInfo>
       </MainInfoContainer>
       <StoreMainInfoSocialContainer>
-        {storeInfo.contact.facebookLink && <StoreMainInfoSocialImage src="/assets/facebook.png" />}
-        {storeInfo.contact.instagramLink && <StoreMainInfoSocialImage src="/assets/instagram.png" />}
-        
+        {storeInfo.contact.facebookLink && (
+          <StoreMainInfoSocialLink target="_blank" href={storeInfo.contact.facebookLink}>
+            <StoreMainInfoSocialImage src="/assets/facebook.png" />
+          </StoreMainInfoSocialLink>
+        )}
+        {storeInfo.contact.instagramLink && (
+          <StoreMainInfoSocialLink target="_blank" href={storeInfo.contact.instagramLink}>
+            <StoreMainInfoSocialImage src="/assets/instagram.png" />
+          </StoreMainInfoSocialLink>
+        )}
       </StoreMainInfoSocialContainer>
       <MainInfoTitle>Cartas disponibles</MainInfoTitle>
       <StoreMainInfoUniqueCardsContainer>
@@ -118,9 +128,12 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
         >
           <StoreMainInfoModalContainer>
             <StoreMainInfoUniqueCardsContainerModal>
-            {deckBaseInfo.deck.map((item) => (
-              <StoreMainInfoCardImage src={item.cardImage} alt={`alt ${item.cardImage}`}/>
-            ))}
+              {deckBaseInfo.deck.map((item) => (
+                <StoreMainInfoCardImage
+                  src={item.cardImage}
+                  alt={`alt ${item.cardImage}`}
+                />
+              ))}
             </StoreMainInfoUniqueCardsContainerModal>
             <StoreMainInfoModalCardName>
               Base: {deckBaseInfo.deckName}

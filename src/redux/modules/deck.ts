@@ -49,6 +49,7 @@ export const createDeck = (data: any) => async (dispatch: Dispatch<any>) => {
 		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/create`, data)
 		toast(response.data.message)
 	} catch (error) {
+		toast.error(error.response.data.message);
 		console.log(error);
 	}
 }
@@ -56,6 +57,15 @@ export const createDeck = (data: any) => async (dispatch: Dispatch<any>) => {
 export const createDeckBase = (data: any) => async (dispatch: Dispatch<any>) => {
 	try {
 		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/createDeckBase`, data)
+		toast(response.data.message)
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export const deleteDeck = (data: any) => async (dispatch: Dispatch<any>) => {
+	try {
+		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/deleteDeck`, data)
 		toast(response.data.message)
 	} catch (error) {
 		console.log(error);

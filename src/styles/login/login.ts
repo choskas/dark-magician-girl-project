@@ -38,9 +38,9 @@ export const LoginWrapper = styled.div`
 
 export const TitleContainer = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
     margin: 0px 0;
 `;
 

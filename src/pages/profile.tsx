@@ -8,7 +8,7 @@ import NavBar from "../components/index/NavBar";
 import MyDataSection from "../components/profile/MyDataSection";
 import MyDecksSection from "../components/profile/MyDecksSection";
 import SearchedCardsSection from "../components/profile/SearchedCardsSection";
-import { getAllUserDecks } from "../redux/modules/deck";
+import { deleteDeck, getAllUserDecks } from "../redux/modules/deck";
 import { addToWantedBases, stopBaseSearch } from "../redux/modules/wantedBases";
 import { ProfileWrapper } from "../styles/profile/myDecks";
 
@@ -29,6 +29,10 @@ const Profile = () => {
     }
     await dispatch(getAllUserDecks(session.user.id));
   };
+  const deleteAndGetDecks = async (data) => {
+    await dispatch(deleteDeck(data));
+    await dispatch(getAllUserDecks(session.user.id));
+  }
   useEffect(() => {
     if (!loading && !session) {
       router.push("/");
@@ -52,6 +56,8 @@ const Profile = () => {
             <MyDataSection session={session} cards={cards} decks={decks} />
             <SearchedCardsSection cards={cards} />
             <MyDecksSection
+              deleteAndGetDecks={deleteAndGetDecks}
+              router={router}
               addAndGetBases={addAndGetBases}
               session={session}
               decks={decks}

@@ -229,6 +229,7 @@ export const SetPrice = styled.div`
 export const DrawerText = styled.p`
   font-family: "Montserrat", sans-serif;
   font-weight: bolder;
+  padding: 20px 0 0 0;
 `;
 
 export const SelectContainer = styled.div`
@@ -274,4 +275,31 @@ export const DrawerImage = styled.img<DrawerImageProps>`
 export const FindThisBaseButtonContainer = styled.div`
   width: 315px;
   display: flex;
+  margin: 5px 0;
+`;
+
+export const FoundBaseText = styled.p`
+  margin: 5px 0;
+  font-size: 12px;
+  padding: 0 10px;
+  text-align: justify;
+`;
+
+export const StoresDrawerText = styled.p`
+  margin: 2px 0;
+  font-size: 16px;
+  color: #ef5da8;
+`;
+
+export const StoresDrawerLink = styled.a`
+  font-size: 16px;
+  color: #ef5da8;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export const MyDeckSectionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;

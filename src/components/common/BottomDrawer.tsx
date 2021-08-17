@@ -1,17 +1,24 @@
 import { ReactNode } from "react";
-import { DrawerWrapper } from "../../styles/common/BottomDrawer";
+import {
+  CloseIconDrawer,
+  DrawerWrapper,
+} from "../../styles/common/BottomDrawer";
 
 interface BottomDrawerProps {
-    isOpen: boolean;
-    children: ReactNode;
+  isOpen: boolean;
+  children: ReactNode;
+  onClose?: Function;
 }
 
-const BottomDrawer = ({isOpen, children} : BottomDrawerProps) => {
-    return (
-        <DrawerWrapper isOpen={isOpen}>
-            {children}
-        </DrawerWrapper>
-    )
-}
+const BottomDrawer = ({ isOpen, children, onClose }: BottomDrawerProps) => {
+  return (
+    <DrawerWrapper isOpen={isOpen}>
+      {onClose && (
+        <CloseIconDrawer onClick={() => onClose()} src="/assets/Close.png" />
+      )}
+      {children}
+    </DrawerWrapper>
+  );
+};
 
 export default BottomDrawer;
