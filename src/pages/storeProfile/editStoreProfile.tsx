@@ -70,6 +70,9 @@ const EditStoreProfile = () => {
       setInstagramLink(session.user.contact.instagramLink);
       setTwitterLink(session.user.contact.twitterLink);
       setWhatsapp(session.user.contact.phoneNumber);
+      if (session.user.role !== 'store')  {
+          router.push('/');
+      }
     }
   }, [session]);
 
