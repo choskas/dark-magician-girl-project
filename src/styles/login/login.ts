@@ -44,6 +44,16 @@ export const TitleContainer = styled.div`
     margin: 0px 0;
 `;
 
+export const TitleContainerLogin = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    margin: 0px 0;
+    align-items: center;
+`;
+
+
 export const TitleLogin = styled.img`
     margin: 5px 0;
     width: 190px;

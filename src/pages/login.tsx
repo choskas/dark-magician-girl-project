@@ -16,6 +16,7 @@ import {
   SubtitleLogin,
   TextLogin,
   TitleContainer,
+  TitleContainerLogin,
   TitleLogin,
 } from "../styles/login/login";
 import { useRouter } from "next/router";
@@ -43,10 +44,10 @@ const Login = () => {
                 <LoginImage />
               </LoginImageContainer>
               <LoginFormContainer>
-                <TitleContainer>
+                <TitleContainerLogin>
                   <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
                   <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
-                </TitleContainer>
+                </TitleContainerLogin>
                 <InputsWrapper>
                   Las contraseñas ya no son tan seguras, olvidate de anotarlas
                   en un papel o recordarlas, no te preocupes tu cuenta sera
