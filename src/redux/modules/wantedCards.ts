@@ -95,3 +95,17 @@ export const hasFoundCard =
       toast.error(error.response.data.message);
     }
   };
+
+  // deleteWantedCard
+  export const deleteWantedCard = (data: any) => async (dispatch: Dispatch<any>) => {
+    try {
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/wantedCards/deleteWantedCard`,
+        data
+      );
+      toast(response.data.message)
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };

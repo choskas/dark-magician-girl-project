@@ -1,13 +1,16 @@
+// @ts-nocheck
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
+  deleteWantedCard,
   getAllWantedCardsById,
   selectedCardFunc,
 } from "../../redux/modules/wantedCards";
 import Link from "next/link";
 import {
   BigTitle,
+  ModalContainerUniqueCard,
   ModalImage,
   ModalImageWrapper,
   NoDecksMessage,
@@ -23,6 +26,7 @@ import {
   SearchedIcon,
 } from "../../styles/profile/searchedCardsStyles";
 import Modal from "../common/Modal";
+import LoginButton from "../common/LoginButton";
 
 interface SearchedCardsSectionProps {
   cards: any;
@@ -37,6 +41,12 @@ const SearchedCardsSection = ({ cards }: SearchedCardsSectionProps) => {
     await dispatch(getAllWantedCardsById(id));
   };
 
+  const deleteCardFunc = async (data: any) => {
+    await dispatch(deleteWantedCard(data));
+    setIsVisibleModal(false);
+    await getCardsById({ userId: session.user.id });
+  };
+
   const renderModal = () => (
     <Modal
       isVisible={isVisibleModal}
@@ -45,36 +55,47 @@ const SearchedCardsSection = ({ cards }: SearchedCardsSectionProps) => {
         setIsVisibleModal(false);
       }}
     >
-      <ModalImageWrapper>
-        <ModalImage src={cardInfo && cardInfo.image} />
-      </ModalImageWrapper>
-      <ModalFoundByTitle>{cardInfo.name}</ModalFoundByTitle>
-      <ModalFoundByTitle>Estatús:</ModalFoundByTitle>
-      <ModalFoundBy>
-        {cardInfo.isFound ? "Encontrada" : "Buscando"}
-      </ModalFoundBy>
-      {cardInfo.isFound && (
-        <>
-          <ModalFoundByTitle>Encontrada por:</ModalFoundByTitle>
-          <ModalFoundByContainer>
-            {cardInfo.foundBy.map((item) => (
-              <Link href={`/storeProfile/${item.foundById}`}>
-                <ModalFoundBy
-                  onClick={() => dispatch(selectedCardFunc(cardInfo))}
-                >
-                  {item.foundByName} por ${item.price}
-                </ModalFoundBy>
-              </Link>
-            ))}
-          </ModalFoundByContainer>
-        </>
-      )}
+      <ModalContainerUniqueCard>
+        <ModalImageWrapper>
+          <ModalImage src={cardInfo && cardInfo.image} />
+        </ModalImageWrapper>
+        <ModalFoundByTitle>{cardInfo.name}</ModalFoundByTitle>
+        <ModalFoundByTitle>Estatús:</ModalFoundByTitle>
+        <ModalFoundBy>
+          {cardInfo.isFound ? "Encontrada" : "Buscando"}
+        </ModalFoundBy>
+        {cardInfo.isFound && (
+          <>
+            <ModalFoundByTitle>Encontrada por:</ModalFoundByTitle>
+            <ModalFoundByContainer>
+              {cardInfo.foundBy.map((item) => (
+                <Link href={`/storeProfile/${item.foundById}`}>
+                  <ModalFoundBy
+                    onClick={() => dispatch(selectedCardFunc(cardInfo))}
+                  >
+                    {item.foundByName} por ${item.price}
+                  </ModalFoundBy>
+                </Link>
+              ))}
+            </ModalFoundByContainer>
+          </>
+        )}
+        <LoginButton
+          onClick={() =>
+            deleteCardFunc({
+              userId: session.user.id,
+              rarityCode: cardInfo.rarityCode,
+            })
+          }
+        >
+          Borrar carta
+        </LoginButton>
+      </ModalContainerUniqueCard>
     </Modal>
   );
 
   useEffect(() => {
     if (session) {
-      // @ts-ignore
       getCardsById({ userId: session.user.id });
     }
   }, [session]);

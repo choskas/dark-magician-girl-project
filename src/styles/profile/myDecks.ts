@@ -172,6 +172,12 @@ export const ModalWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const ModalContainerUniqueCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const ModalImageWrapper = styled.div`
   display: flex;
   flex-direction: row;

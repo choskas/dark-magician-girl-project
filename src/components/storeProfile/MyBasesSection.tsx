@@ -1,4 +1,8 @@
 import { useState } from "react";
+import {
+  deleteDeckBase,
+  getAllUniqueCardsById,
+} from "../../redux/modules/storeCards";
 import { BigTitle, NoDecksMessage } from "../../styles/profile/myDecks";
 import { CardsWrapper } from "../../styles/profile/searchedCardsStyles";
 import {
@@ -9,12 +13,17 @@ import {
   StoreMainInfoUniqueCardsContainer,
   StoreMainInfoUniqueCardsContainerModal,
 } from "../../styles/storeProfile/storeProfileInfo";
+import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
 
-const MyBasesSection = ({ decks }) => {
+const MyBasesSection = ({ decks, dispatch, session }) => {
   const [deckBaseInfo, setDeckBaseInfo] = useState(null);
   const [isVisibleModalBases, setIsVisibleModalBases] = useState(false);
-
+  const deleteBaseFunc = (data) => {
+    dispatch(deleteDeckBase(data));
+    dispatch(getAllUniqueCardsById({ userId: session.user.id }));
+    setIsVisibleModalBases(false);
+  };
   return (
     <>
       <BigTitle>Mis bases</BigTitle>
@@ -54,6 +63,16 @@ const MyBasesSection = ({ decks }) => {
                 <StoreMainInfoModalCardRarity>
                   Precio: ${deckBaseInfo.deckPrice}
                 </StoreMainInfoModalCardRarity>
+                <LoginButton
+                  onClick={() =>
+                    deleteBaseFunc({
+                      userId: session.user.id,
+                      deckId: deckBaseInfo.deckId,
+                    })
+                  }
+                >
+                  Borrar base
+                </LoginButton>
               </StoreMainInfoModalContainer>
             </Modal>
           )}

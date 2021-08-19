@@ -78,5 +78,5 @@ export const ModalFoundBy = styled.p`
   text-decoration: none;
   font-size: 16px;
   text-align: center;
-  margin: 2px 0;
+  margin: 8px 0;
 `;

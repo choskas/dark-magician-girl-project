@@ -424,6 +424,7 @@ const SearchDeck = () => {
                   mainCard: myDeck[0].card_images[0].image_url,
                 }))
                 setIsOpenDrawer(false);
+                router.push('/storeProfile');
                 return true;
               } else {
                 toast.error('Ambos campos son obligatorios')

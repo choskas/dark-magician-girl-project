@@ -45,7 +45,7 @@ const StoreProfileIndex = () => {
               session={session}
             />
             <MyCardsSection cards={storeUniqueCards} />
-            <MyBasesSection decks={storeDeckBases}/>
+            <MyBasesSection session={session} dispatch={dispatch} decks={storeDeckBases}/>
           </StoreProfileWrapper>
           <Footer />
         </>

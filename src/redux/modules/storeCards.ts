@@ -65,3 +65,15 @@ export const deleteUniqueCard = (data: any) => async (dispatch: Dispatch<any>) =
     console.log(error);
   }
 };
+
+export const deleteDeckBase = (id) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/deleteDeckBase`, id
+    );
+    toast(response.data.message)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

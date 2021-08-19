@@ -95,6 +95,9 @@ export const StoreMainInfoUniqueCardsContainerModal = styled.div`
     padding: 10px;
     width: 87%;
     overflow-y: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const StoreMainInfoCardImage = styled.img`
@@ -108,6 +111,7 @@ export const StoreMainInfoModalContainer = styled.div`
     flex-direction: column;
     color: #fff;
     text-align: center;
+    align-items: center;
 `;
 
 export const StoreMainInfoModalImageContainer = styled.div`
