@@ -9,7 +9,7 @@ const Footer = () => (
                 <FooterIcon src="/assets/instagram.png" />
             </FooterIconWrapper>
                 <FooterTitle>
-                    YugiCards!
+                    Cards Seeker!
                 </FooterTitle>
                 <FooterSubtitle>
                     By Choskas & Migueluck

@@ -53,7 +53,7 @@ const NavBar = () => {
   return (
     <Wrapper>
       <Link href="/">
-        <LinkTo>YugiCards!</LinkTo>
+        <LinkTo>Cards Seeker!</LinkTo>
       </Link>
 
       <HaamburgerImage

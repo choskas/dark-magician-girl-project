@@ -47,7 +47,8 @@ export const WitchcraftImageDesk = styled.img`
 export const FooterTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin: auto 0 5px 18%;
+    margin: 0 5px 18%;
+    padding-top: 120px;
 `;
 
 export const FooterIconWrapper = styled.div`

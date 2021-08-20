@@ -45,7 +45,7 @@ const Login = () => {
               </LoginImageContainer>
               <LoginFormContainer>
                 <TitleContainerLogin>
-                  <TitleLogin src="/assets/LogoLogin.png"></TitleLogin>
+                  <TitleLogin>Cards Seeker!</TitleLogin>
                   <SubtitleLogin>Cotizador de cartas</SubtitleLogin>
                 </TitleContainerLogin>
                 <InputsWrapper>
@@ -84,7 +84,7 @@ const Login = () => {
                   >
                     Login with facebook
                   </LoginButton>
-                  <LoginButton
+                  {/* <LoginButton
                     icon="/assets/discordIcon.png"
                     onClick={async () => {
                       try {
@@ -97,7 +97,7 @@ const Login = () => {
                     }}
                   >
                     Login with Discord
-                  </LoginButton>
+                  </LoginButton> */}
                   <LoginButton
                     icon="/assets/twitchIcon.png"
                     onClick={async () => {
