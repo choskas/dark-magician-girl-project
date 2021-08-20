@@ -83,3 +83,8 @@ export const FooterSubtitle = styled.p`
     font-size: 12px;
     text-align: center;
 `;
+
+export const FooterPrivacyLink = styled.p`
+    font-size: 10px;
+    margin: 0;
+`;
