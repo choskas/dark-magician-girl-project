@@ -20,7 +20,7 @@ import {
   SwitchDiv,
   Title,
 } from "../../styles/deckPrice/deckPrice";
-import { ButtonContainer, StartButton } from "../../styles/index/MainPage";
+import { ButtonContainer, CardFrame, StartButton } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
 import FullScreenLoader from "../common/FullScreenLoader";
@@ -35,6 +35,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToMyDeck, createDeck, createDeckBase } from "../../redux/modules/deck";
 import BottomDrawer from "../common/BottomDrawer";
 import { toast } from "react-toastify";
+import NavBar from "../index/NavBar";
+import Footer from "../Footer/Footer";
 
 const ItemTypes = {
   CARD: "card",
@@ -191,6 +193,9 @@ const SearchDeck = () => {
   }, [searchCardValue]);
 
   return (
+    <>
+    <NavBar />
+    <CardFrame />
     <SearchDeckWrapper>
       {allCards.length <= 10000 ? (
         <FullScreenLoader />
@@ -480,6 +485,8 @@ const SearchDeck = () => {
         </ButtonsWrapper>
       </BottomDrawer>
     </SearchDeckWrapper>
+    <Footer />
+    </>
   );
 };
 

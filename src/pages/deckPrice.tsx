@@ -5,10 +5,7 @@ import { CardFrame } from "../styles/index/MainPage";
 
 const DeckPrice = () => (
     <>
-    <NavBar />
-    <CardFrame />
     <SearchDeck />
-    <Footer />
     </>
 );
 
