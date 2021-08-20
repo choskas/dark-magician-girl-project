@@ -29,7 +29,6 @@ const NavBar = () => {
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/storeProfile/editStoreProfile')}>Editar información</CollapseOption> : <></> }
         <CollapseOption onClick={() => router.push('/deckPrice')}>{session && session.user.role === 'store' ? 'Arma tu base' : 'Arma tu deck' } </CollapseOption>
         <CollapseOption onClick={() => {
-          
           disconnectSocket();
           signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB 
           })}}>Salir</CollapseOption>
