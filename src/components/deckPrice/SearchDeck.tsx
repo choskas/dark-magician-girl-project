@@ -20,10 +20,9 @@ import {
   SwitchDiv,
   Title,
 } from "../../styles/deckPrice/deckPrice";
-import { ButtonContainer, CardFrame, StartButton } from "../../styles/index/MainPage";
+import { ButtonContainer, StartButton } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
-import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
 import {
@@ -35,8 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToMyDeck, createDeck, createDeckBase } from "../../redux/modules/deck";
 import BottomDrawer from "../common/BottomDrawer";
 import { toast } from "react-toastify";
-import NavBar from "../index/NavBar";
-import Footer from "../Footer/Footer";
+import LittleLoader from "../common/LittleLoader";
 
 const ItemTypes = {
   CARD: "card",
@@ -191,15 +189,9 @@ const SearchDeck = () => {
   useEffect(() => {
     searchCard(searchCardValue);
   }, [searchCardValue]);
-
+  console.log(allCards.length)
   return (
-    <>
-    <NavBar />
-    <CardFrame />
     <SearchDeckWrapper>
-      {allCards.length <= 10000 ? (
-        <FullScreenLoader />
-      ) : (
         <>
           <Title>
             {session && session.user.role === "store"
@@ -216,7 +208,9 @@ const SearchDeck = () => {
             Busca tus cartas por nombre o por código, si búscas tus cartas por
             código el precio que se mostrará será el más aproximado a esa carta.
           </Subtitle>
-          <SwitchDiv>
+          {allCards.length <= 11000 ? (<LittleLoader />): (
+            <>
+                      <SwitchDiv>
             <Switch
               onText="Name"
               offText="Code"
@@ -262,6 +256,9 @@ const SearchDeck = () => {
               </SearchInputWrapper>
             )}
           </SearchBothInputWrapper>
+            </>
+          )}
+
           <DesktopSeparator />
           <Separator />
           <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>
@@ -361,7 +358,6 @@ const SearchDeck = () => {
             </MyDeckWrapper>
           </SearchAndMyDeckWrapper>
         </>
-      )}
       <BottomDrawer isOpen={isOpenDrawer}>
         <SmallText>* Tu primera carta será tu carta principal</SmallText>
         <SaveDeckInputs>
@@ -485,8 +481,6 @@ const SearchDeck = () => {
         </ButtonsWrapper>
       </BottomDrawer>
     </SearchDeckWrapper>
-    <Footer />
-    </>
   );
 };
 
