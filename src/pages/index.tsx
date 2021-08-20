@@ -6,7 +6,6 @@ import WhatToDoSection from "../components/index/WhatToDoSection";
 import { CardFrame } from "../styles/index/MainPage";
 
 const HomePage = () => {
-  
   return (
     <>
       <NavBar />
