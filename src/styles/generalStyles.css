@@ -40,6 +40,11 @@ body {
   justify-content: center;
 }
 
+#loader-text {
+  text-align: center;
+  color: #ef5da8;
+}
+
 #loader .image-stack{
   width: 100px;
   height: 150px;

@@ -1,4 +1,5 @@
 const LittleLoader = () => (
+    <>
   <div
     id="loader"
     style={{
@@ -15,7 +16,10 @@ const LittleLoader = () => (
       <img className="img-3" src="/assets/darkMagicianGirlChibiLoader.png" />
       <img className="img-4" src="/assets/darkMagicianGirlLoader2.png" />
     </div>
+            
   </div>
+  <p id="loader-text">Cargando cartas...</p>
+  </>
 );
 
 export default LittleLoader;
