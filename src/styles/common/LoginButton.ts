@@ -30,7 +30,7 @@ export const LoginButtonImage = styled.img`
         top: 45px;
     }
     cursor: pointer;
-    top: 35px;
+    top: 45px;
     position: relative;
     left: -150px;
     width: 25px;

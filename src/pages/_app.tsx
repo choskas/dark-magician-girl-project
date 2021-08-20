@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <ProviderAuth session={pageProps.session}>
         <DndProvider backend={HTML5Backend}>
           <Head>
-            <title>YugiCards</title>
+            <title>Cards Seeker</title>
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1.0"

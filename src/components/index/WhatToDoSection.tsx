@@ -7,21 +7,21 @@ const WhatToDoSection = () => (
             <Dot />
             <DotTitle>Busca!</DotTitle>
         </TitleDotContainer>
-        <DotSubtitle>¡Da de alta tu Deck ideal en <MarkWord fontSize='32px'>YugiCards!</MarkWord> </DotSubtitle>
+        <DotSubtitle>¡Da de alta tu Deck ideal en <MarkWord fontSize='32px'>Cards Seeker!</MarkWord> </DotSubtitle>
         </TitleDotWrapper>
         <TitleDotWrapper>
         <TitleDotContainer>
             <Dot />
             <DotTitle>Compara!</DotTitle>
         </TitleDotContainer>
-        <DotSubtitle width="90%">Compara los precios de las cartas que has dado de alta en <MarkWord fontSize='32px'>YugiCards!</MarkWord> </DotSubtitle>
+        <DotSubtitle width="90%">Compara los precios de las cartas que has dado de alta en <MarkWord fontSize='32px'>Cards Seeker!</MarkWord> </DotSubtitle>
         </TitleDotWrapper>
         <TitleDotWrapper>
         <TitleDotContainer>
             <Dot />
             <DotTitle>Selecciona!</DotTitle>
         </TitleDotContainer>
-        <DotSubtitle width="90%">Escoge tu mejor opción para comprar tus cartas favoritas usando <MarkWord fontSize='32px'>YugiCards!</MarkWord> </DotSubtitle>
+        <DotSubtitle width="90%">Escoge tu mejor opción para comprar tus cartas favoritas usando <MarkWord fontSize='32px'>Cards Seeker!</MarkWord> </DotSubtitle>
         </TitleDotWrapper>
     </SectionTwoImage>
 );

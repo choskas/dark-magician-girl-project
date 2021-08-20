@@ -58,6 +58,7 @@ const SearchDeck = () => {
   const [deckName, setDeckName] = useState("");
   const [deckType, setDeckType] = useState("");
   const [deckPrice, setDeckPrice] = useState(null);
+  const [finishCardsLoading, setFinishCardsLoading] = useState(false);
   const [session, loading] = useSession();
 
   const router = useRouter();
@@ -74,6 +75,7 @@ const SearchDeck = () => {
         return item.name;
       });
       setAllCardsName(onlyNames);
+      setFinishCardsLoading(true);
     } catch (error) {
       console.log(error);
       router.push("/");
@@ -193,7 +195,6 @@ const SearchDeck = () => {
   useEffect(() => {
     searchCard(searchCardValue);
   }, [searchCardValue]);
-  console.log(allCards.length);
   return (
     <SearchDeckWrapper>
       <>
@@ -212,7 +213,7 @@ const SearchDeck = () => {
           Busca tus cartas por nombre o por código, si búscas tus cartas por
           código el precio que se mostrará será el más aproximado a esa carta.
         </Subtitle>
-        {allCards.length <= 11000 ? (
+        {!finishCardsLoading ? (
           <LittleLoader />
         ) : (
           <>
