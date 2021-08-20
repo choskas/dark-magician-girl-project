@@ -59,6 +59,7 @@ export const createDeckBase = (data: any) => async (dispatch: Dispatch<any>) => 
 		const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deck/createDeckBase`, data)
 		toast(response.data.message)
 	} catch (error) {
+		
 		console.log(error);
 	}
 }
