@@ -23,7 +23,6 @@ import {
 import { ButtonContainer, StartButton } from "../../styles/index/MainPage";
 import Card from "./Card";
 import InputText from "../common/InputText";
-import FullScreenLoader from "../common/FullScreenLoader";
 import Switch from "../../components/common/Switch";
 import { useRouter } from "next/router";
 import {
@@ -32,9 +31,14 @@ import {
   Separator,
 } from "../../styles/common/Separtor";
 import { useDispatch, useSelector } from "react-redux";
-import { addToMyDeck, createDeck, createDeckBase } from "../../redux/modules/deck";
+import {
+  addToMyDeck,
+  createDeck,
+  createDeckBase,
+} from "../../redux/modules/deck";
 import BottomDrawer from "../common/BottomDrawer";
 import { toast } from "react-toastify";
+import LittleLoader from "../common/LittleLoader";
 
 const ItemTypes = {
   CARD: "card",
@@ -189,188 +193,196 @@ const SearchDeck = () => {
   useEffect(() => {
     searchCard(searchCardValue);
   }, [searchCardValue]);
-
+  console.log(allCards.length);
   return (
     <SearchDeckWrapper>
-      {allCards.length <= 10000 ? (
-        <FullScreenLoader />
-      ) : (
-        <>
-          <Title>
-            {session && session.user.role === "store"
-              ? "Crea tu base"
-              : "Busqueda de decks"}
-          </Title>
-          {session && session.user.role === "store" && (
-            <Subtitle>
-              Crea tus bases, puedes basarte en nuestro precio aproximado para
-              darle un precio.
-            </Subtitle>
-          )}
+      <>
+        <Title>
+          {session && session.user.role === "store"
+            ? "Crea tu base"
+            : "Busqueda de decks"}
+        </Title>
+        {session && session.user.role === "store" && (
           <Subtitle>
-            Busca tus cartas por nombre o por código, si búscas tus cartas por
-            código el precio que se mostrará será el más aproximado a esa carta.
+            Crea tus bases, puedes basarte en nuestro precio aproximado para
+            darle un precio.
           </Subtitle>
-          <SwitchDiv>
-            <Switch
-              onText="Name"
-              offText="Code"
-              onImage="/assets/Card.png"
-              offImage="/assets/Code.png"
-              isActive={searchByCode}
-              onClick={() => setSearchByCode(!searchByCode)}
-            />
-          </SwitchDiv>
-          <SearchBothInputWrapper>
-            {!searchByCode ? (
-              <SearchInputWrapper>
-                <InputText
-                  onKeyPress={() => {}}
-                  onClickListValue={() => {}}
-                  autoCompleteValues={allCardsName}
-                  placeholder="Búsqueda por nombre"
-                  value={searchCardValue}
-                  setValue={setSearchCardValue}
-                  icon="/assets/Search.png"
-                  onChange={(
-                    _e: ChangeEvent<HTMLInputElement>,
-                    value: string
-                  ) => {
-                    searchCard(value);
-                    setSearchCardValue(value);
-                  }}
-                />
-              </SearchInputWrapper>
-            ) : (
-              <SearchInputWrapper>
-                <InputText
-                  onKeyPress={() => {}}
-                  placeholder="Búsqueda por código"
-                  icon="/assets/Search.png"
-                  onChange={(
-                    _e: ChangeEvent<HTMLInputElement>,
-                    value: string
-                  ) => {
-                    searchCardByCode(value);
-                  }}
-                />
-              </SearchInputWrapper>
-            )}
-          </SearchBothInputWrapper>
-          <DesktopSeparator />
-          <Separator />
-          <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>
-          <SearchAndMyDeckWrapper>
-            <AllCardsWrapper>
-              {foundCards &&
-                foundCards.map((item: any) => (
-                  <Card
-                    item={item}
-                    onTouchCard={() => {
-                      setMyDeck((myDeck) => [
-                        ...myDeck,
-                        {
-                          id: item.id,
-                          name: item.name,
-                          level: item.level,
-                          race: item.race,
-                          archetype: item.archetype,
-                          attribute: item.attribute,
-                          atk: item.atk,
-                          def: item.def,
-                          desc: item.desc,
-                          type: item.type,
-                          cardPrices: item.card_prices,
-                          card_images: item.card_images,
-                          setCode: cardByCodeInfo && cardByCodeInfo.set_code,
-                          setName: cardByCodeInfo && cardByCodeInfo.set_name,
-                          setPrice: cardByCodeInfo.set_price
-                            ? cardByCodeInfo.set_price
-                            : item.card_prices[0].tcgplayer_price,
-                          setRarity:
-                            cardByCodeInfo && cardByCodeInfo.set_rarity,
-                        },
-                      ]);
+        )}
+        <Subtitle>
+          Busca tus cartas por nombre o por código, si búscas tus cartas por
+          código el precio que se mostrará será el más aproximado a esa carta.
+        </Subtitle>
+        {allCards.length <= 11000 ? (
+          <LittleLoader />
+        ) : (
+          <>
+            <SwitchDiv>
+              <Switch
+                onText="Name"
+                offText="Code"
+                onImage="/assets/Card.png"
+                offImage="/assets/Code.png"
+                isActive={searchByCode}
+                onClick={() => setSearchByCode(!searchByCode)}
+              />
+            </SwitchDiv>
+            <SearchBothInputWrapper>
+              {!searchByCode ? (
+                <SearchInputWrapper>
+                  <InputText
+                    onKeyPress={() => {}}
+                    onClickListValue={() => {}}
+                    autoCompleteValues={allCardsName}
+                    placeholder="Búsqueda por nombre"
+                    value={searchCardValue}
+                    setValue={setSearchCardValue}
+                    icon="/assets/Search.png"
+                    onChange={(
+                      _e: ChangeEvent<HTMLInputElement>,
+                      value: string
+                    ) => {
+                      searchCard(value);
+                      setSearchCardValue(value);
                     }}
-                    isEditable={false}
-                    foundCards={foundCards}
-                    name={item.name}
-                    image={item.card_images[0].image_url_small}
                   />
-                ))}
-            </AllCardsWrapper>
+                </SearchInputWrapper>
+              ) : (
+                <SearchInputWrapper>
+                  <InputText
+                    onKeyPress={() => {}}
+                    placeholder="Búsqueda por código"
+                    icon="/assets/Search.png"
+                    onChange={(
+                      _e: ChangeEvent<HTMLInputElement>,
+                      value: string
+                    ) => {
+                      searchCardByCode(value);
+                    }}
+                  />
+                </SearchInputWrapper>
+              )}
+            </SearchBothInputWrapper>
+            <DesktopSeparator />
             <Separator />
-            <DesktopVerticalSeparator />
-            <MyDeckWrapper ref={drop}>
-              <MyDeckPriceWrapper>
-                <Subtitle>
-                  {session && session.user.role === "store" ? "Mi base" : "Mi Deck"}
-                </Subtitle>
-                <Price>
-                  ${totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2)} dls
-                </Price>
-              </MyDeckPriceWrapper>
-              <DeckWrapper>
-                {myDeck &&
-                  myDeck.map((item: any, index) => (
+            <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>
+            <SearchAndMyDeckWrapper>
+              <AllCardsWrapper>
+                {foundCards &&
+                  foundCards.map((item: any) => (
                     <Card
-                      index={index}
-                      onTouchCard={() => {}}
                       item={item}
-                      isClickedDelete={isClickedDelete}
-                      setIsClickedDelete={setIsClickedDelete}
-                      isEditable={true}
+                      onTouchCard={() => {
+                        setMyDeck((myDeck) => [
+                          ...myDeck,
+                          {
+                            id: item.id,
+                            name: item.name,
+                            level: item.level,
+                            race: item.race,
+                            archetype: item.archetype,
+                            attribute: item.attribute,
+                            atk: item.atk,
+                            def: item.def,
+                            desc: item.desc,
+                            type: item.type,
+                            cardPrices: item.card_prices,
+                            card_images: item.card_images,
+                            setCode: cardByCodeInfo && cardByCodeInfo.set_code,
+                            setName: cardByCodeInfo && cardByCodeInfo.set_name,
+                            setPrice: cardByCodeInfo.set_price
+                              ? cardByCodeInfo.set_price
+                              : item.card_prices[0].tcgplayer_price,
+                            setRarity:
+                              cardByCodeInfo && cardByCodeInfo.set_rarity,
+                          },
+                        ]);
+                      }}
+                      isEditable={false}
                       foundCards={foundCards}
                       name={item.name}
-                      image={item.image || item.card_images[0].image_url_small}
-                      onClickDelete={(index) => {
-                        const array = myDeck;
-                        array.splice(index, 1);
-                        setMyDeck(array);
-                        const arrayPrice = totalDeckPrice;
-                        arrayPrice.splice(index, 1);
-                        setTotalDeckPrice(arrayPrice);
-                      }}
+                      image={item.card_images[0].image_url_small}
                     />
                   ))}
-              </DeckWrapper>
-              <ButtonContainer>
-                {myDeck.length >= 1 && (
-                  <StartButton
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (!session && session) {
-                        router.push("/login");
-                        dispatch(addToMyDeck({ myDeck }));
-                      } else {
-                        setIsOpenDrawer(!isOpenDrawer);
-                      }
-                    }}
-                  >
+              </AllCardsWrapper>
+              <Separator />
+              <DesktopVerticalSeparator />
+              <MyDeckWrapper ref={drop}>
+                <MyDeckPriceWrapper>
+                  <Subtitle>
                     {session && session.user.role === "store"
-                      ? "Guardar base"
-                      : "Guardar deck"}
-                  </StartButton>
-                )}
-              </ButtonContainer>
-            </MyDeckWrapper>
-          </SearchAndMyDeckWrapper>
-        </>
-      )}
+                      ? "Mi base"
+                      : "Mi Deck"}
+                  </Subtitle>
+                  <Price>
+                    ${totalDeckPrice.reduce((a, b) => a + b, 0).toFixed(2)} dls
+                  </Price>
+                </MyDeckPriceWrapper>
+                <DeckWrapper>
+                  {myDeck &&
+                    myDeck.map((item: any, index) => (
+                      <Card
+                        index={index}
+                        onTouchCard={() => {}}
+                        item={item}
+                        isClickedDelete={isClickedDelete}
+                        setIsClickedDelete={setIsClickedDelete}
+                        isEditable={true}
+                        foundCards={foundCards}
+                        name={item.name}
+                        image={
+                          item.image || item.card_images[0].image_url_small
+                        }
+                        onClickDelete={(index) => {
+                          const array = myDeck;
+                          array.splice(index, 1);
+                          setMyDeck(array);
+                          const arrayPrice = totalDeckPrice;
+                          arrayPrice.splice(index, 1);
+                          setTotalDeckPrice(arrayPrice);
+                        }}
+                      />
+                    ))}
+                </DeckWrapper>
+                <ButtonContainer>
+                  {myDeck.length >= 1 && (
+                    <StartButton
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (!session && session) {
+                          router.push("/login");
+                          dispatch(addToMyDeck({ myDeck }));
+                        } else {
+                          setIsOpenDrawer(!isOpenDrawer);
+                        }
+                      }}
+                    >
+                      {session && session.user.role === "store"
+                        ? "Guardar base"
+                        : "Guardar deck"}
+                    </StartButton>
+                  )}
+                </ButtonContainer>
+              </MyDeckWrapper>
+            </SearchAndMyDeckWrapper>
+          </>
+        )}
+      </>
       <BottomDrawer isOpen={isOpenDrawer}>
         <SmallText>* Tu primera carta será tu carta principal</SmallText>
         <SaveDeckInputs>
           <InputText
             onKeyPress={() => {}}
             placeholder={
-              session && session.user.role === 'store' ? "Nombre de la base" : "Nombre del deck"
+              session && session.user.role === "store"
+                ? "Nombre de la base"
+                : "Nombre del deck"
             }
             value={deckName}
             onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
               setDeckName(value);
             }}
           />
-          {session && session.user.role === 'store' ? (
+          {session && session.user.role === "store" ? (
             <InputText
               onKeyPress={() => {}}
               placeholder="Precio del deck"
@@ -394,43 +406,45 @@ const SearchDeck = () => {
         <ButtonsWrapper>
           <StartButton
             onClick={async () => {
-              if (session.user.role === 'store') {
+              if (session.user.role === "store") {
                 if (deckPrice && deckName) {
-                await dispatch(createDeckBase({
-                  userId: session.user.id,
-                  email: session.user.email,
-                  deckName, 
-                  deckPrice, 
-                  deck: myDeck.map((item) => {
-                    return {
-                      id: item.id,
-                      name: item.name,
-                      type: item.type,
-                      desc: item.desc,
-                      atk: item.atk,
-                      def: item.def,
-                      level: item.level,
-                      race: item.race,
-                      attribute: item.attribute,
-                      archetype: item.archetype,
-                      cardImageSmall: item.card_images[0].image_url_small,
-                      cardImage: item.card_images[0].image_url,
-                      setCode: item.setCode && item.setCode,
-                      setName: item.setName && item.setName,
-                      setPrice: item.setPrice && item.setPrice,
-                      setRarity: item.setRarity && item.setRarity,
-                    };
-                  }), 
-                  mainCard: myDeck[0].card_images[0].image_url,
-                }))
-                setIsOpenDrawer(false);
-                router.push('/storeProfile');
-                return true;
-              } else {
-                toast.error('Ambos campos son obligatorios')
-                return false;
+                  await dispatch(
+                    createDeckBase({
+                      userId: session.user.id,
+                      email: session.user.email,
+                      deckName,
+                      deckPrice,
+                      deck: myDeck.map((item) => {
+                        return {
+                          id: item.id,
+                          name: item.name,
+                          type: item.type,
+                          desc: item.desc,
+                          atk: item.atk,
+                          def: item.def,
+                          level: item.level,
+                          race: item.race,
+                          attribute: item.attribute,
+                          archetype: item.archetype,
+                          cardImageSmall: item.card_images[0].image_url_small,
+                          cardImage: item.card_images[0].image_url,
+                          setCode: item.setCode && item.setCode,
+                          setName: item.setName && item.setName,
+                          setPrice: item.setPrice && item.setPrice,
+                          setRarity: item.setRarity && item.setRarity,
+                        };
+                      }),
+                      mainCard: myDeck[0].card_images[0].image_url,
+                    })
+                  );
+                  setIsOpenDrawer(false);
+                  router.push("/storeProfile");
+                  return true;
+                } else {
+                  toast.error("Ambos campos son obligatorios");
+                  return false;
+                }
               }
-              } 
               if (deckName && deckType && myDeck) {
                 await dispatch(
                   createDeck({
