@@ -13,7 +13,6 @@ import {
   WitchcraftTextWrapper,
 } from "../../styles/footer/Footer";
 
-
 const Footer = () => (
   <FooterStyle background="/assets/WitchcrafterCreationPink.png">
     <WitchcraftTextWrapper>
