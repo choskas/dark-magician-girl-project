@@ -144,11 +144,15 @@ export const Card = styled.img`
   }
 `;
 
+export const GoToText = styled.p`
+  color: #ef5da8;
+  font-size: 18px;
+  text-align: center;
+`;
+
 export const NoDecksMessage = styled.p`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
-  padding-left: 10px;
-  padding-right: 10px;
   font-size: 18px;
   margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
   background: pink;
@@ -159,7 +163,7 @@ export const NoDecksMessage = styled.p`
   transition: transform 120ms ease-in;
   font-weight: bold;
   line-height: 1.2;
-  margin: 10px 21%;
+  text-align: center;
   // Desktop
   @media screen and (min-width: 1000px) {
     font-size: 34px;

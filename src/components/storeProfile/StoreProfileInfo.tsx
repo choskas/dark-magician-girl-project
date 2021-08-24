@@ -117,6 +117,9 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
             <StoreMainInfoModalCardRarity>
               Rareza: {cardInfo.rarityCode}
             </StoreMainInfoModalCardRarity>
+            <StoreMainInfoModalCardRarity>
+              Precio: ${cardInfo.price}
+            </StoreMainInfoModalCardRarity>
           </StoreMainInfoModalContainer>
         </Modal>
       )}

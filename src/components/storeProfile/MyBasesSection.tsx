@@ -1,9 +1,14 @@
+import Link from "next/link";
 import { useState } from "react";
 import {
   deleteDeckBase,
   getAllUniqueCardsById,
 } from "../../redux/modules/storeCards";
-import { BigTitle, NoDecksMessage } from "../../styles/profile/myDecks";
+import {
+  BigTitle,
+  GoToText,
+  NoDecksMessage,
+} from "../../styles/profile/myDecks";
 import { CardsWrapper } from "../../styles/profile/searchedCardsStyles";
 import {
   StoreMainInfoCardImage,
@@ -78,7 +83,12 @@ const MyBasesSection = ({ decks, dispatch, session }) => {
           )}
         </CardsWrapper>
       ) : (
-        <NoDecksMessage>No tienes bases.</NoDecksMessage>
+        <>
+          <NoDecksMessage>No tienes bases.</NoDecksMessage>
+          <Link href="/deckPrice">
+            <GoToText>Ir a crear base.</GoToText>
+          </Link>
+        </>
       )}
     </>
   );

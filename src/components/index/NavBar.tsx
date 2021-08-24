@@ -25,6 +25,7 @@ const NavBar = () => {
       <>
         <CollapseOption onClick={() => session && session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
         <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
+        <CollapseOption onClick={() => router.push('/onSale')}>Ahora en venta</CollapseOption>
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/storeProfile/editStoreProfile')}>Editar información</CollapseOption> : <></> }
         <CollapseOption onClick={() => router.push('/deckPrice')}>{session && session.user.role === 'store' ? 'Arma tu base' : 'Arma tu deck' } </CollapseOption>
@@ -36,7 +37,6 @@ const NavBar = () => {
     ) : (
       <>
         <CollapseOption onClick={() => router.push('/login')}> Acceder </CollapseOption>
-        <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>¿Cuánto cuesta esta carta?</CollapseOption>
         <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
       </>
     );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { deleteDeck } from "../../redux/modules/deck";
 import { TitleContainer } from "../../styles/login/login";
@@ -15,6 +16,7 @@ import {
   NoDecksMessage,
   Title,
   TitleWrapper,
+  GoToText,
 } from "../../styles/profile/myDecks";
 import {
   CardArchetype,
@@ -60,14 +62,17 @@ const MyDecksSection = ({
     if (decks.length > 0) {
       return decks.map((item) => (
         <>
-        <TitleContainer>
-          <TitleWrapper>
-            <Title>{item.deckName}</Title>
-            <DeckPrice>${item.deckPrice}</DeckPrice>
-          </TitleWrapper>
-          <DeleteContainer>
-            <DeletButton src="/assets/Close.png" onClick={() => deleteAndGetDecks({_id: item._id})} />
-          </DeleteContainer>
+          <TitleContainer>
+            <TitleWrapper>
+              <Title>{item.deckName}</Title>
+              <DeckPrice>${item.deckPrice}</DeckPrice>
+            </TitleWrapper>
+            <DeleteContainer>
+              <DeletButton
+                src="/assets/Close.png"
+                onClick={() => deleteAndGetDecks({ _id: item._id })}
+              />
+            </DeleteContainer>
           </TitleContainer>
           <DeckWrapper>
             {item.deck.map((card) => (
@@ -120,7 +125,8 @@ const MyDecksSection = ({
               </FoundBaseText>
               <FindThisBaseButtonContainer>
                 <LoginButton
-                  onClick={() => {setIsOpenStoresDrawer(!isOpenStoresDrawer);
+                  onClick={() => {
+                    setIsOpenStoresDrawer(!isOpenStoresDrawer);
                     setStoreInfo(item.foundBy);
                   }}
                 >
@@ -139,30 +145,40 @@ const MyDecksSection = ({
         </>
       ));
     } else {
-      return <NoDecksMessage>No tienes decks aun.</NoDecksMessage>;
+      return (
+        <>
+          <NoDecksMessage>No tienes decks aun.</NoDecksMessage>
+          <Link href="/deckPrice">
+            <GoToText>Ir a crear Deck</GoToText>
+          </Link>
+        </>
+      );
     }
   };
   return (
     <MyDeckSectionContainer>
       <BigTitleContainer>
-      <BigTitle>Mis Decks</BigTitle>
+        <BigTitle>Mis Decks</BigTitle>
       </BigTitleContainer>
       {renderDecks()}
-      <BottomDrawer isOpen={isOpenStoresDrawer} onClose={() => setIsOpenStoresDrawer(false)}>
-          <DrawerText>
-            Estas tiendas han encontrado tu deck, da click en su nombre para
-            obtener mas informaciñon de contacto:{" "}
-          </DrawerText>
-          {storeInfo.map((store) => (
-            <StoresDrawerText>
-              Tienda:{' '}
-              <StoresDrawerLink href={`/storeProfile/${store.foundById}`}>
-                {store.foundByName}
-              </StoresDrawerLink> {' '}
-              por ${store.price}
-            </StoresDrawerText>
-          ))}
-        </BottomDrawer>
+      <BottomDrawer
+        isOpen={isOpenStoresDrawer}
+        onClose={() => setIsOpenStoresDrawer(false)}
+      >
+        <DrawerText>
+          Estas tiendas han encontrado tu deck, da click en su nombre para
+          obtener mas informaciñon de contacto:{" "}
+        </DrawerText>
+        {storeInfo.map((store) => (
+          <StoresDrawerText>
+            Tienda:{" "}
+            <StoresDrawerLink href={`/storeProfile/${store.foundById}`}>
+              {store.foundByName}
+            </StoresDrawerLink>{" "}
+            por ${store.price}
+          </StoresDrawerText>
+        ))}
+      </BottomDrawer>
     </MyDeckSectionContainer>
   );
 };

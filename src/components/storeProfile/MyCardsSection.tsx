@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import {
   BigTitle,
+  GoToText,
   ModalContainerUniqueCard,
   ModalImage,
   ModalImageWrapper,
@@ -104,7 +105,12 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
           {cardInfo && renderModal()}
         </CardsWrapper>
       ) : (
-        <NoDecksMessage>No tienes ninguna carta.</NoDecksMessage>
+        <>
+          <NoDecksMessage>No tienes ninguna carta.</NoDecksMessage>
+          <Link href="/uniqueCardPrice">
+            <GoToText>Agrega una carta ahora.</GoToText>
+          </Link>
+        </>
       )}
     </>
   );

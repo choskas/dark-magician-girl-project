@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import {
   BigTitle,
+  GoToText,
   ModalContainerUniqueCard,
   ModalImage,
   ModalImageWrapper,
@@ -125,7 +126,12 @@ const SearchedCardsSection = ({ cards }: SearchedCardsSectionProps) => {
           {cardInfo && renderModal()}
         </CardsWrapper>
       ) : (
-        <NoDecksMessage>No tienes busquedas aun.</NoDecksMessage>
+        <>
+          <NoDecksMessage>No tienes busquedas aun.</NoDecksMessage>
+          <Link href="/uniqueCardPrice">
+            <GoToText>Ir a busqueda de carta.</GoToText>
+          </Link>
+        </>
       )}
     </>
   );

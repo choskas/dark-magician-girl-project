@@ -4,10 +4,12 @@ import { toast } from "react-toastify";
 
 const STORE_UNIQUE_CARDS = "yugi/store/STORE_UNIQUE_CARDS";
 const STORE_DECK_BASES = "yugi/store/STORE_DECK_BASES";
+const STORE_DECKS_AND_CARDS = "yugi/store/STORE_DECKS_AND_CARDS";
 
 const INITIAL_STATE = {
   uniqueCards: [],
   deckBases: [],
+  allStoresDecksAndCards: [],
 };
 
 export default function storeCards(state = INITIAL_STATE, action: AnyAction) {
@@ -15,7 +17,9 @@ export default function storeCards(state = INITIAL_STATE, action: AnyAction) {
     case STORE_UNIQUE_CARDS:
       return { ...state, uniqueCards: action.payload };
     case STORE_DECK_BASES:
-      return { ...state, deckBases: action.payload}
+      return { ...state, deckBases: action.payload};
+      case STORE_DECKS_AND_CARDS:
+        return { ...state, allStoresDecksAndCards: action.payload}
     default:
       return state;
   }
@@ -72,6 +76,22 @@ export const deleteDeckBase = (id) => async (dispatch: Dispatch<any>) => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/deleteDeckBase`, id
     );
     toast(response.data.message)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// getAllStoresDecksAndCards
+
+export const getAllStoreAndDecksCards = () => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/getAllStoresDecksAndCards`);
+    dispatch({
+      type: STORE_DECKS_AND_CARDS,
+      payload: response.data.stores,
+    })
     return response.data;
   } catch (error) {
     console.log(error);
