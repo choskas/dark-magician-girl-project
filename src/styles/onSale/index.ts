@@ -34,7 +34,7 @@ export const OnSaleCardSubtitle = styled.span`
 
 export const OnSaleCardText = styled.p`
     font-size: 12px;
-    margin: 2px 0 0 0;
+    margin: 3px 0 0 0;
 `;
 
 export const OnSaleGoToText = styled.p`
