@@ -104,6 +104,22 @@ export const StoreMainInfoCardImage = styled.img`
     width: 75px;
     height: 100px;
     margin: 10px;
+    cursor: pointer;
+    @media screen and (min-width: 1000px) {
+        width: 80px;
+        height: 120px;
+    }
+`;
+
+export const StoreMainInfoRarityCode = styled.p`
+    font-size: 18px;
+    color: #ef5da8;
+    margin: 0 0 0 0;
+`;
+
+export const StoreMainInfoImageAndCodeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 export const StoreMainInfoModalContainer = styled.div`

@@ -20,6 +20,8 @@ import {
   ProfileTitle,
   StoreMainInfoUniqueCardsContainerModal,
   StoreMainInfoSocialLink,
+  StoreMainInfoRarityCode,
+  StoreMainInfoImageAndCodeContainer,
 } from "../../styles/storeProfile/storeProfileInfo";
 import Modal from "../common/Modal";
 interface StoreProfileInfoProps {
@@ -59,12 +61,18 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
       </MainInfoContainer>
       <StoreMainInfoSocialContainer>
         {storeInfo.contact.facebookLink && (
-          <StoreMainInfoSocialLink target="_blank" href={storeInfo.contact.facebookLink}>
+          <StoreMainInfoSocialLink
+            target="_blank"
+            href={storeInfo.contact.facebookLink}
+          >
             <StoreMainInfoSocialImage src="/assets/facebook.png" />
           </StoreMainInfoSocialLink>
         )}
         {storeInfo.contact.instagramLink && (
-          <StoreMainInfoSocialLink target="_blank" href={storeInfo.contact.instagramLink}>
+          <StoreMainInfoSocialLink
+            target="_blank"
+            href={storeInfo.contact.instagramLink}
+          >
             <StoreMainInfoSocialImage src="/assets/instagram.png" />
           </StoreMainInfoSocialLink>
         )}
@@ -132,10 +140,17 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
           <StoreMainInfoModalContainer>
             <StoreMainInfoUniqueCardsContainerModal>
               {deckBaseInfo.deck.map((item) => (
-                <StoreMainInfoCardImage
-                  src={item.cardImage}
-                  alt={`alt ${item.cardImage}`}
-                />
+                <StoreMainInfoImageAndCodeContainer>
+                  <StoreMainInfoCardImage
+                    src={item.cardImage}
+                    alt={`alt ${item.cardImage}`}
+                  />
+                  {item.setCode && (
+                    <StoreMainInfoRarityCode>
+                      {item.setCode}
+                    </StoreMainInfoRarityCode>
+                  )}
+                </StoreMainInfoImageAndCodeContainer>
               ))}
             </StoreMainInfoUniqueCardsContainerModal>
             <StoreMainInfoModalCardName>

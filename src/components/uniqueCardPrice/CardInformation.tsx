@@ -44,11 +44,13 @@ import Select from "../common/Select";
 interface CardInformationProps {
   cardInfo: any;
   session: any;
+  isOpenDrawer: boolean;
+  setIsOpenDrawer: Function;
 }
 
-const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
+const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: CardInformationProps) => {
   const dispatch = useDispatch();
-  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
   const [selectedRarity, setSelectedRarity] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [cardPrice, setCardPrice] = useState(null);
@@ -134,7 +136,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
       )}
       {cardInfo && (
         <BottomDrawer isOpen={isOpenDrawer}>
-          <DrawerText> Selecciona el tipo de carta que quieres </DrawerText>
+          <DrawerText> Selecciona el tipo de carta que {session.user.role === 'store' ? 'tienes' : 'quieres' } </DrawerText>
           <SelectContainer>
             <Select
               placeholder="Rareza"
@@ -234,7 +236,7 @@ const CardInformation = ({ cardInfo, session }: CardInformationProps) => {
                   setCardImages(newArr);
                   setSelectedImage(null);
                   setSelectedRarity("");
-                  setCardPrice(null);
+                  setCardPrice("");
                   setIsOpenDrawer(!isOpenDrawer);
                 } else {
                   if (session.user.role === 'store') {

@@ -31,6 +31,7 @@ export const SearchedCardContainer = styled.div`
   border: 1px solid #ef5da8;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   // Desktop
   @media screen and (min-width: 1000px) {
     height: 100px;

@@ -11,7 +11,14 @@ import {
   OnSaleTextWrapper,
   OnSaleWrapper,
 } from "../../styles/onSale";
-import { StoreMainInfoCardImage, StoreMainInfoModalCardRarity, StoreMainInfoModalContainer, StoreMainInfoUniqueCardsContainerModal } from "../../styles/storeProfile/storeProfileInfo";
+import {
+  StoreMainInfoCardImage,
+  StoreMainInfoImageAndCodeContainer,
+  StoreMainInfoModalCardRarity,
+  StoreMainInfoModalContainer,
+  StoreMainInfoRarityCode,
+  StoreMainInfoUniqueCardsContainerModal,
+} from "../../styles/storeProfile/storeProfileInfo";
 import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
@@ -28,7 +35,7 @@ interface SecondTabOnSaleProps {
   setStoreId: Function;
   searchDeck: Function;
   router: {
-      push: Function
+    push: Function;
   };
 }
 
@@ -57,62 +64,64 @@ const SecondTabOnSale = ({
           searchDeck(value);
         }}
       />
-          </SearchInputWrapper>
-      <OnSaleWrapper>
-        {allDecks.map((item) => {
-          return item.decksBases.map((deck) => (
-            <OnSaleCardWrapper>
-              <OnSaleCardImage src={deck.mainCard} />
-              <OnSaleTextWrapper>
-                <OnSaleCardText>
-                  <OnSaleCardSubtitle>Base: </OnSaleCardSubtitle>
-                  {deck.deckName}
-                </OnSaleCardText>
-                <OnSaleGoToText
-                  onClick={() => {
-                    setSelectedDeck(deck);
-                    setIsVisibleModal(true);
-                    setStoreId(item.userId)
-                  }}
-                >
-                  Ver cartas incluidas
-                </OnSaleGoToText>
-              </OnSaleTextWrapper>
-            </OnSaleCardWrapper>
-          ));
-        })}
-              </OnSaleWrapper>
-        <Modal
-          onClose={() => {
-            setIsVisibleModal(false);
-            setSelectedDeck(null);
-          }}
-          isVisible={isVisibleModal}
-        >
-            {selectedDeck && (
-                <StoreMainInfoModalContainer>
-                <StoreMainInfoUniqueCardsContainerModal>
-                  {selectedDeck.deck.map((item) => (
-                    <StoreMainInfoCardImage
-                      src={item.cardImage}
-                      alt={`alt ${item.cardImage}`}
-                    />
-                  ))}
-                </StoreMainInfoUniqueCardsContainerModal>
-                <StoreMainInfoModalCardRarity>
-                  Precio: ${selectedDeck.deckPrice}
-                </StoreMainInfoModalCardRarity>
-                <LoginButton
-                  onClick={() => router.push(`/storeProfile/${storeId}`)
-                    
-                  }
-                >
-                  Ir a tienda
-                </LoginButton>
-              </StoreMainInfoModalContainer>
-            )}
-                    
-            </Modal>
+    </SearchInputWrapper>
+    <OnSaleWrapper>
+      {allDecks.map((item) => {
+        return item.decksBases.map((deck) => (
+          <OnSaleCardWrapper>
+            <OnSaleCardImage src={deck.mainCard} />
+            <OnSaleTextWrapper>
+              <OnSaleCardText>
+                <OnSaleCardSubtitle>Base: </OnSaleCardSubtitle>
+                {deck.deckName}
+              </OnSaleCardText>
+              <OnSaleGoToText
+                onClick={() => {
+                  setSelectedDeck(deck);
+                  setIsVisibleModal(true);
+                  setStoreId(item.userId);
+                }}
+              >
+                Ver cartas incluidas
+              </OnSaleGoToText>
+            </OnSaleTextWrapper>
+          </OnSaleCardWrapper>
+        ));
+      })}
+    </OnSaleWrapper>
+    <Modal
+      onClose={() => {
+        setIsVisibleModal(false);
+        setSelectedDeck(null);
+      }}
+      isVisible={isVisibleModal}
+    >
+      {selectedDeck && (
+        <StoreMainInfoModalContainer>
+          <StoreMainInfoUniqueCardsContainerModal>
+            {selectedDeck.deck.map((item) => (
+              <StoreMainInfoImageAndCodeContainer>
+                <StoreMainInfoCardImage
+                  src={item.cardImage}
+                  alt={`alt ${item.cardImage}`}
+                />
+                {item.setCode && (
+                  <StoreMainInfoRarityCode>
+                    {item.setCode}
+                  </StoreMainInfoRarityCode>
+                )}
+              </StoreMainInfoImageAndCodeContainer>
+            ))}
+          </StoreMainInfoUniqueCardsContainerModal>
+          <StoreMainInfoModalCardRarity>
+            Precio: ${selectedDeck.deckPrice}
+          </StoreMainInfoModalCardRarity>
+          <LoginButton onClick={() => router.push(`/storeProfile/${storeId}`)}>
+            Ir a tienda
+          </LoginButton>
+        </StoreMainInfoModalContainer>
+      )}
+    </Modal>
   </>
 );
 

@@ -20,6 +20,7 @@ const UniqueCardPrice = () => {
   const [allCards, setAllCards] = useState([]);
   const [allCardsName, setAllCardsName] = useState([]);
   const [cardInfo, setCardInfo] = useState(null);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const getAllCards = async () => {
     try {
       const response = await axios.get(
@@ -61,10 +62,11 @@ const UniqueCardPrice = () => {
                 placeholder="Busquéda"
                 onChange={(e, value) => {
                   setSearchValue(value);
+                  setIsOpenDrawer(false);
                 }}
               />
             </InputTextWrapper>
-            <CardInformation session={session} cardInfo={cardInfo} />
+            <CardInformation isOpenDrawer={isOpenDrawer} setIsOpenDrawer={setIsOpenDrawer} session={session} cardInfo={cardInfo} />
             {!cardInfo && session && (
               <>
                 {session.user.role === "client" ? (

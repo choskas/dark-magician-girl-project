@@ -12,9 +12,11 @@ import {
 import { CardsWrapper } from "../../styles/profile/searchedCardsStyles";
 import {
   StoreMainInfoCardImage,
+  StoreMainInfoImageAndCodeContainer,
   StoreMainInfoModalCardName,
   StoreMainInfoModalCardRarity,
   StoreMainInfoModalContainer,
+  StoreMainInfoRarityCode,
   StoreMainInfoUniqueCardsContainer,
   StoreMainInfoUniqueCardsContainerModal,
 } from "../../styles/storeProfile/storeProfileInfo";
@@ -56,10 +58,17 @@ const MyBasesSection = ({ decks, dispatch, session }) => {
               <StoreMainInfoModalContainer>
                 <StoreMainInfoUniqueCardsContainerModal>
                   {deckBaseInfo.deck.map((item) => (
-                    <StoreMainInfoCardImage
-                      src={item.cardImage}
-                      alt={`alt ${item.cardImage}`}
-                    />
+                    <StoreMainInfoImageAndCodeContainer>
+                      <StoreMainInfoCardImage
+                        src={item.cardImage}
+                        alt={`alt ${item.cardImage}`}
+                      />
+                      {item.setCode && (
+                        <StoreMainInfoRarityCode>
+                          {item.setCode}
+                        </StoreMainInfoRarityCode>
+                      )}
+                    </StoreMainInfoImageAndCodeContainer>
                   ))}
                 </StoreMainInfoUniqueCardsContainerModal>
                 <StoreMainInfoModalCardName>

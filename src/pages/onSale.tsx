@@ -16,8 +16,8 @@ const OnSale = () => {
   const [allDecks, setAllDecks] = useState([]);
   const [allUniqueCards, setAllUniqueCards] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
-  const [searchCardValue, setSearchCardValue] = useState(null);
-  const [searchDeckValue, setSearchDeckValue] = useState(null);
+  const [searchCardValue, setSearchCardValue] = useState('');
+  const [searchDeckValue, setSearchDeckValue] = useState('');
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [storeId, setStoreId] = useState(null);
   const allStoreDecksAndCards = useSelector(
