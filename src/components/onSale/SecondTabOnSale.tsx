@@ -18,14 +18,15 @@ import Modal from "../common/Modal";
 
 interface SecondTabOnSaleProps {
   allDecks: Array<any>;
-  searchCardValue: string | null;
-  setSearchCardValue: Function;
+  searchDeckValue: string | null;
+  setSearchDeckValue: Function;
   selectedDeck: any;
   setSelectedDeck: Function;
   isVisibleModal: boolean;
   setIsVisibleModal: Function;
   storeId: null | string;
   setStoreId: Function;
+  searchDeck: Function;
   router: {
       push: Function
   };
@@ -33,12 +34,13 @@ interface SecondTabOnSaleProps {
 
 const SecondTabOnSale = ({
   allDecks,
-  searchCardValue,
-  setSearchCardValue,
+  searchDeckValue,
+  setSearchDeckValue,
   selectedDeck,
   setSelectedDeck,
   isVisibleModal,
   setIsVisibleModal,
+  searchDeck,
   router,
   storeId,
   setStoreId,
@@ -49,17 +51,16 @@ const SecondTabOnSale = ({
         onKeyPress={() => {}}
         onClickListValue={() => {}}
         placeholder="Búsqueda de bases"
-        value={searchCardValue}
+        value={searchDeckValue}
         icon="/assets/Search.png"
         onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
-          setSearchCardValue(value);
+          searchDeck(value);
         }}
       />
           </SearchInputWrapper>
-          {console.log(selectedDeck)}
       <OnSaleWrapper>
         {allDecks.map((item) => {
-          return item.deckBases.map((deck) => (
+          return item.decksBases.map((deck) => (
             <OnSaleCardWrapper>
               <OnSaleCardImage src={deck.mainCard} />
               <OnSaleTextWrapper>

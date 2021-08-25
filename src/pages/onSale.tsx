@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LittleLoader from "../components/common/LittleLoader";
 import TabPanel from "../components/common/TabPanel";
+import SearchDeck from "../components/deckPrice/SearchDeck";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/index/NavBar";
 import FirstTabOnSale from "../components/onSale/FirstTabOnSale";
@@ -16,6 +17,7 @@ const OnSale = () => {
   const [allUniqueCards, setAllUniqueCards] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [searchCardValue, setSearchCardValue] = useState(null);
+  const [searchDeckValue, setSearchDeckValue] = useState(null);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [storeId, setStoreId] = useState(null);
   const allStoreDecksAndCards = useSelector(
@@ -25,7 +27,7 @@ const OnSale = () => {
     const getAllDecks = allStoreDecksAndCards.map((item) => {
       return {
         userId: item.userId,
-        deckBases: item.decksBases,
+        decksBases: item.decksBases,
       };
     });
     setAllDecks(getAllDecks);
@@ -62,6 +64,33 @@ const OnSale = () => {
       setAllUniqueCards(uniqueCards);
     }
   };
+
+  const searchDeck = (value: string) => {
+    const deckCards = allStoreDecksAndCards.map((item) => {
+      return {
+        userId: item.userId,
+        decksBases: item.decksBases,
+      };
+    });
+    if (value.length > 3) {
+      const card = deckCards.map((item: any) => {
+        const deckCardsItem = item.decksBases.filter((card) => {
+          if (card.deckName.toLowerCase().includes(value.toLowerCase())) {
+            return item;
+          }
+        });
+        return {
+          decksBases: deckCardsItem,
+          userId: item.userId,
+        };
+      });
+      setAllDecks(card);
+    }
+    if (value.length < 3) {
+      setAllDecks(deckCards);
+    }
+  };
+
   useEffect(() => {
     dispatch(getAllStoreAndDecksCards());
   }, []);
@@ -85,8 +114,9 @@ const OnSale = () => {
           }
           secondTabContent={
             <SecondTabOnSale
-              searchCardValue={searchCardValue}
-              setSearchCardValue={setSearchCardValue}
+              searchDeck={searchDeck}
+              searchDeckValue={searchDeckValue}
+              setSearchDeckValue={setSearchDeckValue}
               allDecks={allDecks}
               selectedDeck={selectedDeck}
               setSelectedDeck={setSelectedDeck}
