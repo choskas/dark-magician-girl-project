@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }: AppProps) => (
             />
             <meta
               name="description"
-              content="El mejor lugar para buscar tus cartas coleccionables, a precios diferentes"
+              content="¡Cotizar tu deck nunca fue tan facil! El mejor lugar para buscar tus cartas coleccionables, a precios diferentes"
             ></meta>
             <link rel="shortcut icon" href="/icons/favicon.ico" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />

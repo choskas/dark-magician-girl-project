@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -50,7 +51,7 @@ interface CardInformationProps {
 
 const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: CardInformationProps) => {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const [selectedRarity, setSelectedRarity] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [cardPrice, setCardPrice] = useState(null);
@@ -80,8 +81,14 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
         </CardImageWrapper>
         {cardInfo && (
           <IWantItButtonWrapper>
-            <LoginButton onClick={() => setIsOpenDrawer(!isOpenDrawer)}>
-              {session.user.role === "client" ? "!La quiero!" : "¡La tengo!"}
+            <LoginButton onClick={() => {
+              if (!session){
+                router.push('/login')
+                return
+              }
+              setIsOpenDrawer(!isOpenDrawer)
+            }}>
+              {session && session.user.role === "store" ? "!La tengo!" : "¡La quiero!"}
             </LoginButton>
           </IWantItButtonWrapper>
         )}
@@ -109,12 +116,13 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
             </CardDescriptionWrapper>
             <SetsContainer>
               <SetsTitle>Sets y precios</SetsTitle>
+              {console.log(cardInfo.card_sets, 'ialo')}
               <SetWrapper>
                 {cardInfo.card_sets.map((item, key) => (
                   <>
                     <SetName key={key}>{item.set_name}</SetName>
                     <SetCodePriceWrapper>
-                      <SetCode>{item.set_code}</SetCode>
+                      <SetCode title={item.set_rarity}>{item.set_code} {item.set_rarity_code}</SetCode>
                       <SetPrice>${item.set_price} USD</SetPrice>
                     </SetCodePriceWrapper>
                   </>
@@ -136,7 +144,7 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
       )}
       {cardInfo && (
         <BottomDrawer isOpen={isOpenDrawer}>
-          <DrawerText> Selecciona el tipo de carta que {session.user.role === 'store' ? 'tienes' : 'quieres' } </DrawerText>
+          <DrawerText> Selecciona el tipo de carta que {session && session.user.role === 'store' ? 'tienes' : 'quieres' } </DrawerText>
           <SelectContainer>
             <Select
               placeholder="Rareza"
@@ -176,7 +184,7 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
                 />
               ))}
           </DrawerImagesContainer>
-          {session.user.role === "store" && (
+          {session && session.user.role === "store" && (
             <InputContainer>
               <InputText
                 placeholder="Precio"
@@ -195,7 +203,7 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
                 if (!image) {
                   image = cardImages[0].image;
                 }
-                if (selectedRarity && session.user.role === "client") {
+                if (selectedRarity && session && session.user.role === "client") {
                   await dispatch(
                     addToMyWantedCards({
                       name: session.user.name,
@@ -247,7 +255,7 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
                 }
               }}
             >
-              {session.user.role === "client" ? "!La quiero!" : "¡La tengo!"}
+              {session && session.user.role === "client" ? "!La quiero!" : "¡La tengo!"}
             </LoginButton>
           </ButtonDrawerContainer>
         </BottomDrawer>

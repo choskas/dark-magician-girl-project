@@ -7,6 +7,7 @@ export const OnSaleWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 500px;
   // Desktop
   @media screen and (min-width: 1000px) {
     height: 700px;

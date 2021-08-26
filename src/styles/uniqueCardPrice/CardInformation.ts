@@ -152,6 +152,8 @@ export const AlternativeImagesWrapper = styled.div`
   padding: 0 15px;
   // Desktop
   @media screen and (min-width: 1000px) {
+    height: 260px;
+    overflow-y: auto;
   }
 `;
 
