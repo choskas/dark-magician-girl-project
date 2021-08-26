@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
         ...initialProps,
         styles: (
           <>
-            <Html lang="es_MX">
+            <Html lang="es">
               {initialProps.styles}
               {sheet.getStyleElement()}
             </Html>
