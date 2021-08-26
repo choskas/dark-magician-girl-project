@@ -91,13 +91,14 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
       <BigTitle>Cartas</BigTitle>
       {cards.length >= 1 ? (
         <CardsWrapper>
-          {cards.map((item) => (
+          {cards.map((item, key) => (
             <SearchedCardContainer
+              key={`${item.name}-${key}`}
               onClick={() => {
                 setCardInfo(item);
                 setIsVisibleModal(true);
               }}
-              title={item.isFound ? "¡Encontrada!" : "¡Buscando!"}
+              title={item.name}
             >
               <SearchedCardImage src={item.image} alt={`alt ${item.image}`} />
             </SearchedCardContainer>

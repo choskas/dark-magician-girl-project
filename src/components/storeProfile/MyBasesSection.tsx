@@ -37,8 +37,9 @@ const MyBasesSection = ({ decks, dispatch, session }) => {
       {decks.length >= 1 ? (
         <CardsWrapper>
           {decks ? (
-            decks.map((item) => (
+            decks.map((item, key) => (
               <StoreMainInfoCardImage
+                key={`${item.mainCard}-${key}`}
                 onClick={() => {
                   setDeckBaseInfo(item);
                   setIsVisibleModalBases(true);

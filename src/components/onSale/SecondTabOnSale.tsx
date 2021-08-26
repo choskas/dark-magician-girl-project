@@ -61,14 +61,15 @@ const SecondTabOnSale = ({
         value={searchDeckValue}
         icon="/assets/Search.png"
         onChange={(_e: ChangeEvent<HTMLInputElement>, value: string) => {
+          setSearchDeckValue(value);
           searchDeck(value);
         }}
       />
     </SearchInputWrapper>
     <OnSaleWrapper>
       {allDecks.map((item) => {
-        return item.decksBases.map((deck) => (
-          <OnSaleCardWrapper>
+        return item.decksBases.map((deck, key) => (
+          <OnSaleCardWrapper key={`${deck.deckName}-${key}`}>
             <OnSaleCardImage src={deck.mainCard} />
             <OnSaleTextWrapper>
               <OnSaleCardText>

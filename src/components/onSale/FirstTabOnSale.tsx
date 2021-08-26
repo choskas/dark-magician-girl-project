@@ -34,7 +34,7 @@ const FirstTabOnSale = ({
     <OnSaleWrapper>
         {allUniqueCards.map((item) => {
             return item.uniqueCards.map((card) => (
-                <OnSaleCardWrapper key={`wrapper-${card.name}`}>
+                <OnSaleCardWrapper key={`wrapper-${card.name}${Math.random() * (100 - 1)}`}>
                 <OnSaleCardImage src={card.image} />
                 <OnSaleTextWrapper>
                 <OnSaleCardText>{card.name}</OnSaleCardText>
