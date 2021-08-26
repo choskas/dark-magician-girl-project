@@ -55,8 +55,8 @@ const NavBar = () => {
       <Link href="/">
         <LinkTo>Cards Seeker!</LinkTo>
       </Link>
-
       <HaamburgerImage
+        alt={isLoading === false && session ? "img-profile" : "hamburger icon"}
         src={isLoading === false && session ? session.user.image : "/assets/hamburger.png"}
         style={isLoading === false && session ? { width: "40px", height: "40px" } : {}}
         onClick={async (e) => {

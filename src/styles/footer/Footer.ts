@@ -24,6 +24,8 @@ export const WitchcraftTextWrapper = styled.div`
 `;
 
 export const WitchcraftImage = styled.img`
+    width: 251px;
+    height: 214px;
     // small smartphones
     @media screen and (max-width: 410px) {
         margin-left: -50px;

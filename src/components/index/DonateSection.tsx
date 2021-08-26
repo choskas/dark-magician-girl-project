@@ -3,7 +3,7 @@ import { AnotherDarkMagician, AnotherDarkMagicianDesk, DonateButton, DonateImage
 const DonateSection = () => (
     <DonateSectionImage background="/assets/GirlMagicianChocoBlue.png">
         <DonateImageText>
-            <AnotherDarkMagician src="/assets/AnotherDarkMagician.png" />
+            <AnotherDarkMagician src="/assets/AnotherDarkMagician.png" alt="anotherDarkMagician" />
             <AnotherDarkMagicianDesk src="/assets/AnotherDarkMagicianDesk.png" />
             <DonationTextWrapper>
                 <DonationTitle>¡Apoyanos para seguir desarrollando!</DonationTitle>

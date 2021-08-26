@@ -30,7 +30,7 @@ const Footer = () => (
           </LinkTo>
         </Link>
       </FooterTextWrapper>
-      <WitchcraftImage src="/assets/witchcraft.png" />
+      <WitchcraftImage src="/assets/witchcraft.png" alt="witchcraft" />
       <WitchcraftImageDesk src="/assets/witchcraftDesk.png" />
     </WitchcraftTextWrapper>
   </FooterStyle>

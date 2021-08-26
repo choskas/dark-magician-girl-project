@@ -38,7 +38,7 @@ const MainPageFirstSection = () => (
           <StartButton>¡Comenzar!</StartButton>
         </LinkTo>
       </Link>
-      <DarkMagicianGirl src="/assets/darkMagicianGirl.png" />
+      <DarkMagicianGirl src="/assets/darkMagicianGirl.png" alt="dark magician girl" />
     </MainImage>
   </>
 );
