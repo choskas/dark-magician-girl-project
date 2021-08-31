@@ -1,4 +1,3 @@
-// @ts-ignore
 const securityHeaders = [
   {
     key: "X-XSS-Protection",
