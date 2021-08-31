@@ -116,7 +116,6 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
             </CardDescriptionWrapper>
             <SetsContainer>
               <SetsTitle>Sets y precios</SetsTitle>
-              {console.log(cardInfo.card_sets, 'ialo')}
               <SetWrapper>
                 {cardInfo.card_sets.map((item, key) => (
                   <>

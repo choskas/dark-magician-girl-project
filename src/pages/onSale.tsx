@@ -106,6 +106,7 @@ const OnSale = () => {
         <TabPanel
           firstTabContent={
             <FirstTabOnSale
+              dispatch={dispatch}
               searchCard={searchCard}
               searchCardValue={searchCardValue}
               setSearchCardValue={setSearchCardValue}
@@ -114,6 +115,7 @@ const OnSale = () => {
           }
           secondTabContent={
             <SecondTabOnSale
+              dispatch={dispatch}
               searchDeck={searchDeck}
               searchDeckValue={searchDeckValue}
               setSearchDeckValue={setSearchDeckValue}

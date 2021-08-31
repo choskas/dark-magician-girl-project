@@ -13,6 +13,8 @@ import store from "../../redux/store";
 const StoreProfile = () => {
 const router = useRouter();
 const dispatch = useDispatch();
+const isBase = useSelector((state: any) => state.wantedCards.isBase);
+const selectedBase = useSelector((state: any) => state.wantedCards.selectedBase);
 const selectedCard = useSelector((state: any) => state.wantedCards.selectedCard);
 const [storeInfo, setStoreInfo] = useState(null);
 const storeUniqueCards = useSelector((state: any) => state.storeCards.uniqueCards);
@@ -39,7 +41,7 @@ return (
     <NavBar />
     <StoreProfileInfo storeDeckBases={storeDeckBases} storeUniqueCards={storeUniqueCards} storeInfo={storeInfo} />
     {storeInfo.contact.phoneNumber && (
-    <WhatsAppButton phoneNumber={storeInfo.contact.phoneNumber} cardName={selectedCard && selectedCard.name} />
+    <WhatsAppButton selectedBase={selectedBase} isBase={isBase} phoneNumber={storeInfo.contact.phoneNumber} cardName={selectedCard && selectedCard.name} />
     )}
 
     <Footer />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChangeEvent } from "react";
+import { selectedBaseFunc } from "../../redux/modules/wantedCards";
 import { ModalContainer } from "../../styles/common/Modal";
 import { SearchInputWrapper } from "../../styles/deckPrice/deckPrice";
 import {
@@ -34,6 +35,7 @@ interface SecondTabOnSaleProps {
   storeId: null | string;
   setStoreId: Function;
   searchDeck: Function;
+  dispatch: Function;
   router: {
     push: Function;
   };
@@ -51,6 +53,7 @@ const SecondTabOnSale = ({
   router,
   storeId,
   setStoreId,
+  dispatch,
 }: SecondTabOnSaleProps) => (
   <>
     <SearchInputWrapper>
@@ -117,7 +120,12 @@ const SecondTabOnSale = ({
           <StoreMainInfoModalCardRarity>
             Precio: ${selectedDeck.deckPrice}
           </StoreMainInfoModalCardRarity>
-          <LoginButton onClick={() => router.push(`/storeProfile/${storeId}`)}>
+          <LoginButton
+            onClick={() => {
+              router.push(`/storeProfile/${storeId}`);
+              dispatch(selectedBaseFunc(selectedDeck.deckName));
+            }}
+          >
             Ir a tienda
           </LoginButton>
         </StoreMainInfoModalContainer>

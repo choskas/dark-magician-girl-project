@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChangeEvent } from "react";
+import { selectedCardFunc } from "../../redux/modules/wantedCards";
 import { SearchInputWrapper } from "../../styles/deckPrice/deckPrice";
 import { OnSaleCardImage, OnSaleCardSubtitle, OnSaleCardText, OnSaleCardWrapper, OnSaleGoToText, OnSaleTextWrapper, OnSaleWrapper } from "../../styles/onSale";
 import InputText from "../common/InputText";
@@ -9,13 +10,15 @@ interface FirstTabOnSaleProps {
   searchCardValue: string | null;
   setSearchCardValue: Function;
   searchCard: Function;
+  dispatch: Function;
 }
 
 const FirstTabOnSale = ({
   allUniqueCards,
   searchCardValue,
   setSearchCardValue,
-  searchCard
+  searchCard,
+  dispatch,
 }: FirstTabOnSaleProps) => (
   <>
     <SearchInputWrapper>
@@ -41,7 +44,7 @@ const FirstTabOnSale = ({
                 <OnSaleCardText><OnSaleCardSubtitle>Rareza:</OnSaleCardSubtitle> {card.rarityCode}</OnSaleCardText>
                 <OnSaleCardText><OnSaleCardSubtitle>Precio:</OnSaleCardSubtitle> {card.price}</OnSaleCardText>
                 <Link href={`/storeProfile/${item.userId}`}>
-                <OnSaleGoToText>Ir a tienda</OnSaleGoToText>
+                <OnSaleGoToText onClick={() => dispatch(selectedCardFunc(card))}>Ir a tienda</OnSaleGoToText>
                 </Link>
                 </OnSaleTextWrapper>
             </OnSaleCardWrapper>
