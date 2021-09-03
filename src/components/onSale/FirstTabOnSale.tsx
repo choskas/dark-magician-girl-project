@@ -2,8 +2,17 @@ import Link from "next/link";
 import { ChangeEvent } from "react";
 import { selectedCardFunc } from "../../redux/modules/wantedCards";
 import { SearchInputWrapper } from "../../styles/deckPrice/deckPrice";
-import { OnSaleCardImage, OnSaleCardSubtitle, OnSaleCardText, OnSaleCardWrapper, OnSaleGoToText, OnSaleTextWrapper, OnSaleWrapper } from "../../styles/onSale";
+import {
+  OnSaleCardImage,
+  OnSaleCardSubtitle,
+  OnSaleCardText,
+  OnSaleCardWrapper,
+  OnSaleGoToText,
+  OnSaleTextWrapper,
+  OnSaleWrapper,
+} from "../../styles/onSale";
 import InputText from "../common/InputText";
+import ShowMoreButton from "../common/ShowMoreButton";
 
 interface FirstTabOnSaleProps {
   allUniqueCards: Array<any>;
@@ -11,6 +20,8 @@ interface FirstTabOnSaleProps {
   setSearchCardValue: Function;
   searchCard: Function;
   dispatch: Function;
+  showMoreCards: number;
+  setShowMoreCards: Function;
 }
 
 const FirstTabOnSale = ({
@@ -19,6 +30,8 @@ const FirstTabOnSale = ({
   setSearchCardValue,
   searchCard,
   dispatch,
+  showMoreCards,
+  setShowMoreCards,
 }: FirstTabOnSaleProps) => (
   <>
     <SearchInputWrapper>
@@ -35,21 +48,31 @@ const FirstTabOnSale = ({
       />
     </SearchInputWrapper>
     <OnSaleWrapper>
-        {allUniqueCards.map((item) => {
-            return item.uniqueCards.map((card) => (
-                <OnSaleCardWrapper key={`wrapper-${card.name}${Math.random() * (100 - 1)}`}>
-                <OnSaleCardImage src={card.image} />
-                <OnSaleTextWrapper>
-                <OnSaleCardText>{card.name}</OnSaleCardText>
-                <OnSaleCardText><OnSaleCardSubtitle>Rareza:</OnSaleCardSubtitle> {card.rarityCode}</OnSaleCardText>
-                <OnSaleCardText><OnSaleCardSubtitle>Precio:</OnSaleCardSubtitle> {card.price}</OnSaleCardText>
-                <Link href={`/storeProfile/${item.userId}`}>
-                <OnSaleGoToText onClick={() => dispatch(selectedCardFunc(card))}>Ir a tienda</OnSaleGoToText>
-                </Link>
-                </OnSaleTextWrapper>
-            </OnSaleCardWrapper>
-            ))
-        })}
+      {allUniqueCards.slice(0, showMoreCards).map((item, key) => (
+        <OnSaleCardWrapper key={`wrapper-${item.card.name}${key}`}>
+          <OnSaleCardImage src={item.card.image} />
+          <OnSaleTextWrapper>
+            <OnSaleCardText>{item.card.name}</OnSaleCardText>
+            <OnSaleCardText>
+              <OnSaleCardSubtitle>Rareza:</OnSaleCardSubtitle>{" "}
+              {item.card.rarityCode}
+            </OnSaleCardText>
+            <OnSaleCardText>
+              <OnSaleCardSubtitle>Precio:</OnSaleCardSubtitle> {item.card.price}
+            </OnSaleCardText>
+            <Link href={`/storeProfile/${item.userId}`}>
+              <OnSaleGoToText
+                onClick={() => dispatch(selectedCardFunc(item.card))}
+              >
+                Ir a tienda
+              </OnSaleGoToText>
+            </Link>
+          </OnSaleTextWrapper>
+        </OnSaleCardWrapper>
+      ))}
+      {showMoreCards < allUniqueCards.length && (
+        <ShowMoreButton onClick={() => setShowMoreCards(showMoreCards + 10)} />
+      )}
     </OnSaleWrapper>
   </>
 );

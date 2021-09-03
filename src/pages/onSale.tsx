@@ -16,9 +16,11 @@ const OnSale = () => {
   const [allDecks, setAllDecks] = useState([]);
   const [allUniqueCards, setAllUniqueCards] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
-  const [searchCardValue, setSearchCardValue] = useState('');
-  const [searchDeckValue, setSearchDeckValue] = useState('');
+  const [searchCardValue, setSearchCardValue] = useState("");
+  const [searchDeckValue, setSearchDeckValue] = useState("");
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [showMoreCards, setShowMoreCards] = useState(10);
+  const [showMoreDecks, setShowMoreDecks] = useState(10);
   const [storeId, setStoreId] = useState(null);
   const allStoreDecksAndCards = useSelector(
     (state: any) => state.storeCards.allStoresDecksAndCards
@@ -30,35 +32,48 @@ const OnSale = () => {
         decksBases: item.decksBases,
       };
     });
-    setAllDecks(getAllDecks);
+    const newUniqueDecks = getAllDecks.map((item) =>
+      item.decksBases.map((decks) => {
+        return { userId: item.userId, decksBases: decks };
+      })
+    );
+    const mergedDecks = [].concat.apply([], newUniqueDecks);
+    setAllDecks(mergedDecks);
     const getAllUniqueCards = allStoreDecksAndCards.map((item) => {
       return {
         userId: item.userId,
         uniqueCards: item.uniqueCards,
       };
     });
-    setAllUniqueCards(getAllUniqueCards);
+    const newUniqueCards = getAllUniqueCards.map((item) =>
+      item.uniqueCards.map((card) => {
+        return { userId: item.userId, card };
+      })
+    );
+    const mergedCards = [].concat.apply([], newUniqueCards);
+    setAllUniqueCards(mergedCards);
   };
   const searchCard = (value: string) => {
-    const uniqueCards = allStoreDecksAndCards.map((item) => {
+    const getAllUniqueCards = allStoreDecksAndCards.map((item) => {
       return {
         userId: item.userId,
         uniqueCards: item.uniqueCards,
       };
     });
+    const newUniqueCards = getAllUniqueCards.map((item) =>
+      item.uniqueCards.map((card) => {
+        return { userId: item.userId, card };
+      })
+    );
+    const mergedCards = [].concat.apply([], newUniqueCards);
+    const uniqueCards = mergedCards;
     if (value.length > 3) {
-      const card = uniqueCards.map((item: any) => {
-        const uniqueCardItem = item.uniqueCards.filter((card) => {
-          if (card.name.toLowerCase().includes(value.toLowerCase())) {
-            return item;
-          }
-        });
-        return {
-          uniqueCards: uniqueCardItem,
-          userId: item.userId,
-        };
+      const uniqueCardItem = uniqueCards.filter((item) => {
+        if (item.card.name.toLowerCase().includes(value.toLowerCase())) {
+          return item;
+        }
       });
-      setAllUniqueCards(card);
+      setAllUniqueCards(uniqueCardItem);
     }
     if (value.length < 3) {
       setAllUniqueCards(uniqueCards);
@@ -66,25 +81,28 @@ const OnSale = () => {
   };
 
   const searchDeck = (value: string) => {
-    const deckCards = allStoreDecksAndCards.map((item) => {
+    const getAllDecks = allStoreDecksAndCards.map((item) => {
       return {
         userId: item.userId,
         decksBases: item.decksBases,
       };
     });
+    const newUniqueDecks = getAllDecks.map((item) =>
+      item.decksBases.map((decks) => {
+        return { userId: item.userId, decksBases: decks };
+      })
+    );
+    const mergedDecks = [].concat.apply([], newUniqueDecks);
+    const deckCards = mergedDecks;
     if (value.length > 3) {
-      const card = deckCards.map((item: any) => {
-        const deckCardsItem = item.decksBases.filter((card) => {
-          if (card.deckName.toLowerCase().includes(value.toLowerCase())) {
-            return item;
-          }
-        });
-        return {
-          decksBases: deckCardsItem,
-          userId: item.userId,
-        };
+      const deckCardsItem = deckCards.filter((item) => {
+        if (
+          item.decksBases.deckName.toLowerCase().includes(value.toLowerCase())
+        ) {
+          return item;
+        }
       });
-      setAllDecks(card);
+      setAllDecks(deckCardsItem);
     }
     if (value.length < 3) {
       setAllDecks(deckCards);
@@ -111,6 +129,8 @@ const OnSale = () => {
               searchCardValue={searchCardValue}
               setSearchCardValue={setSearchCardValue}
               allUniqueCards={allUniqueCards}
+              showMoreCards={showMoreCards}
+              setShowMoreCards={setShowMoreCards}
             />
           }
           secondTabContent={
@@ -126,6 +146,8 @@ const OnSale = () => {
               setIsVisibleModal={setIsVisibleModal}
               storeId={storeId}
               setStoreId={setStoreId}
+              showMoreDecks={showMoreDecks}
+              setShowMoreDecks={setShowMoreDecks}
               router={router}
             />
           }

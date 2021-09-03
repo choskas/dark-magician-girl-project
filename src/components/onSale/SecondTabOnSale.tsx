@@ -23,6 +23,7 @@ import {
 import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
 import Modal from "../common/Modal";
+import ShowMoreButton from "../common/ShowMoreButton";
 
 interface SecondTabOnSaleProps {
   allDecks: Array<any>;
@@ -36,6 +37,8 @@ interface SecondTabOnSaleProps {
   setStoreId: Function;
   searchDeck: Function;
   dispatch: Function;
+  showMoreDecks: number;
+  setShowMoreDecks: Function;
   router: {
     push: Function;
   };
@@ -53,6 +56,8 @@ const SecondTabOnSale = ({
   router,
   storeId,
   setStoreId,
+  showMoreDecks,
+  setShowMoreDecks,
   dispatch,
 }: SecondTabOnSaleProps) => (
   <>
@@ -70,28 +75,29 @@ const SecondTabOnSale = ({
       />
     </SearchInputWrapper>
     <OnSaleWrapper>
-      {allDecks.map((item) => {
-        return item.decksBases.map((deck, key) => (
-          <OnSaleCardWrapper key={`${deck.deckName}-${key}`}>
-            <OnSaleCardImage src={deck.mainCard} />
-            <OnSaleTextWrapper>
-              <OnSaleCardText>
-                <OnSaleCardSubtitle>Base: </OnSaleCardSubtitle>
-                {deck.deckName}
-              </OnSaleCardText>
-              <OnSaleGoToText
-                onClick={() => {
-                  setSelectedDeck(deck);
-                  setIsVisibleModal(true);
-                  setStoreId(item.userId);
-                }}
-              >
-                Ver cartas incluidas
-              </OnSaleGoToText>
-            </OnSaleTextWrapper>
-          </OnSaleCardWrapper>
-        ));
-      })}
+      {allDecks.slice(0, showMoreDecks).map((item, key) => (
+        <OnSaleCardWrapper key={`${item.decksBases.deckName}-${key}`}>
+          <OnSaleCardImage src={item.decksBases.mainCard} />
+          <OnSaleTextWrapper>
+            <OnSaleCardText>
+              <OnSaleCardSubtitle>Base: </OnSaleCardSubtitle>
+              {item.decksBases.deckName}
+            </OnSaleCardText>
+            <OnSaleGoToText
+              onClick={() => {
+                setSelectedDeck(item.decksBases);
+                setIsVisibleModal(true);
+                setStoreId(item.userId);
+              }}
+            >
+              Ver cartas incluidas
+            </OnSaleGoToText>
+          </OnSaleTextWrapper>
+        </OnSaleCardWrapper>
+      ))}
+      {showMoreDecks < allDecks.length && (
+        <ShowMoreButton onClick={() => setShowMoreDecks(showMoreDecks + 10)} />
+      )}
     </OnSaleWrapper>
     <Modal
       onClose={() => {
