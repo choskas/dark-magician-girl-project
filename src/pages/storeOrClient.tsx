@@ -24,7 +24,7 @@ const StoreOrClient = () => {
     });
   };
 
-  console.log(session, '')
+  
   useEffect(() => {
     if (session && session.user.role === 'store' && !session.user.contact ){
       router.push("/storeExtraData")

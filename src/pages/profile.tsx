@@ -33,6 +33,7 @@ const Profile = () => {
     await dispatch(deleteDeck(data));
     await dispatch(getAllUserDecks(session.user.id));
   }
+  console.log(session, '')
   useEffect(() => {
     if (!loading && !session) {
       router.push("/");
