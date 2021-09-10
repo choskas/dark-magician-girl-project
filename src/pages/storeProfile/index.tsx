@@ -27,7 +27,6 @@ const StoreProfileIndex = () => {
       dispatch(getAllUniqueCardsById({ userId: session.user.id }));
     }
   };
-  console.log(session, '')
   useEffect(() => {
     getCards();
     if (!loading && !session) {

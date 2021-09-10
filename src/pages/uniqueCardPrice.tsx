@@ -59,7 +59,7 @@ const UniqueCardPrice = () => {
                 icon="/assets/Search.png"
                 autoCompleteValues={allCardsName}
                 value={searchValue}
-                placeholder="Busquéda"
+                placeholder="Búsqueda"
                 onChange={(e, value) => {
                   setSearchValue(value);
                   setIsOpenDrawer(false);

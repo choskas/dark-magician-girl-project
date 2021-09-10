@@ -1,4 +1,4 @@
-import { options } from "next-auth/client";
+// @ts-nocheck
 import { useEffect, useRef, useState } from "react";
 import { Option, OptionsContainer } from "../../styles/common/Select";
 import InputText from "./InputText";
@@ -8,9 +8,16 @@ interface SelectProps {
   placeholder: string;
   value: string | null;
   onChange: Function;
+  onKeyDown?: Function;
 }
 
-const Select = ({ options, placeholder, value, onChange }) => {
+const Select = ({
+  options,
+  placeholder,
+  value,
+  onChange,
+  onKeyDown = () => {},
+}) => {
   const [isVisibileOptions, setIsVisibleOptions] = useState(false);
   const [optionsArr, setOptionsArr] = useState(options);
   const ref = useRef<HTMLDivElement>(null);
@@ -36,11 +43,12 @@ const Select = ({ options, placeholder, value, onChange }) => {
     };
   });
   useEffect(() => {
-    setOptionsArr(options)
-  }, [options])
+    setOptionsArr(options);
+  }, [options]);
   return (
     <div ref={ref}>
       <InputText
+        onKeyDown={(e) => onKeyDown(e)}
         value={value}
         onClick={() => setIsVisibleOptions(!isVisibileOptions)}
         placeholder={placeholder}

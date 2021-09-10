@@ -22,6 +22,7 @@ interface InputTextProps {
   onClickListValue?: Function;
   onClick?: Function;
   onBlur?: Function;
+  onKeyDown?: Function;
 }
 const InputText = ({
   placeholder,
@@ -36,6 +37,7 @@ const InputText = ({
   onClickListValue,
   onClick = () => {},
   onBlur = () => {},
+  onKeyDown = () => {},
 }: InputTextProps) => {
   const [namesArr, setNamesArr] = useState([]);
   const searchCard = (value: string) => {
@@ -55,6 +57,7 @@ const InputText = ({
       <Input
       onBlur={() => onBlur()}
       onClick={() => onClick()}
+      onKeyDown={(e) => onKeyDown(e)}
 	  	onKeyPress={(e) => onKeyPress(e)}
         onChange={(e) => {
           e.preventDefault();

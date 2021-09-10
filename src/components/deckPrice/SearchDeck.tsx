@@ -35,16 +35,19 @@ import {
   addToMyDeck,
   createDeck,
   createDeckBase,
+  getAllArchetypesCatalog,
 } from "../../redux/modules/deck";
 import BottomDrawer from "../common/BottomDrawer";
 import { toast } from "react-toastify";
 import LittleLoader from "../common/LittleLoader";
+import Select from "../common/Select";
 
 const ItemTypes = {
   CARD: "card",
 };
 
 const SearchDeck = () => {
+  const [selectedArchetype, setSelectedArchetype] = useState(null);
   const [allCards, setAllCards] = useState([]);
   const [allCardsName, setAllCardsName] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
@@ -64,9 +67,13 @@ const SearchDeck = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const myDeckRedux = useSelector((state: any) => state.deck.myDeck);
+  const archetypesCatalog = useSelector(
+    (state: any) => state.deck.archetypesCatalog
+  );
 
   const getAllCards = async () => {
     try {
+      dispatch(getAllArchetypesCatalog());
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/allCards`
       );
@@ -181,6 +188,17 @@ const SearchDeck = () => {
     setTotalDeckPrice(priceArray);
   };
 
+  const archetypesCatalogFunction = () => {
+    const newCatalog = archetypesCatalog.map((item) => {
+      return {
+        name: `${item.archetype_name}`,
+        value: `${item.archetype_name}`,
+      };
+    });
+    const addAll = [{ name: "Ninguno", value: "Ninguno" }, ...newCatalog];
+    return addAll;
+  };
+
   useEffect(() => {
     myDeckPrice();
   }, [myDeck]);
@@ -263,6 +281,33 @@ const SearchDeck = () => {
                 </SearchInputWrapper>
               )}
             </SearchBothInputWrapper>
+            {!searchByCode && (
+              <SearchInputWrapper>
+                <Select
+                  placeholder="Búsqueda por arquetipo"
+                  onKeyDown={(e) =>
+                    e.key == "Backspace" && setSelectedArchetype("")
+                  }
+                  onChange={(item, value) => {
+                    setSelectedArchetype(value);
+                    const cards = allCards.filter((item: any) => {
+                      if (item.archetype) {
+                        return item.archetype
+                          .toLowerCase()
+                          .includes(value.toLowerCase());
+                      }
+                    });
+                    setFoundCards(cards);
+                    if (value === "Ninguno") {
+                      setFoundCards([]);
+                    }
+                  }}
+                  value={selectedArchetype}
+                  options={archetypesCatalogFunction()}
+                />
+              </SearchInputWrapper>
+            )}
+
             <DesktopSeparator />
             <Separator />
             <Subtitle>Resultados de la busqueda: {foundCards.length}</Subtitle>

@@ -6,10 +6,12 @@ export const UniqueCardPriceWrapper = styled.div`
 
 export const InputTextWrapper = styled.div`
   width: 100%;
+  margin-bottom: 20px;
   // Desktop
   @media screen and (min-width: 1000px) {
     width: 400px;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
 `;
 

@@ -16,7 +16,7 @@ export const Title = styled.p`
   }
   font-family: "Dharma-Regular";
   font-size: 96px;
-  color: black;
+  color: #ef5da8;
   margin: 10px 0;
   text-align: center;
 `;
