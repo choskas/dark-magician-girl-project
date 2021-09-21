@@ -20,7 +20,7 @@ export const ProfileImage = styled.img`
 `;
 
 export const ProfileTitle = styled.p`
-    margin: 10px 0;
+    margin: 16px 0;
     font-size: 20px;
     text-align: center;
 `;
@@ -143,11 +143,11 @@ export const StoreMainInfoModalImage = styled.img`
 `;
 
 export const StoreMainInfoModalCardName = styled.p`
-    margin: 10px 0;
+    margin: 16px 0;
     font-size: 20px;
 `;
 
 export const StoreMainInfoModalCardRarity = styled.p`
-    margin: 10px 0;
+    margin: 16px 0;
     font-size: 16px;
 `;

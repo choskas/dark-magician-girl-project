@@ -72,25 +72,28 @@ const InputText = ({
       />
       <Span className="input__label">{placeholder}</Span>
       <InputIcon src={icon} onClick={() => onClickIcon()}/>
-      <Autocomplete>
-        <List>
-          {namesArr.map((item, key) => (
-            <ListName
-			  key={key}
-              value={item}
-              onClick={(e) => {
-                e.preventDefault();
-				const value = e.currentTarget.getAttribute("value")
-				onClickListValue(value);
-                setValue(value);
-                setNamesArr([]);
-              }}
-            >
-              {item}
-            </ListName>
-          ))}
-        </List>
-      </Autocomplete>
+      {namesArr.length >= 1 && (
+              <Autocomplete>
+              <List>
+                {namesArr.map((item, key) => (
+                  <ListName
+              key={key}
+                    value={item}
+                    onClick={(e) => {
+                      e.preventDefault();
+              const value = e.currentTarget.getAttribute("value")
+              onClickListValue(value);
+                      setValue(value);
+                      setNamesArr([]);
+                    }}
+                  >
+                    {item}
+                  </ListName>
+                ))}
+              </List>
+            </Autocomplete>
+      )}
+
     </Label>
   );
 };

@@ -122,7 +122,7 @@ export const ButtonContainer = styled.div`
 
 export const StartButton = styled.button`
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
+    font-size: 16px;
     text-align: center;
     border-radius: 8px;
     background: radial-gradient(50% 50% at 50% 50%, #8C2163 0%, #C370A2 100%);
@@ -203,7 +203,7 @@ export const Dot = styled.div`
 export const DotTitle = styled.p`
     font-family: "Dharma-Regular";
     font-size: ${({fontSize = '64px'}: DotTitleProps) => fontSize};
-    margin: 10px 0 0 0;
+    margin: 16px 0 0 0;
     // desktop
     @media screen and (min-width: 1000px) {
         text-align: center;

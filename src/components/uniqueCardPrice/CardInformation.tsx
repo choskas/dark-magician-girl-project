@@ -117,7 +117,8 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
             <SetsContainer>
               <SetsTitle>Sets y precios</SetsTitle>
               <SetWrapper>
-                {cardInfo.card_sets.map((item, key) => (
+                {console.log(cardInfo)}
+                {cardInfo.card_sets && cardInfo.card_sets.map((item, key) => (
                   <>
                     <SetName key={key}>{item.set_name}</SetName>
                     <SetCodePriceWrapper>
@@ -151,12 +152,12 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
                 setSelectedRarity(value);
               }}
               value={selectedRarity}
-              options={cardInfo.card_sets.map((item) => {
+              options={cardInfo.card_sets ? cardInfo.card_sets.map((item) => {
                 return {
                   name: `${item.set_code} ${item.set_rarity}`,
                   value: `${item.set_code} ${item.set_rarity}`,
                 };
-              })}
+              }): []}
             />
           </SelectContainer>
           <DrawerText> ¿Sabes cuál es su imagen correcta? </DrawerText>

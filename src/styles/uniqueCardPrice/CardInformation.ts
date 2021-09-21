@@ -44,7 +44,7 @@ export const DescritpionAndButtonWrapper = styled.div`
 export const CardDescriptionWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   border: 1px solid #ef5da8;
-  margin: 10px 0;
+  margin: 16px 0;
   color: ${({ color }) => (color ? color : "black")};
   // Desktop
   @media screen and (min-width: 1000px) {
@@ -56,10 +56,10 @@ export const CardDescriptionWrapper = styled.div`
 `;
 
 export const IWantItButtonWrapper = styled.div`
-  width: 200px;
+  width: 340px;
   display: flex;
   justify-content: center;
-  margin: 10px 0 10px -30px;
+  margin: 16px 0 16px 0;
   // Desktop
   @media screen and (min-width: 1000px) {
     width: 300px;
@@ -179,7 +179,7 @@ export const SetsContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 500px;
-    margin: 10px 0;
+    margin: 16px 0;
   }
 `;
 

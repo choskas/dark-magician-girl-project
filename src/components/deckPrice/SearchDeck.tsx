@@ -12,6 +12,7 @@ import {
   Price,
   SaveDeckInputs,
   SearchAndMyDeckWrapper,
+  SearchArchetypeWrapper,
   SearchBothInputWrapper,
   SearchDeckWrapper,
   SearchInputWrapper,
@@ -282,7 +283,7 @@ const SearchDeck = () => {
               )}
             </SearchBothInputWrapper>
             {!searchByCode && (
-              <SearchInputWrapper>
+              <SearchArchetypeWrapper>
                 <Select
                   placeholder="Búsqueda por arquetipo"
                   onKeyDown={(e) =>
@@ -305,7 +306,7 @@ const SearchDeck = () => {
                   value={selectedArchetype}
                   options={archetypesCatalogFunction()}
                 />
-              </SearchInputWrapper>
+              </SearchArchetypeWrapper>
             )}
 
             <DesktopSeparator />

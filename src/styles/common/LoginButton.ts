@@ -5,7 +5,7 @@ export const LoginButtonContainer = styled.button`
     width: 341px;
     height: 48px;
     background: radial-gradient(50% 50% at 50% 50%, #8C2163 0%, #C370A2 100%);
-    font-size: 24px;
+    font-size: 16px;
     text-align: center;
     border-radius: 9px;
     margin: 0 30px;

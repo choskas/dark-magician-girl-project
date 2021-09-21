@@ -12,13 +12,13 @@ export const Input = styled.input`
   box-sizing: border-box;
   display: block;
   width: 100%;
-  border: 3px solid #ef5da8;
+  border: 1px solid #ef5da8;
   padding-left: 10px;
   color: black;
   background: transparent;
-  border-radius: 3px;
+  border-radius: 4px;
   width: 100%;
-  height: 35px;
+  height: 48px;
   &:focus {
     outline: none !important;
     border: 1px solid #ef5da8;
@@ -27,7 +27,7 @@ export const Input = styled.input`
   &:focus,
   &:not(:placeholder-shown) {
     & + .input__label {
-      transform: translate(0.25rem, -75%) scale(0.8);
+      transform: translate(0.25rem, -90%) scale(0.8);
       color: var(--color-accent);
     }
   }
@@ -41,7 +41,7 @@ export const Span = styled.span`
   top: 0;
   padding-left: 10px;
   padding-right: 10px;
-  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+  margin: calc(var(--size-bezel) * 0.75 + 4px) calc(var(--size-bezel) * 0.5);
   background: pink;
   white-space: nowrap;
   transform: translate(0, 0);
@@ -50,7 +50,7 @@ export const Span = styled.span`
   transition: transform 120ms ease-in;
   font-weight: bold;
   line-height: 1.2;
-  margin: 7px 10px 0 10px;
+  margin: 13px 10px 0 10px;
   &:focus {
     transform: translate(0.1rem, -65%) scale(0.8);
     color: var(--color-accent);
@@ -60,7 +60,7 @@ export const Span = styled.span`
 export const InputIcon = styled.img`
   position: relative;
   float: right;
-  margin: -30px 10px 0 0;
+  margin: -36px 10px 0 0;
 `;
 
 export const Autocomplete = styled.div`
@@ -70,6 +70,8 @@ export const Autocomplete = styled.div`
   border-right: 1px solid #ef5da8;
   border-bottom: 1px solid #ef5da8;
   margin-top: -2px;
+  position: relative;
+  z-index: 1;
 `;
 
 export const List = styled.ul`
