@@ -5,7 +5,7 @@ interface DrawerWrapperProps {
 }
 
 export const CartDrawerWrapper = styled.div<DrawerWrapperProps>`
-  position: absolute;
+  position: fixed;
   overflow-y: auto;
   bottom: 10px;
   left: 0;
@@ -27,12 +27,11 @@ export const CartCloseIconDrawer = styled.img`
 export const CartTitleWrapper = styled.div`
     background-color: #5D5FEF;
     width: 100%;
-    text-align: center;
     color: #fff;
     font-size: 24px;
     height: 9%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 `;
 
