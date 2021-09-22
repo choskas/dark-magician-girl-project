@@ -82,8 +82,6 @@ export const deleteDeckBase = (id) => async (dispatch: Dispatch<any>) => {
   }
 };
 
-// getAllStoresDecksAndCards
-
 export const getAllStoreAndDecksCards = () => async (dispatch: Dispatch<any>) => {
   try {
     const response = await axios.get(
@@ -97,3 +95,14 @@ export const getAllStoreAndDecksCards = () => async (dispatch: Dispatch<any>) =>
     console.log(error);
   }
 };
+
+export const postCardsFastCharge = (data: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/fastAddUniqueCard`, data);
+    toast(response.data.message);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}

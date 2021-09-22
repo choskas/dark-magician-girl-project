@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardInfoDescription, CardInfoTitle, CartCardImage, CartCardInfoContainer, CartCardInfoName, CartCardInfoQuantityRarity, CartCardInfoQuantityRarityContainer, CartCardWrapper, CartDeleteContainer, CartDeleteImage } from "../../styles/fastCharge/cartCard"
 
 interface CartCardProps {
@@ -35,6 +35,7 @@ const CartCard = ({onClickDelete, cardName, cardQuantity, cardRarity, cardImage}
             setDeleteClass('delete');
             setTimeout(() => {
                 onClickDelete()
+                setDeleteClass('')
             }, 2000)
             }}>
         <CartDeleteImage src="/icons/deleteIcon.png"/>

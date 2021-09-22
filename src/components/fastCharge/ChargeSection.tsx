@@ -1,5 +1,8 @@
 import axios from "axios";
+import { session, useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { postCardsFastCharge } from "../../redux/modules/storeCards";
 import { SearchDeckWrapper } from "../../styles/deckPrice/deckPrice";
 import {
   AddCardWrapper,
@@ -15,7 +18,6 @@ import {
   CartCollapseContent,
   AddToStoreButtonContainer,
 } from "../../styles/fastCharge";
-import { SetName } from "../../styles/uniqueCardPrice/CardInformation";
 import CartBottomDrawer from "../common/CartBottomDrawer";
 import InputText from "../common/InputText";
 import LoginButton from "../common/LoginButton";
@@ -30,6 +32,8 @@ const ChargeSection = () => {
   const [cardsArray, setCardsArray] = useState([]);
   const [selectedRarity, setSelectedRarity] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [session, isLoading] = useSession();
+  const dispatch = useDispatch();
   const getAllCards = async () => {
     try {
       const response = await axios.get(
@@ -148,12 +152,24 @@ const ChargeSection = () => {
           </LoginButton>
         </AddCardButtonWrapper>
       </AddCardWrapper>
-      <CartBottomDrawer>
+      <CartBottomDrawer drawerTitle={`Mi stock (${cardsArray.length})`}>
         <CartCollapseContent>
             {cartItemsShow()}
             {cardsArray.length >= 1 && (
           <AddToStoreButtonContainer>
-          <LoginButton>Agregar a mi tienda</LoginButton>
+          <LoginButton onClick={() => {
+            const cards = cardsArray.map((item) => {
+              return {
+                name: item.name,
+                rarityCode: item.rarityCode,
+                image: item.image
+              }
+            });
+            // @ts-ignore 
+            const data = {userId: session.user.id, cards} 
+            dispatch(postCardsFastCharge(data));
+            setCardsArray([]);
+          }}>Agregar a mi tienda</LoginButton>
           </AddToStoreButtonContainer>
             )}
         </CartCollapseContent>

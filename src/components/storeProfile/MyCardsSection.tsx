@@ -62,8 +62,18 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
           <ModalImage src={cardInfo && cardInfo.image} />
         </ModalImageWrapper>
         <ModalFoundByTitle>{cardInfo.name}</ModalFoundByTitle>
-        <ModalFoundByTitle>Precio:</ModalFoundByTitle>
-        <ModalFoundBy>{cardInfo.price}</ModalFoundBy>
+        {cardInfo.price && (
+          <>
+            <ModalFoundByTitle>Precio:</ModalFoundByTitle>
+            <ModalFoundBy>{cardInfo.price}</ModalFoundBy>
+          </>
+        )}
+        {cardInfo.rarityCode && (
+          <>
+            <ModalFoundByTitle>Rareza:</ModalFoundByTitle>
+            <ModalFoundBy>{cardInfo.rarityCode}</ModalFoundBy>
+          </>
+        )}
         <LoginButton
           onClick={() => {
             deleteCardFunc({

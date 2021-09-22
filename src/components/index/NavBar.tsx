@@ -28,6 +28,7 @@ const NavBar = () => {
         <CollapseOption onClick={() => router.push('/onSale')}>Ahora en venta</CollapseOption>
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
         {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/storeProfile/editStoreProfile')}>Editar información</CollapseOption> : <></> }
+        {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/fastCharge')}>Carga rapida</CollapseOption> : <></> }
         <CollapseOption onClick={() => router.push('/deckPrice')}>{session && session.user.role === 'store' ? 'Arma tu base' : 'Arma tu deck' } </CollapseOption>
         <CollapseOption onClick={() => {
           disconnectSocket();
