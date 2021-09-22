@@ -49,7 +49,6 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
     setIsVisibleModal(false);
     await getCardsById({ userId: session.user.id });
   };
-
   const renderModal = () => (
     <Modal
       isVisible={isVisibleModal}
