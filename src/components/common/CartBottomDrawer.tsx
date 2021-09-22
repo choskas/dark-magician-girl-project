@@ -3,6 +3,7 @@ import {
   CartCloseIconDrawer,
   CartContent,
   CartDrawerWrapper,
+  CartTitle,
   CartTitleWrapper,
   CollapseIconWrapper,
 } from "../../styles/common/CartBottomDrawer";
@@ -20,7 +21,9 @@ const CartBottomDrawer = ({
   return (
     <CartDrawerWrapper isOpen={isOpen}>
       <CartTitleWrapper>
+        <CartTitle>
         {drawerTitle}
+        </CartTitle>
         <CollapseIconWrapper
           src={
             isOpen

@@ -5,7 +5,7 @@ interface DrawerWrapperProps {
 }
 
 export const CartDrawerWrapper = styled.div<DrawerWrapperProps>`
-  position: fixed;
+  position: absolute;
   overflow-y: auto;
   bottom: 10px;
   left: 0;
@@ -37,9 +37,12 @@ export const CartTitleWrapper = styled.div`
 `;
 
 export const CollapseIconWrapper = styled.img`
-    margin-left: 30%;
     margin-right: 10px;
     cursor: pointer;
+`;
+
+export const CartTitle = styled.div`
+    margin-right: 25%;
 `;
 
 export const CartContent = styled.div`
