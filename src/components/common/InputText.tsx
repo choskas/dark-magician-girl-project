@@ -25,6 +25,7 @@ interface InputTextProps {
   onKeyDown?: Function;
   disabled?: boolean;
   type?: string;
+  onFocus?: Function;
 }
 const InputText = ({
   placeholder,
@@ -42,6 +43,7 @@ const InputText = ({
   onBlur = () => {},
   onKeyDown = () => {},
   type = "text",
+  onFocus = () => {},
 }: InputTextProps) => {
   const [namesArr, setNamesArr] = useState([]);
   const searchCard = (value: string) => {
@@ -60,6 +62,7 @@ const InputText = ({
     <Label style={{ width }}>
       <Input
       disabled={disabled}
+      onFocus={() => onFocus()}
       onBlur={() => onBlur()}
       onClick={() => onClick()}
       onKeyDown={(e) => onKeyDown(e)}

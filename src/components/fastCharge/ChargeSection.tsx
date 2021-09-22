@@ -66,12 +66,14 @@ const ChargeSection = () => {
     return newCardsArr.map((item) => (
       <CartCard
         onClickDelete={() => {
-            const deleteArray = cardsArray.filter((list) => list.rarityCode !== item.rarityCode)
-            setCardsArray(deleteArray)
+          const deleteArray = cardsArray.filter(
+            (list) => list.rarityCode !== item.rarityCode
+          );
+          setCardsArray(deleteArray);
         }}
         cardName={item.name}
         cardImage={item.image}
-        cardRarity={item.rarityCode.split(' ')[1]}
+        cardRarity={item.rarityCode.split(" ")[1]}
         cardQuantity={item.quantity}
       />
     ));
@@ -90,6 +92,14 @@ const ChargeSection = () => {
         </AddCardTitleWrapper>
         <SearchInputWrapper>
           <InputText
+            onFocus={() => {
+              const drawer = document.getElementById("cartDrawerWrapper");
+              drawer.style.opacity = "0";
+            }}
+            onBlur={() => {
+              const drawer = document.getElementById("cartDrawerWrapper");
+              drawer.style.opacity = "1";
+            }}
             placeholder="Búsqueda por nombre"
             onClickListValue={(value) => getCardInfo(value)}
             setValue={setSearchValue}
@@ -103,6 +113,14 @@ const ChargeSection = () => {
         <QuantityRarityWrapper>
           <SmallInputWrapper>
             <InputText
+              onFocus={() => {
+                const drawer = document.getElementById("cartDrawerWrapper");
+                drawer.style.opacity = "0";
+              }}
+              onBlur={() => {
+                const drawer = document.getElementById("cartDrawerWrapper");
+                drawer.style.opacity = "1";
+              }}
               type="number"
               value={selectedQuantity}
               placeholder="Cantidad"
@@ -111,6 +129,14 @@ const ChargeSection = () => {
           </SmallInputWrapper>
           <SmallInputWrapper>
             <Select
+              onFocus={() => {
+                const drawer = document.getElementById("cartDrawerWrapper");
+                drawer.style.opacity = "0";
+              }}
+              onBlur={() => {
+                const drawer = document.getElementById("cartDrawerWrapper");
+                drawer.style.opacity = "1";
+              }}
               placeholder="Rareza"
               onChange={(item, value) => {
                 setSelectedRarity(value);
@@ -142,9 +168,9 @@ const ChargeSection = () => {
                 });
               }
               setCardsArray(array);
-              setSearchValue('');
+              setSearchValue("");
               setSelectedQuantity(1);
-              setSelectedRarity('');
+              setSelectedRarity("");
               setCardInfo(null);
             }}
           >
@@ -154,24 +180,28 @@ const ChargeSection = () => {
       </AddCardWrapper>
       <CartBottomDrawer drawerTitle={`Mi stock (${cardsArray.length})`}>
         <CartCollapseContent>
-            {cartItemsShow()}
-            {cardsArray.length >= 1 && (
-          <AddToStoreButtonContainer>
-          <LoginButton onClick={() => {
-            const cards = cardsArray.map((item) => {
-              return {
-                name: item.name,
-                rarityCode: item.rarityCode,
-                image: item.image
-              }
-            });
-            // @ts-ignore 
-            const data = {userId: session.user.id, cards} 
-            dispatch(postCardsFastCharge(data));
-            setCardsArray([]);
-          }}>Agregar a mi tienda</LoginButton>
-          </AddToStoreButtonContainer>
-            )}
+          {cartItemsShow()}
+          {cardsArray.length >= 1 && (
+            <AddToStoreButtonContainer>
+              <LoginButton
+                onClick={() => {
+                  const cards = cardsArray.map((item) => {
+                    return {
+                      name: item.name,
+                      rarityCode: item.rarityCode,
+                      image: item.image,
+                    };
+                  });
+                  // @ts-ignore
+                  const data = { userId: session.user.id, cards };
+                  dispatch(postCardsFastCharge(data));
+                  setCardsArray([]);
+                }}
+              >
+                Agregar a mi tienda
+              </LoginButton>
+            </AddToStoreButtonContainer>
+          )}
         </CartCollapseContent>
       </CartBottomDrawer>
     </SearchDeckWrapper>

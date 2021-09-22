@@ -9,6 +9,8 @@ interface SelectProps {
   value: string | null;
   onChange: Function;
   onKeyDown?: Function;
+  onFocus?: Function;
+  onBlur?: Function;
 }
 
 const Select = ({
@@ -17,6 +19,8 @@ const Select = ({
   value,
   onChange,
   onKeyDown = () => {},
+  onFocus = () => {},
+  onBlur = () => {}
 }) => {
   const [isVisibileOptions, setIsVisibleOptions] = useState(false);
   const [optionsArr, setOptionsArr] = useState(options);
@@ -48,6 +52,8 @@ const Select = ({
   return (
     <div ref={ref}>
       <InputText
+        onBlur={() => onBlur()}
+        onFocus={() => onFocus()}
         onKeyDown={(e) => onKeyDown(e)}
         value={value}
         onClick={() => setIsVisibleOptions(!isVisibileOptions)}

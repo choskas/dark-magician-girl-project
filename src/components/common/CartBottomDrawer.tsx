@@ -19,7 +19,7 @@ const CartBottomDrawer = ({
 }: BottomDrawerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <CartDrawerWrapper isOpen={isOpen}>
+    <CartDrawerWrapper isOpen={isOpen} id="cartDrawerWrapper">
       <CartTitleWrapper>
         <CartTitle>
         {drawerTitle}
