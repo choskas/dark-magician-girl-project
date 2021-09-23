@@ -17,6 +17,10 @@ export const ProfileImageContainer = styled.div`
 
 export const ProfileImage = styled.img`
     width: 200px;
+    max-height: 240px;
+    margin-top: 10px;
+    max-width: 320px;
+    margin-bottom: 10px;
 `;
 
 export const ProfileTitle = styled.p`

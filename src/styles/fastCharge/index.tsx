@@ -48,16 +48,6 @@ export const AddCardButtonWrapper = styled.div`
     margin: 20px 0;
 `;
 
-export const AddCardButton = styled.button`
-    width: 336px;
-    height: 48px;
-    background: transparent;
-    border: 1px solid #5D5FEF;
-    border-style: dashed;
-    text-align: center;
-    font-size: 16px;
-    color: #5D5FEF;
-`;
 
 export const CartCollapseContent = styled.div`
     margin: 20px 0;

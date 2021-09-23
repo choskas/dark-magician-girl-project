@@ -1,9 +1,10 @@
 import axios from "axios";
-import { session, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { postCardsFastCharge } from "../../redux/modules/storeCards";
 import { SearchDeckWrapper } from "../../styles/deckPrice/deckPrice";
+import { toast } from "react-toastify";
 import {
   AddCardWrapper,
   QuantityRarityWrapper,
@@ -12,8 +13,6 @@ import {
   AddCardTitleWrapper,
   AddCardTitle,
   AddCardSeparator,
-  AddCardPinkSeparator,
-  AddCardButton,
   AddCardButtonWrapper,
   CartCollapseContent,
   AddToStoreButtonContainer,
@@ -106,6 +105,7 @@ const ChargeSection = () => {
             autoCompleteValues={allCardsName}
             value={searchValue}
             onChange={(e, value) => {
+              setSelectedRarity("");
               setSearchValue(value);
             }}
           />
@@ -159,19 +159,23 @@ const ChargeSection = () => {
           <LoginButton
             onClick={(e: any) => {
               const array = [...cardsArray];
-              for (let i = 1; i <= selectedQuantity; i++) {
-                array.push({
-                  name: cardInfo.name,
-                  rarityCode: selectedRarity,
-                  image: cardInfo.card_images[0].image_url,
-                  quantity: selectedQuantity,
-                });
+              if (selectedRarity && searchValue && selectedQuantity) {
+                for (let i = 1; i <= selectedQuantity; i++) {
+                  array.push({
+                    name: cardInfo.name,
+                    rarityCode: selectedRarity,
+                    image: cardInfo.card_images[0].image_url,
+                    quantity: selectedQuantity,
+                  });
+                }
+                setCardsArray(array);
+                setSearchValue("");
+                setSelectedQuantity(1);
+                setSelectedRarity("");
+                setCardInfo(null);
+              } else {
+                toast.error("Llena todos los campos");
               }
-              setCardsArray(array);
-              setSearchValue("");
-              setSelectedQuantity(1);
-              setSelectedRarity("");
-              setCardInfo(null);
             }}
           >
             Agregar

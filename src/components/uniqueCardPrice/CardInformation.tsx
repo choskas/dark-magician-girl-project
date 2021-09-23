@@ -117,7 +117,6 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
             <SetsContainer>
               <SetsTitle>Sets y precios</SetsTitle>
               <SetWrapper>
-                {console.log(cardInfo)}
                 {cardInfo.card_sets && cardInfo.card_sets.map((item, key) => (
                   <>
                     <SetName key={key}>{item.set_name}</SetName>

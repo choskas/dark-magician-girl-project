@@ -48,6 +48,7 @@ export default NextAuth({
       session.user.storeName = user.storeName;
       session.user.address = user.address;
       session.user.contact = user.contact;
+      session.user.storeProfileImageKey = user.storeProfileImageKey
       return Promise.resolve(session);
     },
   },

@@ -5,11 +5,15 @@ import { toast } from "react-toastify";
 const STORE_UNIQUE_CARDS = "yugi/store/STORE_UNIQUE_CARDS";
 const STORE_DECK_BASES = "yugi/store/STORE_DECK_BASES";
 const STORE_DECKS_AND_CARDS = "yugi/store/STORE_DECKS_AND_CARDS";
+const STORE_PROFILE_IMAGE_KEY = "yugi/store/STORE_PROFILE_IMAGE_KEY";
+const STORE_PROFILE_IMAGE = "yugi/store/STORE_PROFILE_IMAGE";
 
 const INITIAL_STATE = {
   uniqueCards: [],
   deckBases: [],
   allStoresDecksAndCards: [],
+  storeProfileImageKey: '',
+  storeProfileImage: '',
 };
 
 export default function storeCards(state = INITIAL_STATE, action: AnyAction) {
@@ -19,7 +23,11 @@ export default function storeCards(state = INITIAL_STATE, action: AnyAction) {
     case STORE_DECK_BASES:
       return { ...state, deckBases: action.payload};
       case STORE_DECKS_AND_CARDS:
-        return { ...state, allStoresDecksAndCards: action.payload}
+        return { ...state, allStoresDecksAndCards: action.payload};
+      case STORE_PROFILE_IMAGE_KEY:
+        return { ...state, storeProfileImageKey: action.payload};
+      case STORE_PROFILE_IMAGE:
+        return { ...state, storeProfileImage: action.payload};
     default:
       return state;
   }
@@ -101,6 +109,36 @@ export const postCardsFastCharge = (data: any) => async (dispatch: Dispatch<any>
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/fastAddUniqueCard`, data);
     toast(response.data.message);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const postStoreImage = (data: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/postStoreImage`, data, {headers: {'Content-Type': 'multipart/form-data'}});
+    toast(response.data.message);
+    dispatch({
+      type: STORE_PROFILE_IMAGE_KEY,
+      payload: response.data.imageKey,
+    })
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// getStoreImage
+export const getStoreImage = (data: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/getStoreImage`, data);
+    dispatch({
+      type: STORE_PROFILE_IMAGE,
+      payload: response.data.image,
+    })
     return response.data;
   } catch (error) {
     console.log(error)
