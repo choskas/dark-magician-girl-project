@@ -60,7 +60,7 @@ const MyDataSectionStore = ({
           setTimeout(() => {
             // @ts-ignore
             setImageKeyState(response.imageKey);
-          }, 2000);
+          }, 3000);
         }}
       />
       <ProfileTitle>
