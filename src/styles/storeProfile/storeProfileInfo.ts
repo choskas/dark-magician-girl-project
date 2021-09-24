@@ -13,6 +13,8 @@ export const ProfileImageContainer = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const ProfileImage = styled.img`

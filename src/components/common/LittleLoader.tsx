@@ -1,4 +1,7 @@
-const LittleLoader = () => (
+interface LittleLoader {
+  message: string;
+}
+const LittleLoader = ({message = "Cargando cartas..."}) => (
     <>
   <div
     id="loader"
@@ -18,7 +21,7 @@ const LittleLoader = () => (
     </div>
             
   </div>
-  <p id="loader-text">Cargando cartas...</p>
+  <p id="loader-text">{message}</p>
   </>
 );
 
