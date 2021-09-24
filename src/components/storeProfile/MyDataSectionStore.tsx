@@ -39,7 +39,6 @@ import UploadImageButton from "../common/UploadImageButton";
         <UploadImageButton getImage={async (file) => {
                 setImageKeyState('darkMagiciansTo.jpeg');
                 var blob = file.slice(0, file.size, file.type); 
-                console.log(file)
                 const newFile = new File([blob], `store-${session.user.id}.png`, {type: file.type});
                 const formData = new FormData();
                 formData.append('storeProfileImage', newFile)
