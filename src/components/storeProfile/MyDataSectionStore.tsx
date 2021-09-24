@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStoreImage, postStoreImage } from "../../redux/modules/storeCards";
+import { postStoreImage } from "../../redux/modules/storeCards";
 import {
     MainInfo,
     MainInfoContainer,
@@ -19,33 +19,36 @@ import UploadImageButton from "../common/UploadImageButton";
   }
   const MyDataSectionStore = ({ session, cards, decks }: MyDataSectionStoreProps) => {
     const dispatch = useDispatch();
+    const [imageKeyState , setImageKeyState] = useState('darkMagiciansTo.jpeg');
     const imageKey = useSelector(
       (state: any) => state.storeCards.storeProfileImageKey
     );
-    const profileImg = useSelector((state: any) => state.storeCards.storeProfileImage);
 
-    const getProfileImage = (imageKeyArg) => {
-      dispatch(getStoreImage({imageKey: imageKeyArg}))
-    }
+    console.log(imageKeyState, 'olaa')
 
     useEffect(() => {
-      if (session.user.storeProfileImageKey){
-        getProfileImage(session.user.storeProfileImageKey)
+      if (session.user.storeProfileImageKey) {
+        setImageKeyState(session.user.storeProfileImageKey);
       }
     }, [])
     return (
       <>
         <ProfileImageContainer>
-          <ProfileImage src={profileImg ? profileImg : "/assets/darkMagiciansTo.jpeg"} />
+          <ProfileImage src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/images/${imageKeyState}`} />
         </ProfileImageContainer>
         <UploadImageButton getImage={async (file) => {
+                setImageKeyState('darkMagiciansTo.jpeg');
+                var blob = file.slice(0, file.size, file.type); 
+                console.log(file)
+                const newFile = new File([blob], `store-${session.user.id}.png`, {type: file.type});
                 const formData = new FormData();
-                formData.append('storeProfileImage', file)
+                formData.append('storeProfileImage', newFile)
                 formData.append('userId', session.user.id)
                 formData.append('imageKey', session.user.storeProfileImageKey);
                 const response = await dispatch(postStoreImage(formData));
+                console.log(response, 'respuesta')
                 // @ts-ignore
-                await getProfileImage(response.imageKey);
+                setImageKeyState(response.imageKey);
         }} />
         <ProfileTitle>
           {session.user.name ? session.user.name : "Unknown"}

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStoreImage } from "../../redux/modules/storeCards";
 import { NoDecksMessage } from "../../styles/profile/myDecks";
 import {
   MainInfo,
@@ -34,26 +33,21 @@ interface StoreProfileInfoProps {
 
 const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
   const dispatch = useDispatch();
-  const profileImg = useSelector((state: any) => state.storeCards.storeProfileImage);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [imageKeyState , setImageKeyState] = useState('darkMagiciansTo.jpeg');
   const [isVisibleModalBases, setIsVisibleModalBases] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
   const [deckBaseInfo, setDeckBaseInfo] = useState(null);
-  const getImage = () => {
-    dispatch(getStoreImage({imageKey: storeInfo.storeProfileImageKey}))
-  }
   useEffect(() => {
     if (storeInfo.storeProfileImageKey){
-      getImage();
+      setImageKeyState(storeInfo.storeProfileImageKey);
     }
   }, [])
   return (
     <StoreProfileInfoContainer>
       <ProfileImageContainer>
         <ProfileImage
-          src={
-            profileImg ? profileImg : "/assets/darkMagicianChoco.jpeg"
-          }
+src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/images/${imageKeyState}`}
         />
       </ProfileImageContainer>
       <ProfileTitle>
