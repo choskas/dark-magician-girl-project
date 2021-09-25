@@ -15,7 +15,7 @@ export const initiateSocket = (data) => {
   const { id } = data;
   let message;
   if (!socket) {
-    socket = io(process.env.NEXT_PUBLIC_BACKEND_URL);
+    socket = io(process.env.NEXT_PUBLIC_BACKEND_URL_ROOT);
     socket.emit("join", { userId: id });
     const data = getFoundCardSocket();
     message = data;

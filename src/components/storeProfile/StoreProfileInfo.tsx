@@ -47,7 +47,7 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
     <StoreProfileInfoContainer>
       <ProfileImageContainer>
         <ProfileImage
-src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/images/${imageKeyState}`}
+src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${imageKeyState}`}
         />
       </ProfileImageContainer>
       <ProfileTitle>
