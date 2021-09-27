@@ -8,9 +8,10 @@ import {
 
 interface UploadImageButtonProps {
   getImage: Function;
+  text?: string;
 }
 
-const UploadImageButton = ({ getImage }: UploadImageButtonProps) => {
+const UploadImageButton = ({ getImage, text = 'Cambiar imagen de tienda' }: UploadImageButtonProps) => {
   const refInput = useRef(null);
   const [uploadError, setUploadError] = useState(null);
 
@@ -42,7 +43,7 @@ const UploadImageButton = ({ getImage }: UploadImageButtonProps) => {
             refInput.current.click();
           }}
         >
-          Cambiar imagen de tienda
+          {text}
         </AddImageButton>
       </FormUploadButton>
       {uploadError && <UploadErrorText> {uploadError} </UploadErrorText>}

@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 interface PopoverWrapperProps {
   isVisible: boolean;
+  width: string;
 }
 
 export const PopoverWrapper = styled.div<PopoverWrapperProps>`
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-  width: 200px;
+  width: ${({ width }) => (width ? width : "200px")};
   height: auto;
   background: #fff;
   color: black;

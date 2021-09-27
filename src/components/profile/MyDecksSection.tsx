@@ -3,7 +3,7 @@ import { useState } from "react";
 import { deleteDeck } from "../../redux/modules/deck";
 import { TitleContainer } from "../../styles/login/login";
 import {
-  BigTitle,
+  BigTitleDuelist,
   BigTitleContainer,
   Card,
   DeckPrice,
@@ -147,7 +147,6 @@ const MyDecksSection = ({
     } else {
       return (
         <>
-          <NoDecksMessage>No tienes decks aun.</NoDecksMessage>
           <Link href="/deckPrice">
             <GoToText>Ir a crear Deck</GoToText>
           </Link>
@@ -158,7 +157,7 @@ const MyDecksSection = ({
   return (
     <MyDeckSectionContainer>
       <BigTitleContainer>
-        <BigTitle>Mis Decks</BigTitle>
+        <BigTitleDuelist>Mis Decks</BigTitleDuelist>
       </BigTitleContainer>
       {renderDecks()}
       <BottomDrawer

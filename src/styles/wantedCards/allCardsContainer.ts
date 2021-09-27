@@ -26,6 +26,16 @@ export const CardInfoModalContainer = styled.div`
   color: #fff;
 `;
 
+
+export const CardInfoModalArchetypeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+`;
+
 export const CardInfoImage = styled.img`
   height: 300px;
   width: 200px;

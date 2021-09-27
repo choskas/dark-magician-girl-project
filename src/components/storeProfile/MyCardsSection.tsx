@@ -8,7 +8,7 @@ import {
 } from "../../redux/modules/wantedCards";
 import Link from "next/link";
 import {
-  BigTitle,
+  BigTitleMyProfile,
   GoToText,
   ModalContainerUniqueCard,
   ModalImage,
@@ -97,7 +97,7 @@ const MyCardsSection = ({ cards }: MyCardsSectionProps) => {
 
   return (
     <>
-      <BigTitle>Cartas</BigTitle>
+      <BigTitleMyProfile>Cartas</BigTitleMyProfile>
       {cards.length >= 1 ? (
         <CardsWrapper>
           {cards.map((item, key) => (

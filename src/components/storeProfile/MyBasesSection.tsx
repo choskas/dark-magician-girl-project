@@ -6,6 +6,7 @@ import {
 } from "../../redux/modules/storeCards";
 import {
   BigTitle,
+  BigTitleMyProfile,
   GoToText,
   NoDecksMessage,
 } from "../../styles/profile/myDecks";
@@ -33,7 +34,7 @@ const MyBasesSection = ({ decks, dispatch, session }) => {
   };
   return (
     <>
-      <BigTitle>Mis bases</BigTitle>
+      <BigTitleMyProfile>Mis bases</BigTitleMyProfile>
       {decks.length >= 1 ? (
         <CardsWrapper>
           {decks ? (

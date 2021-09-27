@@ -126,3 +126,29 @@ export const postStoreImage = (data: any) => async (dispatch: Dispatch<any>) => 
   }
 }
 
+export const postProfileImage = (data: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/uploadProfileImageDuelist`, data, {headers: {'Content-Type': 'multipart/form-data'}});
+    toast(response.data.message);
+    dispatch({
+      type: STORE_PROFILE_IMAGE_KEY,
+      payload: response.data.imageKey,
+    })
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updateFavouriteArchetype = (data: any) => async (dispatch: Dispatch<any>) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/updateArchetype`, data);
+    toast(response.data.message);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+

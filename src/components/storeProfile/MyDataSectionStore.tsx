@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postStoreImage } from "../../redux/modules/storeCards";
 import {
+  AccountType,
   MainInfo,
   MainInfoContainer,
   MainInfoSubtitle,
@@ -9,6 +10,8 @@ import {
   ProfileBold,
   ProfileImage,
   ProfileImageContainer,
+  ProfilePersonalInformationWrapper,
+  ProfileStoreName,
   ProfileTitle,
 } from "../../styles/storeProfile/storeProfileInfo";
 import LittleLoader from "../common/LittleLoader";
@@ -26,12 +29,12 @@ const MyDataSectionStore = ({
   const dispatch = useDispatch();
   const [imageKeyState, setImageKeyState] = useState("darkMagiciansTo.jpeg");
   const imageKey = useSelector(
-    (state: any) => state.storeCards.storeProfileImageKey
+    (state: any) => state.storeCards.profileImageKey
   );
 
   useEffect(() => {
-    if (session.user.storeProfileImageKey) {
-      setImageKeyState(session.user.storeProfileImageKey);
+    if (session.user.profileImageKey) {
+      setImageKeyState(session.user.profileImageKey);
     }
   }, []);
   return (
@@ -45,6 +48,7 @@ const MyDataSectionStore = ({
           <LittleLoader message="Cambianto tu imagen..." />
         )}
       </ProfileImageContainer>
+      <ProfilePersonalInformationWrapper>
       <UploadImageButton
         getImage={async (file) => {
           setImageKeyState(null);
@@ -53,9 +57,9 @@ const MyDataSectionStore = ({
             type: file.type,
           });
           const formData = new FormData();
-          formData.append("storeProfileImage", newFile);
+          formData.append("profileImage", newFile);
           formData.append("userId", session.user.id);
-          formData.append("imageKey", session.user.storeProfileImageKey);
+          formData.append("imageKey", session.user.profileImageKey);
           const response = await dispatch(postStoreImage(formData));
           setTimeout(() => {
             // @ts-ignore
@@ -66,20 +70,21 @@ const MyDataSectionStore = ({
       <ProfileTitle>
         {session.user.name ? session.user.name : "Unknown"}
       </ProfileTitle>
-      <ProfileTitle>
-        <ProfileBold>Tienda: </ProfileBold>{" "}
-        {session.user.storeName ? session.user.storeName : "Unknown"}
-      </ProfileTitle>
+      <ProfileStoreName>
+        ({session.user.storeName ? session.user.storeName : "Unknown"})
+      </ProfileStoreName>
       <MainInfoContainer>
         <MainInfo>
-          <MainInfoTitle>Cartas</MainInfoTitle>
+          <MainInfoTitle>Cartas en venta</MainInfoTitle>
           <MainInfoSubtitle>{cards.length}</MainInfoSubtitle>
         </MainInfo>
         <MainInfo>
-          <MainInfoTitle>Bases</MainInfoTitle>
+          <MainInfoTitle>Bases en venta</MainInfoTitle>
           <MainInfoSubtitle>{decks.length}</MainInfoSubtitle>
+          <AccountType>Cuenta: {session.user.role === "store" ? 'Tienda' : 'Duelista'} </AccountType>
         </MainInfo>
       </MainInfoContainer>
+      </ProfilePersonalInformationWrapper>
     </>
   );
 };

@@ -19,6 +19,8 @@ export const Wrapper = styled.div`
 `;
 
 export const HaamburgerImage = styled.img`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
     width: 24px;
     height: 21px;
     cursor: pointer;

@@ -6,11 +6,11 @@ export const CardsWrapper = styled.div`
   box-sizing: border-box;
   display: block;
   width: 87%;
-  border: 3px solid #ef5da8;
+  border: 1px solid #ef5da8;
   padding-left: 10px;
   color: black;
   background: transparent;
-  border-radius: 3px;
+  border-radius: 15px;
   height: auto;
   margin: 5px 20px;
   display: flex;

@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
 export const StoreProfileInfoContainer = styled.div`
-    border: 2px solid #ef5da8;
-    margin: 10px 10px;
-    padding: 10px 0;
     display: flex;
     flex-direction: column;
-    width: 93%;
 `;
 
 export const ProfileImageContainer = styled.div`
@@ -15,20 +11,33 @@ export const ProfileImageContainer = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(93, 95, 239, 0.2);
 `;
 
 export const ProfileImage = styled.img`
-    width: 200px;
-    max-height: 240px;
+    width: 160px;
+    max-height: 160px;
     margin-top: 10px;
     max-width: 320px;
     margin-bottom: 10px;
+    border-radius: 50%;
+    border: 4px solid #ef5da8;
 `;
 
 export const ProfileTitle = styled.p`
-    margin: 16px 0;
-    font-size: 20px;
+    margin: 4px 0;
+    font-size: 24px;
     text-align: center;
+    font-weight: normal;
+`;
+
+export const ProfileArchetype = styled.p`
+    text-align: center;
+    font-size: 20px;
+    text-decoration: underline;
+    color: #5D5FEF;
+    margin: 0;
+    cursor: pointer;
 `;
 
 export const ProfileBold = styled.span`
@@ -39,6 +48,7 @@ export const ProfileBold = styled.span`
 export const MainInfoContainer = styled.div`
     display: flex;
     justify-content: space-around;
+    margin-top: 8px;
 `;
 
 export const MainInfo = styled.div`
@@ -49,14 +59,15 @@ export const MainInfo = styled.div`
 `;
 
 export const MainInfoTitle = styled.p`
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
     margin: 0;
 
 `;
 
 export const MainInfoSubtitle = styled.p`
-font-size: 16px;
+font-size: 20px;
+    font-weight: bold;
+    color: #5D5FEF;
     margin: 0;
     text-align: center;
 `;
@@ -82,12 +93,13 @@ export const StoreMainInfoSocialImage = styled.img`
 
 export const StoreMainInfoUniqueCardsContainer = styled.div`
     margin: 10px 10px;
-    border: 2px solid #ef5da8;
+    border: 1px solid #ef5da8;
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     width: 285px;
     padding: 10px;
+    border-radius: 15px;
     width: 87%;
 `;
 
@@ -156,4 +168,29 @@ export const StoreMainInfoModalCardName = styled.p`
 export const StoreMainInfoModalCardRarity = styled.p`
     margin: 16px 0;
     font-size: 16px;
+`;
+
+export const ProfilePersonalInformationWrapper = styled.div`
+    background-color: rgba(239, 93, 168, 0.2);
+`;
+
+export const AccountType = styled.div`
+    margin: 10px 0 0 32px;
+    color: #5D5FEF;
+    opacity: 0.5;
+    font-size: 12px;
+`;
+
+export const AccountTypeDuelist = styled.div`
+    float: right;
+    color: #5D5FEF;
+    opacity: 0.5;
+    font-size: 12px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+`;
+
+export const ProfileStoreName = styled.div`
+    margin-bottom: 12px;
+    text-align: center;
 `;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NoDecksMessage } from "../../styles/profile/myDecks";
+import { BigTitle, NoDecksMessage } from "../../styles/profile/myDecks";
 import {
   MainInfo,
   StoreMainInfoCardImage,
@@ -23,6 +23,8 @@ import {
   StoreMainInfoSocialLink,
   StoreMainInfoRarityCode,
   StoreMainInfoImageAndCodeContainer,
+  ProfilePersonalInformationWrapper,
+  AccountType,
 } from "../../styles/storeProfile/storeProfileInfo";
 import Modal from "../common/Modal";
 interface StoreProfileInfoProps {
@@ -34,56 +36,62 @@ interface StoreProfileInfoProps {
 const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
   const dispatch = useDispatch();
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [imageKeyState , setImageKeyState] = useState('darkMagiciansTo.jpeg');
+  const [imageKeyState, setImageKeyState] = useState("darkMagiciansTo.jpeg");
   const [isVisibleModalBases, setIsVisibleModalBases] = useState(false);
   const [cardInfo, setCardInfo] = useState(null);
   const [deckBaseInfo, setDeckBaseInfo] = useState(null);
   useEffect(() => {
-    if (storeInfo.storeProfileImageKey){
-      setImageKeyState(storeInfo.storeProfileImageKey);
+    if (storeInfo.profileImageKey) {
+      setImageKeyState(storeInfo.profileImageKey);
     }
-  }, [])
+  }, []);
   return (
     <StoreProfileInfoContainer>
       <ProfileImageContainer>
         <ProfileImage
-src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${imageKeyState}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${imageKeyState}`}
         />
       </ProfileImageContainer>
+      <ProfilePersonalInformationWrapper>
       <ProfileTitle>
         {storeInfo.storeName ? storeInfo.storeName : "Unknown"}
       </ProfileTitle>
       <MainInfoContainer>
         <MainInfo>
-          <MainInfoTitle>Cartas</MainInfoTitle>
+          <MainInfoTitle>Cartas en venta</MainInfoTitle>
           <MainInfoSubtitle>{storeUniqueCards.length}</MainInfoSubtitle>
         </MainInfo>
         <MainInfo>
-          <MainInfoTitle>Bases</MainInfoTitle>
+          <MainInfoTitle>Bases en venta</MainInfoTitle>
           <MainInfoSubtitle>
             {storeDeckBases && storeDeckBases.length}
           </MainInfoSubtitle>
+          <AccountType>Cuenta: Tienda </AccountType>
         </MainInfo>
       </MainInfoContainer>
-      <StoreMainInfoSocialContainer>
-        {storeInfo.contact.facebookLink && (
-          <StoreMainInfoSocialLink
-            target="_blank"
-            href={storeInfo.contact.facebookLink}
-          >
-            <StoreMainInfoSocialImage src="/assets/facebook.png" />
-          </StoreMainInfoSocialLink>
-        )}
-        {storeInfo.contact.instagramLink && (
-          <StoreMainInfoSocialLink
-            target="_blank"
-            href={storeInfo.contact.instagramLink}
-          >
-            <StoreMainInfoSocialImage src="/assets/instagram.png" />
-          </StoreMainInfoSocialLink>
-        )}
-      </StoreMainInfoSocialContainer>
-      <MainInfoTitle>Cartas disponibles</MainInfoTitle>
+      </ProfilePersonalInformationWrapper>
+      {storeInfo.contact.facebookLink && storeInfo.contact.instagramLink && (
+        <StoreMainInfoSocialContainer>
+          {storeInfo.contact.facebookLink && (
+            <StoreMainInfoSocialLink
+              target="_blank"
+              href={storeInfo.contact.facebookLink}
+            >
+              <StoreMainInfoSocialImage src="/assets/facebook.png" />
+            </StoreMainInfoSocialLink>
+          )}
+          {storeInfo.contact.instagramLink && (
+            <StoreMainInfoSocialLink
+              target="_blank"
+              href={storeInfo.contact.instagramLink}
+            >
+              <StoreMainInfoSocialImage src="/assets/instagram.png" />
+            </StoreMainInfoSocialLink>
+          )}
+        </StoreMainInfoSocialContainer>
+      )}
+
+      <BigTitle>Cartas disponibles</BigTitle>
       <StoreMainInfoUniqueCardsContainer>
         {storeUniqueCards.map((item) => (
           <StoreMainInfoCardImage
@@ -96,7 +104,7 @@ src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${imageKeyState}`}
           />
         ))}
       </StoreMainInfoUniqueCardsContainer>
-      <MainInfoTitle>Bases disponibles</MainInfoTitle>
+      <BigTitle>Bases disponibles</BigTitle>
       <StoreMainInfoUniqueCardsContainer>
         {storeDeckBases ? (
           storeDeckBases.map((item) => (

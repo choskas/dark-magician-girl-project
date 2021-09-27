@@ -2,7 +2,7 @@ import Adapters from "next-auth/adapters";
 
 // Extend the built-in models using class inheritance
 export default class User extends (<any>Adapters.TypeORM.Models.User.model) {
-  constructor(name, email, image, emailVerified, role, address, contact, storeName, storeProfileImageKey) {
+  constructor(name, email, image, emailVerified, role, address, contact, storeName, profileImageKey, favouriteArchetype) {
     super(name, email, image, emailVerified);
     if (role) {
       this.role = role;
@@ -11,7 +11,8 @@ export default class User extends (<any>Adapters.TypeORM.Models.User.model) {
       this.address = address;
       this.contact = contact;
       this.storeName = storeName;
-      this.storeProfileImageKey = storeProfileImageKey;
+      this.profileImageKey = profileImageKey;
+      this.favouriteArchetype = favouriteArchetype;
     }
   }
 }
@@ -36,7 +37,10 @@ export const UserSchema = {
     storeName: {
       type: "varchar",
     },
-    storeProfileImageKey: {
+    profileImageKey: {
+      type: "varchar",
+    },
+    favouriteArchetype: {
       type: "varchar",
     }
   },

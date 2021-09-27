@@ -2,16 +2,8 @@ import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
   height: auto;
-    border: 2px solid #ef5da8;
-    margin: 10px 10px;
-    padding: 10px 0;
     display: flex;
     flex-direction: column;
-    width: 93%;
-      // Desktop
-  @media screen and (min-width: 1000px) {
-    width: 98%;
-  }
 `;
 
 export const DeckWrapper = styled.div`
@@ -20,11 +12,11 @@ export const DeckWrapper = styled.div`
   box-sizing: border-box;
   display: block;
   width: 87%;
-  border: 3px solid #ef5da8;
+  border: 1px solid #ef5da8;
   padding-left: 10px;
   color: black;
   background: transparent;
-  border-radius: 3px;
+  border-radius: 15px;
   height: 100px;
   margin: 5px 20px;
   display: flex;
@@ -106,12 +98,13 @@ export const BigTitleContainer = styled.div`
   margin: 20px 0 0 0;
 `;
 
-export const BigTitle = styled.p`
+export const BigTitleDuelist = styled.p`
+  color:  #EF5DA8;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 18px;
+  font-size: 16px;
   margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
   background: pink;
   white-space: nowrap;
@@ -119,9 +112,56 @@ export const BigTitle = styled.p`
   transform-origin: 0 0;
   background: white;
   transition: transform 120ms ease-in;
-  font-weight: bold;
   line-height: 1.2;
-  margin: 10px 10px;
+
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    font-size: 34px;
+    margin: 15px 15px;
+  }
+`;
+
+export const BigTitle = styled.p`
+  color:  #EF5DA8;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+  background: pink;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: white;
+  transition: transform 120ms ease-in;
+  line-height: 1.2;
+  margin: 24px 0 -18px 32px;
+  width: 140px;
+  // Desktop
+  @media screen and (min-width: 1000px) {
+    font-size: 34px;
+    margin: 15px 15px;
+  }
+`;
+
+export const BigTitleMyProfile = styled.div`
+  color:  #EF5DA8;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+  background: pink;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: white;
+  transition: transform 120ms ease-in;
+  line-height: 1.2;
+  margin: 24px 0 -16px 32px;
+  width: 80px;
   // Desktop
   @media screen and (min-width: 1000px) {
     font-size: 34px;
@@ -147,6 +187,7 @@ export const Card = styled.img`
 export const GoToText = styled.p`
   color: #ef5da8;
   font-size: 18px;
+  margin-top: 32px;
   text-align: center;
 `;
 
