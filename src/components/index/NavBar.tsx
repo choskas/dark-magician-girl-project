@@ -89,7 +89,7 @@ const NavBar = () => {
               }}
             >
               <NavBarText>Hola, {session.user.name}</NavBarText>
-              <UserImage src={session.user.image} />
+              <UserImage src={getImageProfile()} />
             </ProfileInfoWrapper>
             <NavBarCollapse isOpen={isOpenCollapse}>
               {dropdownOptions()}
