@@ -266,7 +266,7 @@ interface DrawerImageProps {
 
 export const DrawerImage = styled.img<DrawerImageProps>`
   height: 50px;
-  width: 40px;
+  ;
   margin: 0 5px;
   &:hover {
     zoom: 1.1;

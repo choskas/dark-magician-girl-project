@@ -69,8 +69,8 @@ const SearchedCardsSection = ({ cards }: SearchedCardsSectionProps) => {
           <>
             <ModalFoundByTitle>Encontrada por:</ModalFoundByTitle>
             <ModalFoundByContainer>
-              {cardInfo.foundBy.map((item) => (
-                <Link href={`/storeProfile/${item.foundById}`}>
+              {cardInfo.foundBy.map((item, key) => (
+                <Link href={`/storeProfile/${item.foundById}`} key={`link-${key}`}>
                   <ModalFoundBy
                     onClick={() => dispatch(selectedCardFunc(cardInfo))}
                   >

@@ -43,6 +43,7 @@ const MyDataSectionStore = ({
         {imageKeyState ? (
           <ProfileImage
             src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${imageKeyState}`}
+            alt="profile-img"
           />
         ) : (
           <LittleLoader message="Cambianto tu imagen..." />

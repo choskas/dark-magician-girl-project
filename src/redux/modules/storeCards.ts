@@ -6,6 +6,7 @@ const STORE_UNIQUE_CARDS = "yugi/store/STORE_UNIQUE_CARDS";
 const STORE_DECK_BASES = "yugi/store/STORE_DECK_BASES";
 const STORE_DECKS_AND_CARDS = "yugi/store/STORE_DECKS_AND_CARDS";
 const STORE_PROFILE_IMAGE_KEY = "yugi/store/STORE_PROFILE_IMAGE_KEY";
+const STORE_ALL_STORES = "yugi/store/STORE_ALL_STORES";
 
 const INITIAL_STATE = {
   uniqueCards: [],
@@ -24,6 +25,8 @@ export default function storeCards(state = INITIAL_STATE, action: AnyAction) {
         return { ...state, allStoresDecksAndCards: action.payload};
       case STORE_PROFILE_IMAGE_KEY:
         return { ...state, storeProfileImageKey: action.payload};
+      case STORE_ALL_STORES:
+        return { ...state, allStores: action.payload};
     default:
       return state;
   }
@@ -141,14 +144,16 @@ export const postProfileImage = (data: any) => async (dispatch: Dispatch<any>) =
   }
 }
 
-export const updateFavouriteArchetype = (data: any) => async (dispatch: Dispatch<any>) => {
+export const getAllStores = () => async (dispatch: Dispatch<any>) => {
   try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/updateArchetype`, data);
-    toast(response.data.message);
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/store/getAllStores`);
+    dispatch({
+      type: STORE_ALL_STORES,
+      payload: response.data.stores,
+    })
     return response.data;
   } catch (error) {
     console.log(error)
   }
 }
-

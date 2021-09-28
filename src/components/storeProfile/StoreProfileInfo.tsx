@@ -70,15 +70,17 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
         </MainInfo>
       </MainInfoContainer>
       </ProfilePersonalInformationWrapper>
-      {storeInfo.contact.facebookLink && storeInfo.contact.instagramLink && (
-        <StoreMainInfoSocialContainer>
+      <StoreMainInfoSocialContainer show={storeInfo.contact.facebookLink || storeInfo.contact.instagramLink ? true : false }>
+        
           {storeInfo.contact.facebookLink && (
+
             <StoreMainInfoSocialLink
               target="_blank"
               href={storeInfo.contact.facebookLink}
             >
               <StoreMainInfoSocialImage src="/assets/facebook.png" />
             </StoreMainInfoSocialLink>
+
           )}
           {storeInfo.contact.instagramLink && (
             <StoreMainInfoSocialLink
@@ -88,8 +90,7 @@ const StoreProfileInfo = ({ storeInfo, storeUniqueCards, storeDeckBases }) => {
               <StoreMainInfoSocialImage src="/assets/instagram.png" />
             </StoreMainInfoSocialLink>
           )}
-        </StoreMainInfoSocialContainer>
-      )}
+                      </StoreMainInfoSocialContainer>
 
       <BigTitle>Cartas disponibles</BigTitle>
       <StoreMainInfoUniqueCardsContainer>

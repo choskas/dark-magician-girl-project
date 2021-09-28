@@ -6,6 +6,13 @@ export const ProfileWrapper = styled.div`
     flex-direction: column;
 `;
 
+export const AllDecksWrapper = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const DeckWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   font-weight: 600;

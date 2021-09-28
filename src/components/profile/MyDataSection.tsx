@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllArchetypesCatalog } from "../../redux/modules/deck";
-import { postProfileImage, updateFavouriteArchetype } from "../../redux/modules/storeCards";
+import { getAllArchetypesCatalog, updateFavouriteArchetype } from "../../redux/modules/deck";
+import { postProfileImage } from "../../redux/modules/storeCards";
 import { CancelButton, ConfirmButton } from "../../styles/common/Buttons";
 import {
   ModalArchetypeButtonWrapper,

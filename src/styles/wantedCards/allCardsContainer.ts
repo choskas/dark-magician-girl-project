@@ -7,6 +7,7 @@ export const AllImagesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  border-radius: 15px;
 `;
 
 export const CardImage = styled.img`

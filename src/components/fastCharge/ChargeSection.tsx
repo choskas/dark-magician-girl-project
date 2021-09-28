@@ -62,8 +62,9 @@ const ChargeSection = () => {
         })
       );
     });
-    return newCardsArr.map((item) => (
+    return newCardsArr.map((item, key) => (
       <CartCard
+        key={`Cart-card-${key}`}
         onClickDelete={() => {
           const deleteArray = cardsArray.filter(
             (list) => list.rarityCode !== item.rarityCode

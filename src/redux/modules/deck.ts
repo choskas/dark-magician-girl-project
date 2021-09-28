@@ -89,3 +89,14 @@ export const getAllArchetypesCatalog = () => async (dispatch: Dispatch<any>) => 
 	}
 }
 
+export const updateFavouriteArchetype = (data: any) => async (dispatch: Dispatch<any>) => {
+	try {
+	  const response = await axios.post(
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/updateArchetype`, data);
+	  toast(response.data.message);
+	  return response.data;
+	} catch (error) {
+	  console.log(error)
+	}
+  }
+

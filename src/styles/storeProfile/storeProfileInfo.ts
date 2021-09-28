@@ -16,7 +16,7 @@ export const ProfileImageContainer = styled.div`
 
 export const ProfileImage = styled.img`
     width: 160px;
-    max-height: 160px;
+    height: 160px;
     margin-top: 10px;
     max-width: 320px;
     margin-bottom: 10px;
@@ -72,11 +72,15 @@ font-size: 20px;
     text-align: center;
 `;
 
-export const StoreMainInfoSocialContainer = styled.div`
+interface StoreMainInfoSocialContainerProps {
+    show: boolean
+}
+
+export const StoreMainInfoSocialContainer = styled.div<StoreMainInfoSocialContainerProps>`
     margin: 10px 10px;
     width: 285px;
     padding: 10px;
-    display: flex;
+    display: ${({show}) => show ? 'flex' : 'none'};
     justify-content: space-around;
     background: #ef5da8;
     width: 87%;

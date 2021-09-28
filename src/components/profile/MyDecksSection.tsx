@@ -17,6 +17,7 @@ import {
   Title,
   TitleWrapper,
   GoToText,
+  AllDecksWrapper,
 } from "../../styles/profile/myDecks";
 import {
   CardArchetype,
@@ -60,8 +61,8 @@ const MyDecksSection = ({
 
   const renderDecks = () => {
     if (decks.length > 0) {
-      return decks.map((item) => (
-        <>
+      return decks.map((item, key) => (
+        <AllDecksWrapper>
           <TitleContainer>
             <TitleWrapper>
               <Title>{item.deckName}</Title>
@@ -75,8 +76,9 @@ const MyDecksSection = ({
             </DeleteContainer>
           </TitleContainer>
           <DeckWrapper>
-            {item.deck.map((card) => (
+            {item.deck.map((card, key) => (
               <Card
+                key={`card-${key}`}
                 onClick={() => {
                   setIsVisibleModal(true);
                   setCardInfo(card);
@@ -142,7 +144,7 @@ const MyDecksSection = ({
               {item.isWanted ? "Dejar de buscar" : "Buscar esta base"}
             </LoginButton>
           </FindThisBaseButtonContainer>
-        </>
+        </AllDecksWrapper>
       ));
     } else {
       return (
@@ -168,8 +170,8 @@ const MyDecksSection = ({
           Estas tiendas han encontrado tu deck, da click en su nombre para
           obtener mas informaciñon de contacto:{" "}
         </DrawerText>
-        {storeInfo.map((store) => (
-          <StoresDrawerText>
+        {storeInfo.map((store, key) => (
+          <StoresDrawerText key={`store-${key}`}>
             Tienda:{" "}
             <StoresDrawerLink href={`/storeProfile/${store.foundById}`}>
               {store.foundByName}
