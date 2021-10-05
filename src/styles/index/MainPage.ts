@@ -139,6 +139,11 @@ export const StartButton = styled.button`
 export const DarkMagicianGirl = styled.img`
     position: absolute;
     margin: 300px 0 0 70px;
+    // small smartphones
+    @media screen and (max-width: 376px) {
+        margin: 335px 0 0 74px;
+        width: 200px;
+    }
     // large smartphones
     @media screen and (min-height: 730px) {
         margin: 335px 0 0 82px;

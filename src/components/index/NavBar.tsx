@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession, signOut } from 'next-auth/client'
 import socket, { disconnectSocket, initiateSocket } from "../../config/socketConfig";
+import LittleLoader from "../common/LittleLoader";
+import SpinnerLoader from "../SpinnerLoader";
 
 const NavBar = () => {
   const router = useRouter();
@@ -62,20 +64,25 @@ const NavBar = () => {
     useEffect(() => {
       connectToSocket();
     }, [socket]);
+
   return (
     <Wrapper>
       <Link href="/">
         <LinkTo>Cards Seeker!</LinkTo>
       </Link>
+      {isLoading ? 
+        <SpinnerLoader />
+      :
       <HaamburgerImage
-        alt={isLoading === false && session ? "img-profile" : "hamburger icon"}
-        src={getImageProfile()}
-        style={isLoading === false && session ? { width: "40px", height: "40px", fontSize: '12px' } : {}}
-        onClick={async (e) => {
-          e.preventDefault();
-          setIsOpenCollapse(!isOpenCollapse);
-        }}
-      />
+      alt={isLoading === false && session ? "img-profile" : "hamburger icon"}
+      src={getImageProfile()}
+      style={isLoading === false && session ? { width: "40px", height: "40px", fontSize: '12px' } : {}}
+      onClick={async (e) => {
+        e.preventDefault();
+        setIsOpenCollapse(!isOpenCollapse);
+      }}
+    />
+      }
       <NavBarCollapse isOpen={isOpenCollapse}>
         {dropdownOptions()}
       </NavBarCollapse>
