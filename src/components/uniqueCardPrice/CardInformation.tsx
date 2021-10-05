@@ -146,6 +146,7 @@ const CardInformation = ({ cardInfo, session, isOpenDrawer, setIsOpenDrawer }: C
           <DrawerText> Selecciona el tipo de carta que {session && session.user.role === 'store' ? 'tienes' : 'quieres' } </DrawerText>
           <SelectContainer>
             <Select
+              setValue={setSelectedRarity}
               placeholder="Rareza"
               onChange={(item, value) => {
                 setSelectedRarity(value);

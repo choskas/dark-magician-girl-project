@@ -11,12 +11,14 @@ interface SelectProps {
   onKeyDown?: Function;
   onFocus?: Function;
   onBlur?: Function;
+  setValue?: Function;
 }
 
 const Select = ({
   options,
   placeholder,
   value,
+  setValue,
   onChange,
   onKeyDown = () => {},
   onFocus = () => {},
@@ -26,6 +28,7 @@ const Select = ({
   const [optionsArr, setOptionsArr] = useState(options);
   const ref = useRef<HTMLDivElement>(null);
   const searchOnList = (value: string) => {
+
     const newOptions = optionsArr.filter((item: any) => {
       return item.name.toLowerCase().includes(value.toLowerCase());
     });
@@ -46,26 +49,33 @@ const Select = ({
       document.removeEventListener("click", handleClickOutside, true);
     };
   });
-  useEffect(() => {
-    setOptionsArr(options);
-  }, [options]);
   return (
     <div ref={ref}>
       <InputText
         onBlur={() => onBlur()}
         onFocus={() => onFocus()}
-        onKeyDown={(e) => onKeyDown(e)}
+        onKeyDown={(e) => {
+          onKeyDown(e)
+          if (e.key == "Backspace"){
+             setOptionsArr(options);
+          }
+        }}
         value={value}
-        onClick={() => setIsVisibleOptions(!isVisibileOptions)}
+        onClick={() => {
+          setIsVisibleOptions(!isVisibileOptions);
+          setOptionsArr(options);
+        }}
         placeholder={placeholder}
         onChange={(e, value) => {
           searchOnList(value);
+          setValue(value);
         }}
       />
       <OptionsContainer isVisibleOptions={isVisibileOptions}>
         {optionsArr &&
-          optionsArr.map((item) => (
+          optionsArr.map((item, key) => (
             <Option
+              key={`option-${item.name}-${key}`}
               value={item.name}
               onClick={(e) => {
                 e.preventDefault();

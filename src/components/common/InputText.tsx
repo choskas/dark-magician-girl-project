@@ -36,7 +36,7 @@ const InputText = ({
   autoCompleteValues,
   setValue,
   onKeyPress = () => {},
-  onClickIcon,
+  onClickIcon = () => {},
   disabled = false,
   onClickListValue,
   onClick = () => {},

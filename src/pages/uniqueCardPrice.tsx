@@ -39,6 +39,10 @@ const UniqueCardPrice = () => {
     const card = allCards.find((item) => item.name === value);
     setCardInfo(card);
   };
+  const deleteCardInfo = () => {
+    setCardInfo(null);
+    setSearchValue("");
+  }
   useEffect(() => {
     getAllCards();
   }, []);
@@ -53,10 +57,10 @@ const UniqueCardPrice = () => {
             <InputTextWrapper>
               <InputText
                 onKeyPress={(e) => e.charCode == 13 && getCardInfo()}
-                onClickIcon={() => getCardInfo()}
+                onClickIcon={() => searchValue ? deleteCardInfo() : getCardInfo()}
                 onClickListValue={(value) => getCardInfo(value)}
                 setValue={setSearchValue}
-                icon="/assets/Search.png"
+                icon={searchValue ? "/icons/xMark.png" : "/assets/Search.png"}
                 autoCompleteValues={allCardsName}
                 value={searchValue}
                 placeholder="Búsqueda"

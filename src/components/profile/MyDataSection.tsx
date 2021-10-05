@@ -100,6 +100,7 @@ const MyDataSection = ({ session, cards, decks }: MyDataSectionProps) => {
                 </ModalArchetypeSubtitle>
                 <ModalArchetypeInputWrapper>     
                   <Select
+                    setValue={setSelectedArchetype}
                     value={selectedArchetype}
                     options={archetypesCatalog.map((item) => {
                       return {

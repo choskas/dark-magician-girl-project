@@ -48,7 +48,7 @@ const ItemTypes = {
 };
 
 const SearchDeck = () => {
-  const [selectedArchetype, setSelectedArchetype] = useState(null);
+  const [selectedArchetype, setSelectedArchetype] = useState("");
   const [allCards, setAllCards] = useState([]);
   const [allCardsName, setAllCardsName] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
@@ -61,7 +61,7 @@ const SearchDeck = () => {
   const [searchCardValue, setSearchCardValue] = useState("");
   const [deckName, setDeckName] = useState("");
   const [deckType, setDeckType] = useState("");
-  const [deckPrice, setDeckPrice] = useState(null);
+  const [deckPrice, setDeckPrice] = useState("");
   const [finishCardsLoading, setFinishCardsLoading] = useState(false);
   const [session, loading] = useSession();
 
@@ -286,9 +286,6 @@ const SearchDeck = () => {
               <SearchArchetypeWrapper>
                 <Select
                   placeholder="Búsqueda por arquetipo"
-                  onKeyDown={(e) =>
-                    e.key == "Backspace" && setSelectedArchetype("")
-                  }
                   onChange={(item, value) => {
                     setSelectedArchetype(value);
                     const cards = allCards.filter((item: any) => {
@@ -304,6 +301,7 @@ const SearchDeck = () => {
                     }
                   }}
                   value={selectedArchetype}
+                  setValue={setSelectedArchetype}
                   options={archetypesCatalogFunction()}
                 />
               </SearchArchetypeWrapper>
@@ -315,8 +313,9 @@ const SearchDeck = () => {
             <SearchAndMyDeckWrapper>
               <AllCardsWrapper>
                 {foundCards &&
-                  foundCards.map((item: any) => (
+                  foundCards.map((item: any, key: any) => (
                     <Card
+                      key={`card-${item.id}-${key}`}
                       item={item}
                       onTouchCard={() => {
                         setMyDeck((myDeck) => [

@@ -29,7 +29,7 @@ const ChargeSection = () => {
   const [allCardsName, setAllCardsName] = useState([]);
   const [cardInfo, setCardInfo] = useState(null);
   const [cardsArray, setCardsArray] = useState([]);
-  const [selectedRarity, setSelectedRarity] = useState(null);
+  const [selectedRarity, setSelectedRarity] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [session, isLoading] = useSession();
   const dispatch = useDispatch();
@@ -130,6 +130,7 @@ const ChargeSection = () => {
           </SmallInputWrapper>
           <SmallInputWrapper>
             <Select
+              setValue={setSelectedRarity}
               onFocus={() => {
                 const drawer = document.getElementById("cartDrawerWrapper");
                 drawer.style.opacity = "0";
