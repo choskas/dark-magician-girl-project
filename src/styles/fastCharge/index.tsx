@@ -34,6 +34,10 @@ export const AddCardTitle = styled.p`
 export const AddCardSeparator = styled.hr`
     border: 1px solid #5D5FEF;
     width: 70%;
+        // Desktop
+        @media screen and (min-width: 1000px) {
+        display: none;
+    }
 `;
 
 export const AddCardPinkSeparator = styled.hr`
@@ -55,4 +59,12 @@ export const CartCollapseContent = styled.div`
 
 export const AddToStoreButtonContainer = styled.div`
     display: flex;
+`;
+
+export const SearchDeckFastChargeWrapper = styled.div`
+padding: 50px 30px;
+            // Desktop
+            @media screen and (min-width: 1000px) {
+                padding: 0px 30px;
+    }
 `;

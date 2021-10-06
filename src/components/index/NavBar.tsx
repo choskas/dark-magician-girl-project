@@ -13,8 +13,11 @@ import Link from "next/link";
 import { LinkTo } from "../../styles/common/Link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useSession, signOut } from 'next-auth/client'
-import socket, { disconnectSocket, initiateSocket } from "../../config/socketConfig";
+import { useSession, signOut } from "next-auth/client";
+import socket, {
+  disconnectSocket,
+  initiateSocket,
+} from "../../config/socketConfig";
 import LittleLoader from "../common/LittleLoader";
 import SpinnerLoader from "../SpinnerLoader";
 
@@ -25,69 +28,126 @@ const NavBar = () => {
   const dropdownOptions = () =>
     session ? (
       <>
-        <CollapseOption onClick={() => session && session.user.role === 'client' ? router.push('/profile') : router.push('/storeProfile')}> Mi perfil </CollapseOption>
-        <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>Búsqueda de cartas</CollapseOption>
-        <CollapseOption onClick={() => router.push('/stores')}> Tiendas </CollapseOption>
-        <CollapseOption onClick={() => router.push('/onSale')}>Ahora en venta</CollapseOption>
-        {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/wantedCards')}>Cartas que están buscando</CollapseOption> : <></> }
-        {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/storeProfile/editStoreProfile')}>Editar información</CollapseOption> : <></> }
-        {session && session.user.role === 'store' ? <CollapseOption onClick={() => router.push('/fastCharge')}>Carga rapida</CollapseOption> : <></> }
-        <CollapseOption onClick={() => router.push('/deckPrice')}>{session && session.user.role === 'store' ? 'Arma tu base' : 'Arma tu deck' } </CollapseOption>
-        <CollapseOption onClick={() => {
-          disconnectSocket();
-          signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB 
-          })}}>Salir</CollapseOption>
+        <CollapseOption
+          onClick={() =>
+            session && session.user.role === "client"
+              ? router.push("/profile")
+              : router.push("/storeProfile")
+          }
+        >
+          {" "}
+          Mi perfil{" "}
+        </CollapseOption>
+        <CollapseOption onClick={() => router.push("/uniqueCardPrice")}>
+          Búsqueda de cartas
+        </CollapseOption>
+        <CollapseOption onClick={() => router.push("/stores")}>
+          {" "}
+          Tiendas{" "}
+        </CollapseOption>
+        <CollapseOption onClick={() => router.push("/onSale")}>
+          Ahora en venta
+        </CollapseOption>
+        {session && session.user.role === "store" ? (
+          <CollapseOption onClick={() => router.push("/wantedCards")}>
+            Cartas que están buscando
+          </CollapseOption>
+        ) : (
+          <></>
+        )}
+        {session && session.user.role === "store" ? (
+          <CollapseOption
+            onClick={() => router.push("/storeProfile/editStoreProfile")}
+          >
+            Editar información
+          </CollapseOption>
+        ) : (
+          <></>
+        )}
+        {session && session.user.role === "store" ? (
+          <CollapseOption onClick={() => router.push("/fastCharge")}>
+            Carga rapida
+          </CollapseOption>
+        ) : (
+          <></>
+        )}
+        <CollapseOption onClick={() => router.push("/deckPrice")}>
+          {session && session.user.role === "store"
+            ? "Arma tu base"
+            : "Arma tu deck"}{" "}
+        </CollapseOption>
+        <CollapseOption
+          onClick={() => {
+            disconnectSocket();
+            signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL_WEB });
+          }}
+        >
+          Salir
+        </CollapseOption>
       </>
     ) : (
       <>
-        <CollapseOption onClick={() => router.push('/login')}> Acceder </CollapseOption>
-        <CollapseOption onClick={() => router.push('/uniqueCardPrice')}>Búsqueda de cartas</CollapseOption>
-        <CollapseOption onClick={() => router.push('/deckPrice')}> Cotizar deck </CollapseOption>
+        <CollapseOption onClick={() => router.push("/login")}>
+          {" "}
+          Acceder{" "}
+        </CollapseOption>
+        <CollapseOption onClick={() => router.push("/uniqueCardPrice")}>
+          Búsqueda de cartas
+        </CollapseOption>
+        <CollapseOption onClick={() => router.push("/deckPrice")}>
+          {" "}
+          Cotizar deck{" "}
+        </CollapseOption>
       </>
     );
-    const connectToSocket = async () => {
-      if (session && !socket) {
-        const { user } = session;
-        const message = initiateSocket(user);
-      }
-     
+  const connectToSocket = async () => {
+    if (session && !socket) {
+      const { user } = session;
+      const message = initiateSocket(user);
     }
-    const getImageProfile = () => {
-      let image = '/assets/hamburger.png'
-      if (!isLoading && session && session.user.profileImageKey){
-        image = `${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${session.user.profileImageKey}`
-      } else if (!isLoading && session && !session.user.profileImageKey) {
-        image = session.user.image
-      }
-      return image;
+  };
+  const getImageProfile = () => {
+    let image = "/assets/hamburger.png";
+    if (!isLoading && session && session.user.profileImageKey) {
+      image = `${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${session.user.profileImageKey}`;
+    } else if (!isLoading && session && !session.user.profileImageKey) {
+      image = session.user.image;
     }
-    useEffect(() => {
-      connectToSocket();
-    }, [socket]);
+    return image;
+  };
+  useEffect(() => {
+    connectToSocket();
+  }, [socket]);
 
   return (
     <Wrapper>
       <Link href="/">
         <LinkTo>Cards Seeker!</LinkTo>
       </Link>
-      {isLoading ? 
+      {isLoading ? (
         <SpinnerLoader />
-      :
-      <HaamburgerImage
-      alt={isLoading === false && session ? "img-profile" : "hamburger icon"}
-      src={getImageProfile()}
-      style={isLoading === false && session ? { width: "40px", height: "40px", fontSize: '12px' } : {}}
-      onClick={async (e) => {
-        e.preventDefault();
-        setIsOpenCollapse(!isOpenCollapse);
-      }}
-    />
-      }
+      ) : (
+        <HaamburgerImage
+          alt={
+            isLoading === false && session ? "img-profile" : "hamburger icon"
+          }
+          src={getImageProfile()}
+          style={
+            isLoading === false && session
+              ? { width: "40px", height: "40px", fontSize: "12px" }
+              : {}
+          }
+          onClick={async (e) => {
+            e.preventDefault();
+            setIsOpenCollapse(!isOpenCollapse);
+          }}
+        />
+      )}
       <NavBarCollapse isOpen={isOpenCollapse}>
         {dropdownOptions()}
       </NavBarCollapse>
       <TextWrapper>
-        {session ? (
+        {!isLoading && session ? (
           <>
             <ProfileInfoWrapper
               onClick={(e) => {
@@ -104,12 +164,20 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <Link href="/deckPrice">
-              <LinkTo>
-                <NavBarText>Cotiza tu Deck</NavBarText>
-              </LinkTo>
-            </Link>
-            <NavBarText onClick={() => router.push('/login')}>Inicia sesión</NavBarText>
+            {isLoading ? (
+              <SpinnerLoader isDesktop={true} />
+            ) : (
+              <>
+                <Link href="/deckPrice">
+                  <LinkTo>
+                    <NavBarText>Cotiza tu Deck</NavBarText>
+                  </LinkTo>
+                </Link>
+                <NavBarText onClick={() => router.push("/login")}>
+                  Inicia sesión
+                </NavBarText>
+              </>
+            )}
           </>
         )}
       </TextWrapper>

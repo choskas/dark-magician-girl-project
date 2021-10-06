@@ -1,7 +1,11 @@
 import { SpinnerContainer, SpinnerContent1, SpinnerContent2, SpinnerContent3, SpinnerContent4, SpinnerContent5, SpinnerContent6, SpinnerContent7 } from "../styles/common/SpinnerLoader";
 
-const SpinnerLoader = () => (
-  <SpinnerContainer>
+interface SpinnerLoaderProps {
+  isDesktop: boolean;
+}
+
+const SpinnerLoader = ({isDesktop}: SpinnerLoaderProps) => (
+  <SpinnerContainer isDesktop={isDesktop}>
     <SpinnerContent1></SpinnerContent1>
     <SpinnerContent2></SpinnerContent2>
     <SpinnerContent3></SpinnerContent3>

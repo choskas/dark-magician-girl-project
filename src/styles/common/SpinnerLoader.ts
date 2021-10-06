@@ -1,10 +1,18 @@
 import styled from "styled-components";
 
-export const SpinnerContainer = styled.div`
+interface SpinnerContainerProps {
+  isDesktop: boolean;
+}
+
+export const SpinnerContainer = styled.div<SpinnerContainerProps>`
   display: inline-block;
   position: relative;
   width: 14%;
   height: 77px;
+      // Desktop
+      @media screen and (min-width: 1000px) {
+        display: ${({isDesktop}) => isDesktop ? 'block' : 'none'};
+    }
 `;
 
 export const SpinnerContent1 = styled.div`

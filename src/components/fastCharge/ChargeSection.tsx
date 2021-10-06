@@ -16,6 +16,7 @@ import {
   AddCardButtonWrapper,
   CartCollapseContent,
   AddToStoreButtonContainer,
+  SearchDeckFastChargeWrapper,
 } from "../../styles/fastCharge";
 import CartBottomDrawer from "../common/CartBottomDrawer";
 import InputText from "../common/InputText";
@@ -84,7 +85,7 @@ const ChargeSection = () => {
   }, []);
 
   return (
-    <SearchDeckWrapper>
+    <SearchDeckFastChargeWrapper>
       <AddCardWrapper>
         <AddCardTitleWrapper>
           <AddCardTitle>Carta</AddCardTitle>
@@ -210,7 +211,7 @@ const ChargeSection = () => {
           )}
         </CartCollapseContent>
       </CartBottomDrawer>
-    </SearchDeckWrapper>
+    </SearchDeckFastChargeWrapper>
   );
 };
 
