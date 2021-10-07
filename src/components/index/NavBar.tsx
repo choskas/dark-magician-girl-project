@@ -1,8 +1,11 @@
 // @ts-nocheck
 import {
+  CloseIconNavBar,
   CollapseOption,
+  CollapseOptionMyProfile,
   HaamburgerImage,
   NavBarCollapse,
+  NavBarProfileImageContainer,
   NavBarText,
   ProfileInfoWrapper,
   TextWrapper,
@@ -20,6 +23,7 @@ import socket, {
 } from "../../config/socketConfig";
 import LittleLoader from "../common/LittleLoader";
 import SpinnerLoader from "../SpinnerLoader";
+import { ProfileImage } from "../../styles/storeProfile/storeProfileInfo";
 
 const NavBar = () => {
   const router = useRouter();
@@ -28,22 +32,26 @@ const NavBar = () => {
   const dropdownOptions = () =>
     session ? (
       <>
-        <CollapseOption
+      <CloseIconNavBar onClick={() => setIsOpenCollapse(false)} src="/icons/xMark.png" alt="close-icon"/>
+      <NavBarProfileImageContainer>
+      <ProfileImage src={`${process.env.NEXT_PUBLIC_BACKEND_URL_ROOT}/images/${session.user.profileImageKey}`} alt="img-profile" />
+      </NavBarProfileImageContainer>
+        <CollapseOptionMyProfile
           onClick={() =>
             session && session.user.role === "client"
               ? router.push("/profile")
               : router.push("/storeProfile")
           }
         >
-          {" "}
-          Mi perfil{" "}
-        </CollapseOption>
+          
+          Mi perfil
+        </CollapseOptionMyProfile>
         <CollapseOption onClick={() => router.push("/uniqueCardPrice")}>
           Búsqueda de cartas
         </CollapseOption>
         <CollapseOption onClick={() => router.push("/stores")}>
-          {" "}
-          Tiendas{" "}
+          
+          Tiendas
         </CollapseOption>
         <CollapseOption onClick={() => router.push("/onSale")}>
           Ahora en venta
@@ -74,7 +82,7 @@ const NavBar = () => {
         <CollapseOption onClick={() => router.push("/deckPrice")}>
           {session && session.user.role === "store"
             ? "Arma tu base"
-            : "Arma tu deck"}{" "}
+            : "Arma tu deck"}
         </CollapseOption>
         <CollapseOption
           onClick={() => {
@@ -87,16 +95,20 @@ const NavBar = () => {
       </>
     ) : (
       <>
+       <CloseIconNavBar onClick={() => setIsOpenCollapse(false)} src="/icons/xMark.png" alt="close-icon"/>
+        <NavBarProfileImageContainer>
+        <ProfileImage src={`/assets/darkMagiciansTo.jpeg`} alt="img-profile" />
+       </NavBarProfileImageContainer>
         <CollapseOption onClick={() => router.push("/login")}>
-          {" "}
-          Acceder{" "}
+          
+          Acceder
         </CollapseOption>
         <CollapseOption onClick={() => router.push("/uniqueCardPrice")}>
           Búsqueda de cartas
         </CollapseOption>
         <CollapseOption onClick={() => router.push("/deckPrice")}>
-          {" "}
-          Cotizar deck{" "}
+          
+          Cotizar deck
         </CollapseOption>
       </>
     );

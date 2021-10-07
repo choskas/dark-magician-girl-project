@@ -87,35 +87,64 @@ export const NavBarCollapse = styled.div<NavBarCollapse>`
     // desktop
     @media screen and (min-width: 1000px) {
         cursor: pointer;
-        display: flex;
-        right: 120px;
+        width: 24%;
+        padding: 2%;
     }
-    padding: 0 18px;
-    background-color: white;
-    height: auto;
-    width: 90px;
-    overflow: hidden;
-    position: absolute;
-    -webkit-transition: max-height 0.2s ease-out;
-    transition: max-height 0.2s ease-out;
-    top: 60px;
-    z-index: 1;
-    width: 200px;
-    max-height: ${({ isOpen }) => isOpen ? '100%' : '0'};
-    margin-top: 10px;
-    right: 0;
-    border-radius: 9px;
-    flex-direction: column;
+  position: fixed;
+  overflow-y: auto;
+  bottom: 0;
+  right: 0;
+  width: 56%;
+  height: 100%;
+  background: radial-gradient(50% 50% at 50% 50%, #fff 0%, #fff 100%);
+  opacity: 0.9;
+  transform: ${({isOpen}) => isOpen ? 'translateX(0%)' : 'translateX(100%)' };
+  transition: 0.3s;
+  z-index: 1;
+  padding: 5%;
 `;
 
 export const CollapseOption = styled.p`
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     margin: 15px 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ef5da8;
     width: 100%;
     color: black;
-    height: 20%;
+    height: 5%;
     display: flex;
     align-items: center;
+`;
+
+export const CollapseOptionMyProfile = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    margin: 15px 0;
+    border-bottom: 1px solid #ef5da8;
+    width: 100%;
+    color: black;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+`;
+
+export const NavBarProfileImageContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+`;
+
+export const CloseIconNavBar = styled.img`
+    width: 24px;
+    padding-top: 32px;
+    float: left;
+    cursor: pointer;
+    // desktop
+    @media screen and (min-width: 1000px) {
+      cursor: pointer;
+      width: 32px;
+      padding-top: 40px;
+    }
 `;
